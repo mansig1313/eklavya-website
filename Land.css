@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@100;300;400;500;700;800;900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.landPg{
+    display: flex;
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(93,9,121,1) 100%, rgba(0,212,255,1) 100%);
+    
+}
+
+.column{
+    flex: 50%;
+}
+
+
+.heading{
+    padding-top: 6rem;
+    padding-left: 5rem;
+    padding-bottom: 1rem;
+    font-family :"PT Serif" ,serif;
+    font-size :x-large;
+    color: #ffffff;
+    
+}
+
+.subHeading{
+    padding-left: 5rem;
+    font-family: "M PLUS 1p", sans-serif;
+    font-size: large;
+    color: #ffffff;
+
+}
+
+/* From Uiverse.io by Navarog21 */ 
+button {
+    width: 10em;
+    position: relative;
+    height: 3.5em;
+    border: 3px ridge #8024e9 ;
+    outline: none;
+    background-color: transparent;
+    color: #ffffff;
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  button::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    transition: 0.5s;
+    transform-origin: center;
+  }
+  
+  button::before {
+    content: "";
+    transform-origin: center;
+    position: absolute;
+    top: 80%;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+
+    transition: 0.5s;
+  }
+  
+  button:hover::before, button:hover::after {
+    transform: scale(0)
+  }
+  
+  button:hover {
+    box-shadow: inset 0px 0px 25px #8024e9;
+  }
+
+  .button {
+    display: flex; 
+    padding-left: 13rem;
+    gap: 3rem;
+    padding-top: 5rem;
+  }
+  
+  .button div {
+    
+    flex: 0; 
+    text-align: center;
+  }
+  
+  button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+  
+.btn1{
+    padding: 0;
+}
+
+#right{
+    padding-left: 9rem;
+    padding-bottom: 3rem;
+}
