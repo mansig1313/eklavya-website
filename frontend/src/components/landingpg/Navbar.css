@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
+.navbar {
+  color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  background: #020024;
+  padding: 1.5rem;
+  height: 8rem;
+}
+
+#chkbox {
+  display: none;
+}
+
+.bar {
+  width: 4rem;
+  height: 4rem;
+  color: #252525;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  color: white;
+}
+
+ul {
+  width: 80vw;
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: end;
+  list-style: none;
+  row-gap: 0.5rem;
+  padding-bottom: 10rem;
+}
+
+li {
+  position: relative;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.2rem;
+}
+
+li:hover a {
+  color: orange;
+}
+
+li a:hover::before {
+  content: '';
+  position: absolute;
+  bottom: -0.2rem;
+  left: 0;
+  width: 80%;
+  height: 0.2rem;
+  background-color: orange;
+  transform: translateX(14%);
+}
+
+a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: white;
+}
+
+@media screen and (max-width: 50rem) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media screen and (max-width: 610px) {
+  .navbar {
+    justify-content: flex-start;
+  }
+
+
+  .bar {
+    display: flex;
+  }
+
+  .bar i {
+    font-size: 3rem;
+  }
+
+  ul {
+    width: 100vw;
+    padding: 0.5rem 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+  }
+
+  li {
+    padding: 0.5rem 0;
+  }
+
+  li a:hover::before {
+    width: 120%;
+    transform: translateX(-10%);
+  }
+
+  #chkbox:checked ~ ul {
+    display: flex;
+  }
+
+}
+
+
+.navbar-logo{
+    justify-content: flex-start;
+    transform: translate(-1130px , 50px);
+}
+.navbar-logo img{
+    height: 60px;
+    width : 110px;
+}

@@ -1,0 +1,105 @@
+/* Register.css */
+
+.register-page-container {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 155%;
+    height: 100vh;
+    background: rgb(230,219,232);
+background: linear-gradient(180deg, rgba(230,219,232,0.07344187675070024) 0%, rgba(156,88,178,0.9894082633053222) 26%);
+}
+
+
+.register-page {
+    display: flex;
+    width: 80%;
+    height: 80vh;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.register-form {
+    width: 50%;
+    padding: 5rem;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.register-logo {
+    width: 180px;
+    margin-bottom: 3rem;
+    
+}
+
+h2 {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    color: #333;
+}
+
+.register-button {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #620e83;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.register-button:hover {
+    background-color: #3b6fa3;
+}
+
+.login-text {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #666;
+    display: flex; /* Set display to inline to remove extra space */
+    margin-right: 2rem; 
+}
+
+.login-link {
+    background: none; /* Removes button styling */
+    border: none; /* Removes the box */
+    color: blue; /* Changes text color to blue */
+    font-size: 1rem; /* Ensures consistent font size */
+    cursor: pointer; /* Adds pointer on hover for clarity */
+    text-decoration: underline;
+    margin-left: 10px;
+}
+
+.login-link:hover {
+    text-decoration: none; /* Optional: Removes underline on hover for a cleaner effect */
+    color: darkblue; /* Darkens text color on hover for emphasis */
+}
+
+
+.register-image {
+    width: 50%;
+    background-size: cover;
+    background-position: center;
+    background-color: #ffffff;
+}
+
