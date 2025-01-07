@@ -7,9 +7,9 @@ import LoginPage from './components/landingpg/register/LoginPage';
 import AboutUs from './components/landingpg/AboutUs';
 import Services from './components/landingpg/Services';
 import Register from './components/landingpg/register/Register';
-import TutorHomePage from '../src/homePage/practice_proj/tutor.js';
-import StudentHomePage from '../src/homePage/practice_proj/student.js';
-import ParentHomePage from '../src/homePage/practice_proj/parent.js';
+import TutorHomePage from './homePage/tutor.jsx';
+import StudentHomePage from '../src/homePage/student.jsx';
+import ParentHomePage from '../src/homePage/parent.jsx';
 
 
 
