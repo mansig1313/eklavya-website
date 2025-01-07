@@ -3,15 +3,15 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginPage from "./components/landingpg/register/LoginPage";
-import AboutUs from "./components/landingpg/AboutUs";
-import Services from "./components/landingpg/Services";
-import Register from "./components/landingpg/register/Register";
-import TutorHomePage from "../src/homePage/practice_proj/tutor.js";
-import StudentHomePage from "../src/homePage/practice_proj/student.js";
-import ParentHomePage from "../src/homePage/practice_proj/parent.js";
-import CoursePage from "../src/CourseMainPage/CoursePage/CoursePage.jsx";
-import "../src/CourseMainPage/CoursePage/CoursePage.css";
+import LoginPage from './components/landingpg/register/LoginPage';
+import AboutUs from './components/landingpg/AboutUs';
+import Services from './components/landingpg/Services';
+import Register from './components/landingpg/register/Register';
+import TutorHomePage from '../src/homePage/practice_proj/tutor.js';
+import StudentHomePage from '../src/homePage/practice_proj/student.js';
+import ParentHomePage from '../src/homePage/practice_proj/parent.js';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
