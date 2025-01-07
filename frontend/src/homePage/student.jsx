@@ -10,7 +10,7 @@ import Mycourse from '@mui/icons-material/LibraryBooks';
 import MessageIcon from '@mui/icons-material/Message';
 import PaymentIcon from '@mui/icons-material/Payment';
 import GradingIcon from '@mui/icons-material/Grading';
-import logo from 'C:/Eklavya1/frontend/src/components/landingpg/register/logo_white_nobg.png';
+import logo from '../components/landingpg/register/logo_white_nobg.png';
 
 
 
