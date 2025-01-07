@@ -10,7 +10,7 @@ import PageviewIcon from '@mui/icons-material/Pageview';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import PaymentIcon from '@mui/icons-material/Payment';
 import EventNoteIcon from '@mui/icons-material/EventNote';
-import logo from 'C:/Eklavya1/frontend/src/components/landingpg/register/logo_white_nobg.png';
+import logo from '../components/landingpg/register/logo_white_nobg.png';
 
 
 
