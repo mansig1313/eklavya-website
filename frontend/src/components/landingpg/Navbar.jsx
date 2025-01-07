@@ -1,13 +1,13 @@
-import React from 'react';
-import './Navbar.css';
-import eklavya from './EKLAVYA.png';
+import React from "react";
+import "./Navbar.css";
+import eklavya from "./EKLAVYA.png";
 
 function Navbar() {
   const menus = [
-    { name: 'Home', id: 'home-section' },
-    { name: 'About Us', id: 'aboutus-section' },
-    { name: 'Services', id: 'services-section' },
-    { name: 'Sign In', id: 'signin-section' } // This redirects to the login page
+    { name: "Home", id: "home-section" },
+    { name: "About Us", id: "aboutus-section" },
+    { name: "Services", id: "services-section" },
+    { name: "Sign In", id: "signin-section" }, // This redirects to the login page
   ];
 
   // Function to handle smooth scrolling to the target section
@@ -15,8 +15,8 @@ function Navbar() {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
@@ -33,7 +33,7 @@ function Navbar() {
       <ul>
         {menus.map((menu) => (
           <li key={menu.name}>
-            {menu.name === 'Sign In' ? (
+            {menu.name === "Sign In" ? (
               <a href="/login">{menu.name}</a> // Redirects to login page
             ) : (
               <a

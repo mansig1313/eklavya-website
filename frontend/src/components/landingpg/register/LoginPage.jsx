@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import './Login.css';
-import logo from '../register/logo_white_nobg.png';
-import bottomLeftImage from '../register/sign_in.png';
-import { useNavigate , Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import "./Login.css";
+import logo from "../register/logo_white_nobg.png";
+import bottomLeftImage from "../register/sign_in.png";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 function LoginPage() {
   const [role, setRole] = useState("Student");
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -18,28 +18,29 @@ function LoginPage() {
 
     try {
       const axiosInstance = axios.create({
-        baseURL: 'http://localhost:5000/api',
+        baseURL: "http://localhost:5000/api",
       });
-      const response = await axiosInstance.post('/auth/login', {
+      const response = await axiosInstance.post("/auth/login", {
         email,
         password,
       });
-     if(response.data.success){
-      localStorage.setItem('user',JSON.stringify(response.data.user));
-      if (role === "Student") {
-        navigate('/student-home');
-      } else if (role === "Tutor") {
-        navigate('/tutor-home');
-      } else if (role === "Parent") {
-        navigate('/parent-home');
+      if (response.data.success) {
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        if (role === "Student") {
+          navigate("/student-home");
+        } else if (role === "Tutor") {
+          navigate("/tutor-home");
+        } else if (role === "Parent") {
+          navigate("/parent-home");
+        }
+      } else {
+        setError(
+          response.data.message ||
+            "Login failed....Please Check Your Credentials",
+        );
       }
-     }
-      else{
-        setError(response.data.message || 'Login failed....Please Check Your Credentials');
-      }
-    
     } catch (err) {
-      setError('An error occurred. Please try again later.');
+      setError("An error occurred. Please try again later.");
     }
   };
 
@@ -79,20 +80,33 @@ function LoginPage() {
 
           {error && <p className="error-message">{error}</p>}
 
-          <a href="/forgot-password" className="forgot-password">Forgot Password?</a>
+          <a href="/forgot-password" className="forgot-password">
+            Forgot Password?
+          </a>
 
-          <button type="submit" className="login-button1">Sign in</button>
+          <button type="submit" className="login-button1">
+            Sign in
+          </button>
 
           <p className="or-text">or continue with</p>
 
-          <button type="button1" className="google-signin">Sign in with Google</button>
+          <button type="button1" className="google-signin">
+            Sign in with Google
+          </button>
         </form>
 
         <div className="register-section">
-          <p>Don’t have an account yet? <Link to = '/register'>Register for Free</Link></p>
+          <p>
+            Don’t have an account yet?{" "}
+            <Link to="/register">Register for Free</Link>
+          </p>
         </div>
       </div>
-      <img src={bottomLeftImage} alt="Decorative" className="bottom-left-image" />
+      <img
+        src={bottomLeftImage}
+        alt="Decorative"
+        className="bottom-left-image"
+      />
     </div>
   );
 }

@@ -1,125 +1,128 @@
-@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@100;300;400;500;700;800;900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@100;300;400;500;700;800;900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
-.landPg{
-    display: flex;
-    background: rgb(2,0,36);
-    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(93,9,121,1) 100%, rgba(0,212,255,1) 100%);
-    
+.landPg {
+  display: flex;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(93, 9, 121, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  /* Reset for landing page */
 }
 
-.column{
-    flex: 50%;
+.column {
+  flex: 50%;
 }
 
-
-.heading{
-    padding-top: 6rem;
-    padding-left: 5rem;
-    padding-bottom: 1rem;
-    font-family :"PT Serif" ,serif;
-    font-size :x-large;
-    color: #ffffff;
-    
+.heading {
+  padding-top: 6rem;
+  padding-left: 5rem;
+  padding-bottom: 1rem;
+  font-family: "PT Serif", serif;
+  font-size: x-large;
+  color: #ffffff;
 }
 
-.subHeading{
-    padding-left: 5rem;
-    font-family: "M PLUS 1p", sans-serif;
-    font-size: large;
-    color: #ffffff;
-
+.subHeading {
+  padding-left: 5rem;
+  font-family: "M PLUS 1p", sans-serif;
+  font-size: large;
+  color: #ffffff;
 }
 
-/* From Uiverse.io by Navarog21 */ 
-.buttonHome .btn1 , .buttonHome .btn2  {
-    width: 12em;
-    position: relative;
-    height: 3em;
-    outline: none;
-    background-color: transparent;
-    
-    transition: 1s;
-    border-radius: 0.3em;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0px 0px 10px 2px #8024e9;
-  }
-  
-  .buttonHome .btn1::after , .buttonHome .btn2 ::after {
-    content: "";
-    position: absolute;
-    
-    width: 0;
-    height: 0;
-    transition: 0.5s;
-    
-  }
-  
-  .buttonHome .btn1::before , .buttonHome .btn2 ::before {
-    content: "";
-    transform-origin: center;
-    position: absolute;
-    
-    width: 0;
-    height: 0;
-    transition: 0.5s;
-  }
-  
-  .buttonHome:hover::before, .buttonHome:hover::after {
-    transform: scale(0)
-  }
-  
-  
-  .buttonHome .btn1:hover , .buttonHome .btn2:hover {
-    box-shadow: inset 0px 0px 20px 6px #8024e9;
-    transform: scale(1.05);
-  }
-  
-  
+/* From Uiverse.io by Navarog21 */
+.buttonHome .btn1,
+.buttonHome .btn2 {
+  width: 12em;
+  position: relative;
+  height: 3em;
+  outline: none;
+  background-color: transparent;
 
-  .buttonHome {
-    display: flex; 
-    justify-content: center;
-    
-    gap: 3rem;
-    padding-top: 5rem;
-  }
-  
-  /*
+  transition: 1s;
+  border-radius: 0.3em;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px 2px #8024e9;
+}
+
+.buttonHome .btn1::after,
+.buttonHome .btn2 ::after {
+  content: "";
+  position: absolute;
+
+  width: 0;
+  height: 0;
+  transition: 0.5s;
+}
+
+.buttonHome .btn1::before,
+.buttonHome .btn2 ::before {
+  content: "";
+  transform-origin: center;
+  position: absolute;
+
+  width: 0;
+  height: 0;
+  transition: 0.5s;
+}
+
+.buttonHome:hover::before,
+.buttonHome:hover::after {
+  transform: scale(0);
+}
+
+.buttonHome .btn1:hover,
+.buttonHome .btn2:hover {
+  box-shadow: inset 0px 0px 20px 6px #8024e9;
+  transform: scale(1.05);
+}
+
+.buttonHome {
+  display: flex;
+  justify-content: center;
+
+  gap: 3rem;
+  padding-top: 5rem;
+}
+
+/*
   .buttonHome div {
     
     flex: 0; 
     text-align: center;
   }
   */
-  
-  button {
-    padding: 0.8rem 1.5rem;
-    font-size: 1.6rem;
-    cursor: pointer;
-    border: none;
-    background: none;
-    color: #ffffff;
-  }
-  
-.btn1{
-    padding: 0;
-    width: 12px;
-    text-align: center;
-    padding-top: 10px;
-    color: #ffffff;
+
+button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1.6rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: #ffffff;
 }
 
-.btn2{
+.btn1 {
   padding: 0;
   width: 12px;
   text-align: center;
   padding-top: 10px;
   color: #ffffff;
 }
-#right{
-    padding-left: 9rem;
-    padding-bottom: 3rem;
+
+.btn2 {
+  padding: 0;
+  width: 12px;
+  text-align: center;
+  padding-top: 10px;
+  color: #ffffff;
+}
+#right {
+  padding-left: 9rem;
+  padding-bottom: 3rem;
 }

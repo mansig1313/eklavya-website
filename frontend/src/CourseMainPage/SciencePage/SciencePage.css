@@ -1,0 +1,200 @@
+.science-page-body {
+  all: unset !important;
+  background-color: transparent !important;
+  width: 100%;
+  height: 100%;
+}
+
+/* Wrapper Styles */
+#science-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(93, 9, 121, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  animation: gradientBackground 10s ease infinite;
+}
+
+/* Body Content */
+#science-page-wrapper .science-page-container {
+  font-family: "Arial", sans-serif;
+  min-height: 500px; /* Increased height */
+  width: 70%;
+  /* Increased width */
+  background: rgba(237, 232, 239, 0.8) !important;
+  background: linear-gradient(
+    145deg,
+    rgba(217, 205, 222, 0.8),
+    rgba(239, 236, 239, 0.8)
+  ) !important;
+  /* Gradient background */
+  /* Adjust opacity for better contrast */
+  border-radius: 25px;
+  padding: 40px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    inset 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* Enhanced shadow for depth */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  /* Smooth transition */
+}
+
+#science-page-wrapper .science-page-container:hover {
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 8px 20px rgba(0, 0, 0, 0.3);
+  /* Hover effect for shadow */
+  transform: scale(1.05);
+  /* Slight scale on hover */
+}
+
+/* Header */
+#science-page-wrapper .science-page-header {
+  margin-bottom: 30px;
+}
+
+#science-page-wrapper .science-page-header h1 {
+  font-size: 6rem;
+  margin-bottom: 10px;
+  color: #120536;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  /* Adding a text shadow */
+  /* White text for contrast */
+}
+
+#science-page-wrapper .science-page-header p {
+  font-size: 2.5rem;
+  color: #f0f0f0;
+  font-weight: 600;
+  /* Make the text bold */
+}
+
+/* Group Selection */
+#science-page-wrapper .science-page-group-selection h2,
+#science-page-wrapper .science-page-subject-list h2 {
+  margin-bottom: 20px;
+  font-size: 3rem;
+  color: #18072b;
+  font-weight: 700;
+  /* Make headings bold */
+  text-transform: uppercase;
+}
+
+#science-page-wrapper .science-page-group-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+#science-page-wrapper .science-page-group-buttons button {
+  background: linear-gradient(135deg, #3b4c72, #1c2333);
+  color: #ffffff;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 10px;
+  font-size: 2rem;
+  cursor: pointer;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s,
+    background 0.3s ease;
+  position: relative;
+}
+
+#science-page-wrapper .science-page-group-buttons button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, #6b4c72, #4c2f33);
+  /* Change gradient on hover */
+}
+
+/* Subject List */
+#science-page-wrapper .science-page-subject-list {
+  margin-top: 20px;
+}
+
+#science-page-wrapper .science-page-subjects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+#science-page-wrapper .science-page-subject-button {
+  background: linear-gradient(135deg, #3b4c72, #1c2333);
+  color: #ffffff;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  position: relative;
+}
+
+#science-page-wrapper .science-page-subject-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, #6b4c72, #4c2f33);
+  /* Change gradient on hover */
+}
+
+#science-page-wrapper .science-page-subject-button span {
+  font-size: 1.2rem;
+}
+
+/* Back Button */
+#science-page-wrapper .science-page-back-button {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #ff6f61, #d32f2f);
+  color: #ffffff;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 10px;
+  font-size: 2rem;
+  cursor: pointer;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s,
+    background 0.3s ease;
+}
+
+#science-page-wrapper .science-page-back-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(91, 91, 117, 0.4);
+  background: linear-gradient(135deg, #ff8666, #f08080);
+  /* Change gradient on hover */
+}
+
+/* Keyframes for Background Animation */
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}

@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300..900&display=swap");
 
 .aboutUsContainer {
   display: flex;
   background: rgb(2, 0, 36);
-  background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(93, 9, 121, 1) 100%, rgba(0, 212, 255, 1) 100%);
-
+  background: linear-gradient(
+    0deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(93, 9, 121, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
 
 .aboutus {
@@ -20,27 +24,22 @@
 }
 
 .aboutUsHeading {
-
   color: #ffffff;
   padding-left: 4rem;
   padding-right: rem;
   padding-top: 6rem;
   width: 100%;
   float: left;
-
 }
 
 .accordion {
-
   transform: translateX(-3px);
   padding-top: 4rem;
   padding-bottom: 3rem;
 
   padding-right: 10rem;
   padding-left: 3rem;
-
 }
-
 
 .MuiAccordion-root {
   border-radius: 8px;
@@ -51,11 +50,9 @@
   color: #7d08b3;
 
   font-size: larger;
-
 }
 
 .MuiAccordionDetails-root {
-
   max-height: 200px;
   overflow-y: auto;
   background: white;
@@ -63,8 +60,6 @@
   color: black;
   border-radius: 8px;
 }
-
-
 
 #panel1d-header {
   background: #7d08b3;
@@ -100,11 +95,9 @@
   padding-left: 5rem;
   padding-top: 4rem;
   padding-bottom: 6rem;
-
-  
 }
 
-#right1{
+#right1 {
   background: rgba(204, 118, 219, 0.18);
   border-radius: 10px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -114,19 +107,13 @@
   transition: all 0.3s ease;
 }
 
-
-
-
 #right1:hover {
   background: rgba(204, 118, 219, 0.25); /* Slightly more opaque */
   backdrop-filter: blur(10px); /* Increase blur */
   -webkit-backdrop-filter: blur(10px);
-  transform: scale(1.05);  /* Slight scaling */
+  transform: scale(1.05); /* Slight scaling */
   box-shadow: 0 6px 40px rgba(0, 0, 0, 0.15);
 }
-
-
-
 
 .card {
   font-size: large;

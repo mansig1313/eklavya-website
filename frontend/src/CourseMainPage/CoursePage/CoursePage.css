@@ -1,0 +1,216 @@
+/* Ensure the body takes the full height of the page */
+.course-page-bg,
+.course-page-html,
+.course-page-body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+    color: white;
+  /* Prevent horizontal scrolling */
+}
+
+/* General Layout */
+.course-page-body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(150deg, #d3c0d2, #fdfdfd);
+  /* Soft gradient background */
+  background-size: 150% 150%;
+  background-attachment: fixed;
+  /* Keep the background fixed while scrolling */
+  animation: gradientBackground 10s ease infinite;
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  /* Ensures it covers the whole page */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* Animation for background gradient */
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Header Section */
+.course-page-course-header {
+  text-align: center;
+  padding: 40px;
+  background-color: rgba(218, 196, 206, 0.9);
+  /* Slightly transparent dark background */
+  color: rgb(11, 2, 2);
+  margin-bottom: 60px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  position: relative;
+  width: 100%;
+  max-width: 1250px;
+  backdrop-filter: blur(10px);
+}
+
+/* Header Icons */
+.course-page-header-left,
+.course-page-header-right {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  color: black;
+}
+
+.course-page-header-left {
+  left: 10px;
+}
+
+.course-page-header-right {
+  right: 10px;
+}
+
+.course-page-course-header h1 {
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-top: 20px;
+  color: black;
+  text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.course-page-course-header p {
+  color: black;
+  font-size: 20px;
+  margin-top: 20px;
+  /* Increased font size */
+  font-weight: bold;
+  /* Makes the text bold */
+  font-style: italic;
+}
+
+/* Course Containers Layout */
+.course-page-course-containers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 50px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Individual Course Container */
+.course-page-course-container {
+  background: linear-gradient(145deg, #d3c0d2, #f7f7f7);
+  border-radius: 20px;
+  padding: 30px;
+  width: 320px;
+  text-align: center;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  position: relative;
+  box-shadow:
+    6px 6px 16px rgba(0, 0, 0, 0.2),
+    -6px -6px 16px rgba(255, 255, 255, 0.7);
+  background-size: 200% 200%;
+  background-position: 50%;
+  animation: courseHover 3s ease-in-out infinite;
+}
+
+/* Animation for course containers */
+@keyframes courseHover {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.course-page-course-container:hover {
+  transform: translateY(-15px);
+  box-shadow:
+    8px 8px 24px rgba(0, 0, 0, 0.4),
+    -8px -8px 24px rgba(222, 150, 220, 0.7);
+}
+
+/* Course Icons */
+.course-page-course-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+  color: #6e0f55;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.course-page-container:hover .course-icon {
+  color: #2a2a72;
+  transform: scale(1.2);
+}
+
+/* Course Titles */
+.course-page-course-container h2 {
+  font-size: 28px;
+  color: #130a0a;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+/* Course Descriptions */
+.course-page-course-container p {
+  font-size: 18px;
+  color: #191616;
+  margin-top: 10px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* Science Specific Styling */
+.course-page-science {
+  border-top: 6px solid #fcfcfc;
+}
+
+/* Arts Specific Styling */
+.course-page-arts {
+  border-top: 6px solid #fcfcfc;
+}
+
+/* Commerce Specific Styling */
+.course-page-commerce {
+  border-top: 6px solid #fcfcfc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .course-page-header {
+    padding: 30px;
+  }
+
+  .course-page-containers {
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .course-page-container {
+    width: 280px;
+  }
+}
