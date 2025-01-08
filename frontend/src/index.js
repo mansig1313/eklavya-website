@@ -10,6 +10,7 @@ import Register from './components/landingpg/register/Register';
 import TutorHomePage from './homePage/tutor.jsx';
 import StudentHomePage from '../src/homePage/student.jsx';
 import ParentHomePage from '../src/homePage/parent.jsx';
+import ResourcePage from './Resourcepage/ResourcePage.jsx';
 
 
 
@@ -25,6 +26,7 @@ root.render(
       <Route path="/student-home" element={<StudentHomePage />} />
       <Route path="/tutor-home" element={<TutorHomePage />} />
       <Route path="/parent-home" element={<ParentHomePage />} />
+      <Route path = "/resource" element={<ResourcePage/>}/>
     </Routes>
   </BrowserRouter>
 );

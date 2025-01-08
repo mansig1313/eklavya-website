@@ -39,7 +39,7 @@ html {
   color: white;
 }
 
-ul {
+.navbar ul {
   width: 80vw;
   height: 50px;
   display: flex;

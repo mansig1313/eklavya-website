@@ -10,7 +10,7 @@ const Land = () => {
     <div className='landPg'>
       <div className='column' id='left'>
 
-        <div className='heading'>
+        <div className='headingLand'>
           <h1>WE BRING EMPOWERMENT TO TUTORING SERVICES</h1>
         </div>
         <div className='subHeading'>
