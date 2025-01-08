@@ -1,0 +1,191 @@
+.resource-page * {
+    /* Reset or override specific styles here */
+    margin: 0;
+    padding: 0;
+}
+.resource-page {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+
+  .heading {
+    text-align:left;
+    color: #b826ba;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 1px;
+    margin-left: -10px;
+  }
+  
+   h3, h4 {
+    color: #333;
+  }
+
+  h3.subheading{
+    font-size: large;
+    margin-bottom: 15px;
+  }
+  
+  .upload-form {
+    display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto 30px;
+  padding: 20px;
+  border: 2px solid #e3e7f1;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+  }
+
+  .upload-form h2 {
+    text-align: center;
+    color: #da4ae2;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .upload-form label {
+    font-size: 16px;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  }
+  
+  .upload-form select, .upload-form input, .upload-form textarea, .upload-form button {
+    padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  }
+  
+  .upload-form button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #641589;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .upload-form button:hover {
+    background-color: #140114;
+  }
+  
+  .resource-page .upload-section {
+    margin-bottom: 40px;
+  }
+  
+  .resource-page .upload-section h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .resource-section {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .resource-section ul {
+    list-style-type: none;
+    padding: 20px;
+  }
+  
+  .resource-section li {
+    padding-bottom: 5px 0;
+    font-size: 20px;
+  }
+
+  /* Resource Cards */
+.resource-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .resource-card {
+    background-color: #ffffff;
+    border: 1px solid #e3e7f1;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .resource-card:hover {
+    transform: scale(1.02);
+    background-color :#d9ffd6;
+  }
+
+  .resource-card-title {
+    color: #810781;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .resource-list ul{
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .resource-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .resource-item:last-child {
+    border-bottom: none;
+  }
+
+  .resource-details {
+    text-align: left;
+    flex-grow: 1;
+  }
+
+  .no-resource {
+    font-size: 14px;
+    color: #888;
+    text-align: center;
+  }
+
+  .delete-button {
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #ff4d4d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .delete-button:hover {
+    background-color: #cc0000;
+  }
+
+  .expanded {
+    background-color: #ffffff;
+  }
+  

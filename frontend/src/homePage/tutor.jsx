@@ -11,6 +11,7 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import logo from '../components/landingpg/register/logo_white_nobg.png';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -18,7 +19,7 @@ import logo from '../components/landingpg/register/logo_white_nobg.png';
 
 // Main App Component
 function DashboardApp() {
-    
+    const navigate = useNavigate();
 
   return (
     <div className="app">
@@ -73,10 +74,8 @@ function DashboardApp() {
         
         </div>
         <div div className="main-content">
-        
-    
       <div className="content-grid">
-        <div className="box course-completion">
+        <div className="box course-completion" onClick={() => navigate('/resource')}>
           <h3>Upload Resource</h3>
         </div>
         <div className="box weekly-tests">

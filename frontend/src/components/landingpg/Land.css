@@ -17,13 +17,15 @@
   flex: 50%;
 }
 
-.heading {
-  padding-top: 6rem;
-  padding-left: 5rem;
-  padding-bottom: 1rem;
-  font-family: "PT Serif", serif;
-  font-size: x-large;
-  color: #ffffff;
+
+.heading{
+    padding-top: 6rem;
+    padding-left: 5rem;
+    padding-bottom: 1rem;
+    font-family :"PT Serif" ,serif;
+    font-size :x-large;
+    color: #ffffff;
+    
 }
 
 .subHeading {

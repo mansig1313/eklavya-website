@@ -7,9 +7,13 @@ import LoginPage from './components/landingpg/register/LoginPage';
 import AboutUs from './components/landingpg/AboutUs';
 import Services from './components/landingpg/Services';
 import Register from './components/landingpg/register/Register';
-import TutorHomePage from '../src/homePage/practice_proj/tutor.js';
-import StudentHomePage from '../src/homePage/practice_proj/student.js';
-import ParentHomePage from '../src/homePage/practice_proj/parent.js';
+import TutorHomePage from '../src/homePage/tutor.jsx';
+import StudentHomePage from '../src/homePage/student.jsx';
+import ParentHomePage from '../src/homePage/parent.jsx';
+import CoursePage from '../src/CourseMainPage/CoursePage/CoursePage.jsx';
+import '../src/CourseMainPage/CoursePage/CoursePage.css';
+import TutorSelectionPage from '../src/components/TutorSelectionPage/TutorSelectionPage.jsx';
+import '../src/components/TutorSelectionPage/TutorSelectionPage.css';
 
 
 
@@ -27,6 +31,7 @@ root.render(
         <Route path="/tutor-home" element={<TutorHomePage />} />
         <Route path="/parent-home" element={<ParentHomePage />} />
         <Route path="/course-page" element={<CoursePage />} />
+        <Route path="/:stream" element={<TutorSelectionPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
