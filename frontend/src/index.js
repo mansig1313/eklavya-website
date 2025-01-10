@@ -11,6 +11,7 @@ import TutorHomePage from './homePage/tutor.jsx';
 import StudentHomePage from '../src/homePage/student.jsx';
 import ParentHomePage from '../src/homePage/parent.jsx';
 import ResourcePage from './Resourcepage/ResourcePage.jsx';
+import StudentProfile from './homePage/studentprofile.jsx';
 
 
 
@@ -27,6 +28,7 @@ root.render(
       <Route path="/tutor-home" element={<TutorHomePage />} />
       <Route path="/parent-home" element={<ParentHomePage />} />
       <Route path = "/resource" element={<ResourcePage/>}/>
+      <Route path = "/student-profile" element={<StudentProfile/>}/>
     </Routes>
   </BrowserRouter>
 );

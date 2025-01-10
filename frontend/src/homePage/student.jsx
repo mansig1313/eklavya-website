@@ -11,6 +11,7 @@ import MessageIcon from '@mui/icons-material/Message';
 import PaymentIcon from '@mui/icons-material/Payment';
 import GradingIcon from '@mui/icons-material/Grading';
 import logo from '../components/landingpg/register/logo_white_nobg.png';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -18,6 +19,7 @@ import logo from '../components/landingpg/register/logo_white_nobg.png';
 function DashboardApp() {
     const [progressData, setProgressData] = useState([20, 40, 60, 80]); // Initial values
   const[user, setUser] = useState(null);
+  const navigate = useNavigate();
   useEffect(() => {
 
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
@@ -87,7 +89,9 @@ function DashboardApp() {
           <div className="header-icons"> 
           <NotificationsIcon className="NotificationIcon" />
           <EmailIcon className="EmailIcon" />
-          <PersonIcon className="PersonIcon"/>
+          <PersonIcon className="PersonIcon"
+          onClick={() => navigate('/student-profile')} // Redirect to student profile page
+          style={{ cursor: 'pointer' }}/>
         </div>
         
         </div>

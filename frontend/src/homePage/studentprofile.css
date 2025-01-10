@@ -1,0 +1,218 @@
+/* General container styling */
+.studentprofile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+}
+
+/* Common styling for sections */
+.profile-section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+/* Save Profile Button Styling */
+.profile-section button {
+  display: block; /* Ensures the button occupies its own row */
+  margin: 15px auto 0; /* Centers the button with some spacing */
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.profile-section button:hover {
+  background-color: #45a049;
+}
+
+/* General fixes for container and overflow */
+.studentprofile-container {
+  position: relative; /* Ensures proper positioning for child elements */
+  overflow: visible; /* Prevents any overflow from being hidden */
+}
+
+/* Ensure spacing between sections */
+.profile-section {
+  margin-bottom: 30px; /* Add more spacing if needed */
+}
+
+.profile-section h3 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Form field styling */
+.profile-field {
+  margin-bottom: 15px;
+}
+
+.profile-field label {
+  display: block;
+  font-weight: bold;
+  color: #555;
+}
+
+.profile-field input,
+.profile-field select,
+.profile-field textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Profile picture section */
+.profile-picture-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-picture-wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+}
+
+.profile-picture-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  cursor: pointer;
+  overflow: hidden;
+  border: 2px solid #ccc;
+  background-color: #f0f0f0;
+  position: relative;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.profile-picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-picture-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #888;
+  width: 100%;
+  height: 100%;
+  background-color: #eaeaea;
+  border-radius: 50%;
+}
+
+.remove-picture-btn {
+  margin-top: 10px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.remove-picture-btn:hover {
+  background-color: #d63031;
+}
+
+/* Hover effects */
+.profile-picture-label:hover {
+  border-color: #bbb;
+}
+
+/* Button styling */
+.profile-field button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.profile-field button:hover {
+  background-color: #45a049;
+}
+
+/* Error and success messages */
+.error-message {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.success-message {
+  color: #27ae60;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Password form styling */
+.password-form {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.password-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.password-form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.password-form button:hover {
+  background-color: #45a049;
+}
+
+/* Logout button styling */
+.logout-btn {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.logout-btn:hover {
+  background-color: #d63031;
+}
+
