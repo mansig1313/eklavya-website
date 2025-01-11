@@ -72,10 +72,13 @@ const Profile = () => {
     formData.append("profilePicture", file);
     
     try {
+      const token = localStorage.getItem('token');
       const response = await axios.post(
         "http://localhost:5000/upload-profile-picture",
         formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        { headers: { "Content-Type": "multipart/form-data" ,
+          "Authorization": `Bearer ${token}`
+        } }
       );
   
       if (response.data && response.data.imageUrl) {
@@ -156,6 +159,8 @@ const Profile = () => {
   };
 
   return (
+    <div className="profile-page">
+    <div className="studentprofile">
     <div className="studentprofile-container">
       <div className="profile-picture-section">
         <div className="profile-picture-wrapper">
@@ -318,6 +323,8 @@ const Profile = () => {
           Log Out
         </button>
       </div>
+    </div>
+    </div>
     </div>
   );
 };
