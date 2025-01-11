@@ -25,6 +25,7 @@ function LoginPage() {
         password,
       });
      if(response.data.success){
+      localStorage.setItem('token', response.data.token);
       localStorage.setItem('user',JSON.stringify(response.data.user));
       if (role === "Student") {
         navigate('/student-home');

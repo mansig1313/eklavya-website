@@ -18,30 +18,28 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         setError(''); // Clear any previous errors
-
+    
         if (password !== confirmPassword) {
             setError("Passwords do not match!");
             return;
         }
-
-        if(!name || !email || !password || !role){
+    
+        if (!name || !email || !password || !role) {
             setError('All fields are required');
-            return ;
+            return;
         }
-
+    
         try {
-              const axiosInstance = axios.create({
-                baseURL : 'http://localhost:5000/api',
-              });
+            const axiosInstance = axios.create({
+                baseURL: 'http://localhost:5000/api',
+            });
             const response = await axiosInstance.post('/auth/register', {
                 name,
                 email,
                 password,
                 role,
             });
-
-            
-
+    
             if (response.data.success) {
                 alert("Registration successful!");
                 navigate('/login'); // Redirect to login page after successful registration
@@ -49,10 +47,15 @@ const Register = () => {
                 setError(response.data.message || "Registration failed. Please try again.");
             }
         } catch (error) {
-            console.error("Error during registration:", error);
-            setError("An error occurred. Please try again later.");
+            if (error.response && error.response.status === 400) {
+                setError(error.response.data.message || "Bad Request");
+            } else {
+                console.error("Error during registration:", error);
+                setError("An error occurred. Please try again later.");
+            }
         }
     };
+    
 
     return (
         <div className="register-page-container">
