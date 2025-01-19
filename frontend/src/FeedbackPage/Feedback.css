@@ -1,0 +1,132 @@
+
+/* General Styling */
+.feedback-page-body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    min-height: 100vh;
+    background: linear-gradient(to right, #ffecd2, #481958);
+    /* Soft Peach Gradient */
+}
+
+/* Full-Screen Feedback Page */
+.feedback-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    height: 100vh;
+    background: linear-gradient(135deg, #f0ccf960, #7c54b179);
+    /* Light gray background */
+}
+
+/* Header Styling */
+.feedback-header {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.feedback-header h1 {
+    font-size: 4rem;
+    color: #220a39;
+}
+
+.feedback-header .tagline {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #6b0a6a;
+    margin-top: 5px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Container */
+.feedback-form-container {
+    width: 120%;
+    height: 70%;
+    max-width: 800px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    /* Transparent white */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    /* Depth shadow */
+    backdrop-filter: blur(10px);
+    /* Glass blur effect */
+    -webkit-backdrop-filter: blur(10px);
+    /* For Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Subtle border for outline */
+}
+
+.feedback-form-container h2 {
+    text-align: center;
+    color: #240b46;
+    margin-bottom: 20px;
+    font-size: 3rem;
+
+}
+
+.form-group {
+    font-weight: bold;
+    /* Makes the text bold */
+    margin-bottom: 15px;
+}
+
+.input-field,
+.textarea-field {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.textarea-field {
+    resize: none;
+    height: 100px;
+}
+
+.submit-button {
+    width: 100%;
+    background: linear-gradient(135deg, #29063e, #7c54b1);
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 2rem;
+    transition: background 0.3s;
+}
+
+.submit-button:hover {
+    background: #1f0539;
+}
+
+/* Feedback List */
+.feedback-list-container {
+    width: 100%;
+    max-width: 600px;
+}
+
+.feedback-list-container h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #240b46;
+    font-size: 2rem;
+}
+
+.feedback-items {
+    list-style: none;
+    padding: 0;
+}
+
+.feedback-item {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

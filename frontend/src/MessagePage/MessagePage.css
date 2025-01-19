@@ -1,0 +1,186 @@
+/* Page Background and Layout */
+.message-page-body {
+    background-color: #e8d6f1;
+    /* Soft purple background for the page */
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Chat Container */
+.message-chat-container {
+    border: 1px solid #b3a0d3;
+    /* Soft violet border */
+    border-radius: 15px;
+    width: 900px;
+    /* Adjusted width */
+    height: 600px;
+    /* Adjusted height */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Soft shadow for depth */
+    background: #ffffff;
+    /* White background for the chat */
+    transition: transform 0.3s ease;
+    /* Smooth transition for hover effects */
+}
+
+/* Hover Effect for Chat Container */
+.chat-container:hover {
+    transform: scale(1.02);
+    /* Slight scale-up on hover */
+}
+
+/* Chat Header */
+.chat-header {
+    background-color: #441460;
+    /* Violet background */
+    color: white;
+    padding: 20px;
+    /* Increased padding for a more spacious look */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Unread Badge */
+.unread-badge {
+    background-color: red;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+/* Chat Body */
+.chat-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    /* Adjusted padding */
+    background: #f8f7fc;
+    /* Light violet background */
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+/* My Message Styling */
+.my-message {
+    text-align: right;
+    background: #e0b3e1;
+    /* Light violet background for sent messages */
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 12px;
+    max-width: 70%;
+    margin-left: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+}
+
+/* Their Message Styling */
+.their-message {
+    text-align: left;
+    background: #d0c7e5;
+    /* Light lavender background for received messages */
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 12px;
+    max-width: 70%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+}
+
+/* Chat Footer */
+.chat-footer {
+    display: flex;
+    padding: 15px;
+    /* Adjusted padding */
+    background: #441460;
+    /* Violet background for footer */
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.chat-footer input {
+    flex: 1;
+    padding: 12px;
+    /* Adjusted padding */
+    margin-right: 12px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+    /* Smooth transition */
+}
+
+.chat-footer input:focus {
+    border-color: #6a4ec4;
+    /* Violet border on focus */
+    box-shadow: 0 0 5px rgba(106, 78, 196, 0.5);
+    /* Violet glow */
+}
+
+.chat-footer button {
+    padding: 12px 20px;
+    background: #330f57;
+    /* Darker violet for button */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Smooth transitions */
+}
+
+.chat-footer button:hover {
+    background: #2d094b;
+    /* Darker shade on hover */
+    transform: scale(1.05);
+    /* Slight scale-up on hover */
+}
+
+/* Responsiveness for smaller screens */
+@media screen and (max-width: 480px) {
+    .chat-container {
+        width: 100%;
+        height: 500px;
+        border-radius: 10px;
+        /* Rounded corners for smaller screens */
+    }
+
+    .chat-header {
+        font-size: 16px;
+        /* Smaller font size for header */
+        padding: 15px;
+        /* Adjusted padding */
+    }
+
+    .chat-footer input {
+        font-size: 12px;
+    }
+
+    .chat-footer button {
+        font-size: 12px;
+    }
+
+    /* Styling for message bubbles */
+    .my-message,
+    .their-message {
+        padding: 10px;
+        /* Smaller padding for messages on mobile */
+        max-width: 80%;
+        /* Adjusted max-width for mobile */
+    }
+}

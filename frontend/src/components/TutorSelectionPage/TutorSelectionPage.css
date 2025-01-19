@@ -3,7 +3,7 @@
 
 .body {
     font-family: Arial, sans-serif;
-    background-color: #f4f7fc;
+    background-color: #612f82;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -19,8 +19,18 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Container for both the Heading and Subtitle */
+.dynamic-heading-container {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    background: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 /* Header Styling */
-.h1 {
+.tutor-selection-body h1 {
     font-family: 'Poppins', sans-serif;
     color: #450e55;
     background: #cfb2e0;
@@ -31,9 +41,27 @@
     font-weight: 700;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    
 }
 
-.tutor-subtitle {
+.tutor-selection-body h1:hover {
+    transform: translateY(-5px);
+    background-color: #bda7c9;
+}
+
+/* Animation for Header */
+@keyframes fadeInHeader {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tutor-selection-body .tutor-subtitle {
     font-size: 1.5rem;
     font-weight: 600;
     color: #7522a9;
@@ -41,16 +69,17 @@
     text-align: center;
     padding: 10px 0;
     width: 100%;
+    font-family: 'Roboto', sans-serif;
 }
 
-/* Animation for Header */
-@keyframes fadeIn {
+/* Animation for Filter Bar */
+@keyframes slideIn {
     0% {
-        opacity: 0;
+        transform: translateX(-100%);
     }
 
     100% {
-        opacity: 1;
+        transform: translateX(0);
     }
 }
 
@@ -89,17 +118,6 @@
 
 .filter-bar label:hover {
     color: #007bb5;
-}
-
-/* Animation for Filter Bar */
-@keyframes slideIn {
-    0% {
-        transform: translateX(-100%);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
 }
 
 /* Tutors List Section */
@@ -150,7 +168,7 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    border: 3px solid #4a90e2;
+    border: 3px solid #461f6d;
     object-fit: cover;
 }
 
@@ -173,7 +191,7 @@
 }
 
 .tutor-info strong {
-    color: #4a90e2;
+    color: #3c145d;
 }
 
 .tutor-card:hover .tutor-image img {
@@ -184,6 +202,15 @@
 @media (max-width: 768px) {
     .tutors-list {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .tutor-selection-body h1 {
+        font-size: 3rem;
+        padding: 15px 30px;
+    }
+
+    .tutor-selection-body .tutor-subtitle {
+        font-size: 1.3rem;
     }
 }
 
@@ -199,5 +226,14 @@
     .filter-bar select {
         width: 100%;
         margin-top: 10px;
+    }
+
+    .tutor-selection-body h1 {
+        font-size: 2.5rem;
+        padding: 10px 20px;
+    }
+
+    .tutor-selection-body .tutor-subtitle {
+        font-size: 1.2rem;
     }
 }

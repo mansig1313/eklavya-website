@@ -16,7 +16,7 @@ const Land = () => {
     <div className='landPg'>
       <div className='column' id='left'>
 
-        <div className='heading'>
+        <div className='headingLand'>
           <h1>WE BRING EMPOWERMENT TO TUTORING SERVICES</h1>
         </div>
         <div className='subHeading'>
@@ -34,10 +34,7 @@ const Land = () => {
 
         </div>
 
-        <div className='buttonHome'>
-          <div className='btn1' style = {{width : '20rem' , color : 'white'}}>
-            <button> Find A Tutor</button>
-          </div>
+        
 
           <div className="buttonHome">
             <div className="btn1" style={{ width: "20rem", color: "white" }}>
@@ -60,4 +57,5 @@ const Land = () => {
   );
 };
 
-export default Land;
+      export default Land;
+
