@@ -7,7 +7,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 155%;
+   
+    width: 100%;
     height: 100vh;
     background: rgb(230,219,232);
 background: linear-gradient(180deg, rgba(230,219,232,0.07344187675070024) 0%, rgba(156,88,178,0.9894082633053222) 26%);
@@ -16,7 +17,8 @@ background: linear-gradient(180deg, rgba(230,219,232,0.07344187675070024) 0%, rg
 
 .register-page {
     display: flex;
-    width: 80%;
+   
+    width: 60%;
     height: 80vh;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;

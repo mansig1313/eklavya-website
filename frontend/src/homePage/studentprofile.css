@@ -3,7 +3,8 @@
 
 .studentprofile-container {
   max-width: 800px;
-  
+  margin-top: 50px;
+  margin-bottom: 70px;
   padding-left: 20px;
   margin-left: 240px;
   font-family: Arial, sans-serif;

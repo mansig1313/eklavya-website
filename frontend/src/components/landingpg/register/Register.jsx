@@ -19,6 +19,11 @@ const Register = () => {
         e.preventDefault();
         setError(''); // Clear any previous errors
     
+        if (role === "tutor") {
+            navigate('/tutor-register'); // Redirect to Tutor Register Page if role is Tutor
+            return;
+        }
+
         if (password !== confirmPassword) {
             setError("Passwords do not match!");
             return;

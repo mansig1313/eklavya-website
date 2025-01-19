@@ -29,7 +29,7 @@ root.render(
       <Route path="/parent-home" element={<ParentHomePage />} />
       <Route path = "/resource" element={<ResourcePage/>}/>
       <Route path = "/student-profile" element={<StudentProfile/>}/>
-      <Route path="/tutor-profile" element={<TutorProfile />} />
+      <Route path="/tutor-register" element={<TutorProfile />} />
     </Routes>
   </BrowserRouter>
 );
