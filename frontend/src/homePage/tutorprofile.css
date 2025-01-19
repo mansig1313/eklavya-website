@@ -1,0 +1,229 @@
+/* profile.css */
+
+/* Container Styles */
+.profile-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Profile Picture Section */
+  .profile-picture-section {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-picture-wrapper {
+    position: relative;
+    
+  }
+  .edit-picture-btn {
+    margin-top: 10px;
+    padding: 5px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .edit-options {
+    position: absolute;
+    top: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 10;
+  }
+  
+  .edit-options label,
+  .edit-options button {
+    display: block;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    color: #333;
+    font-size: 14px;
+    background: none;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .edit-options button:hover,
+  .edit-options label:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .edit-icon {
+    margin-right: 8px;
+  }
+
+  .close-edit-options {
+    position: block;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #999;
+  }
+
+  .close-edit-options:hover {
+    color: #000;
+  }
+
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+  }
+  
+  .profile-picture-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #555;
+    border: 2px dashed #ccc;
+  }
+  
+  .remove-picture-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .camera-icon {
+    font-size: 24px;
+  }
+  /* Bio Section */
+  .bio-section {
+    margin-bottom: 20px;
+  }
+  
+  .bio-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .bio-section textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    resize: none;
+  }
+  
+  /* Basic Information Section */
+  .profile-section {
+    margin-bottom: 20px;
+  }
+  
+  .profile-section h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .profile-field {
+    margin-bottom: 15px;
+  }
+  
+  .profile-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .profile-field input,
+  .profile-field select,
+  .password-form input,
+  .password-form button {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .profile-field select {
+    height: 35px;
+  }
+  
+  .password-form {
+    margin-top: 15px;
+  }
+  
+  .password-form button {
+    background-color: #4caf50;
+    color: white;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Toggle Button */
+  .toggle-password-btn {
+    display: inline-block;
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Save and Logout Buttons */
+  .save-profile-btn,
+  .logout-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .save-profile-btn {
+    background-color: #4caf50;
+  }
+  
+  .logout-btn {
+    background-color: #f44336;
+  }
+  
+  /* Danger Zone Section */
+  .danger-zone h3 {
+    color: #f44336;
+  }
+  

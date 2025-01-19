@@ -12,14 +12,13 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import GradingIcon from '@mui/icons-material/Grading';
 
 import logo from '../components/landingpg/register/logo_white_nobg.png';
-import { useNavigate } from 'react-router-dom';  
+
+
 
 // Main App Component
 function DashboardApp() {
     const [progressData, setProgressData] = useState([20, 40, 60, 80]); // Initial values
-  const [user, setUser] = useState(null);
-    const navigate = useNavigate();  // Define the navigate function
-
+  const[user, setUser] = useState(null);
   useEffect(() => {
 
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
@@ -34,26 +33,7 @@ function DashboardApp() {
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
-
-    // Navigation function for 'My Course'
-  const handleMyCourseClick = () => {
-    navigate('/mycourse'); // Navigate to the 'My Course' page
-  };
-
-
-   const handleMessageClick = () => {
-        navigate('/messages'); // Navigate to the messages page
-    };
-
-   const handlePaymentClick = () => {
-    navigate('/payments'); // Navigate to the payment page
-  };
-
-   const handleFeedbackClick = () => {
-    navigate('/feedback'); // Navigate to the feedback page
-  };
-
-
+  
 
   return (
     <div className="app">
@@ -68,27 +48,26 @@ function DashboardApp() {
         <DashboardIcon className="dashboard-icon" />
         <span>Dashboard</span>
         </div>
-           <div className="sidebar-item" onClick={handleMyCourseClick}>
-            <Mycourse className="mycourse" />
-            <span>My Course</span>
-          </div>
-          
-        <div className="sidebar-item" onClick={handleMessageClick}>
-        <MessageIcon className="messages" />
+        <div className="sidebar-item">
+        <Mycourse className="mycourse" />
+        <span> My course </span>
+        </div>
+        <div className="sidebar-item">
+        <MessageIcon   className="messages" />
         <span> Messages </span>
         </div>
-        <div className="sidebar-item" >
+        <div className="sidebar-item">
         <FolderIcon className="Resourse" />
         <span> Resourse </span>
         </div>
-        <div className="sidebar-item" onClick={handleFeedbackClick}>
-            <GradingIcon className="Resourse" />
-            <span>Feedback</span>
-          </div>
-         <div className="sidebar-item" onClick={handlePaymentClick}>
-            <PaymentIcon className="Reports" />
-            <span>Payment</span>
-          </div>
+        <div className="sidebar-item">
+        <GradingIcon  className="Resourse" />
+        <span>Feedback</span>
+        </div>
+        <div className="sidebar-item">
+        <PaymentIcon className="Reports" />
+        <span>Payment</span>
+        </div>
         <div className="sidebar-item">
         <SettingsIcon className="Settings" />
         <span>Settings</span>
@@ -110,8 +89,8 @@ function DashboardApp() {
           <NotificationsIcon className="NotificationIcon" />
           <EmailIcon className="EmailIcon" />
           <PersonIcon className="PersonIcon"/>
-          </div>
-          
+        </div>
+        
         </div>
         <div div className="main-content">
         
@@ -152,11 +131,7 @@ function DashboardApp() {
           
         
         </div>
-
-       
-      </div>
-    
-  );
+    );
 }
 
 export default DashboardApp;
