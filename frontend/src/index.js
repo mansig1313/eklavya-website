@@ -12,7 +12,7 @@ import StudentHomePage from '../src/homePage/student.jsx';
 import ParentHomePage from '../src/homePage/parent.jsx';
 import ResourcePage from './Resourcepage/ResourcePage.jsx';
 import StudentProfile from './homePage/studentprofile.jsx';
-
+import TutorProfile from './homePage/tutorprofile.jsx';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -29,6 +29,7 @@ root.render(
       <Route path="/parent-home" element={<ParentHomePage />} />
       <Route path = "/resource" element={<ResourcePage/>}/>
       <Route path = "/student-profile" element={<StudentProfile/>}/>
+      <Route path="/tutor-profile" element={<TutorProfile />} />
     </Routes>
   </BrowserRouter>
 );

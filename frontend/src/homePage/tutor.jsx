@@ -14,12 +14,13 @@ import logo from '../components/landingpg/register/logo_white_nobg.png';
 import { useNavigate } from 'react-router-dom';
 
 
-
-
-
 // Main App Component
 function DashboardApp() {
     const navigate = useNavigate();
+
+    const goToProfile = () => {
+      navigate("/tutor-profile" ); // Adjust the route to match your profile page
+  };
 
   return (
     <div className="app">
@@ -69,7 +70,7 @@ function DashboardApp() {
           <div className="header-icons"> 
           <NotificationsIcon className="NotificationIcon" />
           <EmailIcon className="EmailIcon" />
-          <PersonIcon className="PersonIcon"/>
+          <PersonIcon className="PersonIcon" onClick={goToProfile}/>
         </div>
         
         </div>
