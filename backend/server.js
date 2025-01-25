@@ -25,6 +25,7 @@ const corsOptions = {
     credentials: true,
 };
 
+
 const io = new Server(server, {
     cors: corsOptions,
 });
