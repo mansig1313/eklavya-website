@@ -10,13 +10,14 @@ import Mycourse from '@mui/icons-material/LibraryBooks';
 import MessageIcon from '@mui/icons-material/Message';
 import PaymentIcon from '@mui/icons-material/Payment';
 import GradingIcon from '@mui/icons-material/Grading';
-
 import logo from '../components/landingpg/register/logo_white_nobg.png';
+import { useNavigate } from 'react-router-dom';
 
 // Main App Component
 function DashboardApp() {
   const [progressData, setProgressData] = useState([20, 40, 60, 80]); // Initial values
   const [user, setUser] = useState(null);
+  const navigate = useNavigate(); // Define the navigate function
 
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
@@ -33,23 +34,40 @@ function DashboardApp() {
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
 
+  // Navigation functions
+  const handleMyCourseClick = () => {
+    navigate('/mycourse'); // Navigate to the 'My Course' page
+  };
+
+  const handleMessageClick = () => {
+    navigate('/messages'); // Navigate to the messages page
+  };
+
+  const handlePaymentClick = () => {
+    navigate('/payments'); // Navigate to the payment page
+  };
+
+  const handleFeedbackClick = () => {
+    navigate('/feedback'); // Navigate to the feedback page
+  };
+
+
   return (
     <div className="app">
       <div className="sidebar">
         <div className="logo-container">
           <img src={logo} alt="Logo" className="logo" />
         </div>
-
         <ul>
           <div className="sidebar-item">
             <DashboardIcon className="dashboard-icon" />
             <span>Dashboard</span>
           </div>
-          <div className="sidebar-item">
+          <div className="sidebar-item" onClick={handleMyCourseClick}>
             <Mycourse className="mycourse" />
-            <span>My course</span>
+            <span>My Course</span>
           </div>
-          <div className="sidebar-item">
+          <div className="sidebar-item" onClick={handleMessageClick}>
             <MessageIcon className="messages" />
             <span>Messages</span>
           </div>
@@ -57,11 +75,11 @@ function DashboardApp() {
             <FolderIcon className="Resourse" />
             <span>Resourse</span>
           </div>
-          <div className="sidebar-item">
+          <div className="sidebar-item" onClick={handleFeedbackClick}>
             <GradingIcon className="Resourse" />
             <span>Feedback</span>
           </div>
-          <div className="sidebar-item">
+          <div className="sidebar-item" onClick={handlePaymentClick}>
             <PaymentIcon className="Reports" />
             <span>Payment</span>
           </div>
@@ -87,7 +105,6 @@ function DashboardApp() {
             <PersonIcon className="PersonIcon" />
           </div>
         </div>
-
         <div className="main-content">
           <div className="content-grid">
             <div className="box course-completion">
@@ -108,11 +125,7 @@ function DashboardApp() {
             <h3>Progress Report</h3>
             <div className="progress-bar">
               {progressData.map((value, index) => (
-                <div
-                  key={index}
-                  className="bar"
-                  style={{ height: `${value}%` }}
-                ></div>
+                <div key={index} className="bar" style={{ height: `${value}%` }}></div>
               ))}
             </div>
           </div>
