@@ -24,7 +24,7 @@ const corsOptions = {
     origin: process.env.FRONTEND_URL || 'http://localhost:3000',  // Default to localhost for development
     credentials: true,
 };
-const { Server } = require('socket.io');
+
 
 const io = new Server(server, {
     cors: corsOptions,
