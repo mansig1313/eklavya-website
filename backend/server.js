@@ -4,6 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const http = require('http');
+
 
 dotenv.config();
 
@@ -22,6 +24,8 @@ const corsOptions = {
     origin: process.env.FRONTEND_URL || 'http://localhost:3000',  // Default to localhost for development
     credentials: true,
 };
+const { Server } = require('socket.io');
+
 const io = new Server(server, {
     cors: corsOptions,
 });
@@ -108,8 +112,6 @@ app.post('/api/auth/login', async (req, res) => {
             }
         });
 
-        // Generate JWT token
-        const token = jwt.sign({ id: user._id, role: user.role }, 'secretKey', { expiresIn: '1h' });
         
     } catch (error) {
         res.status(500).json({ error: "Error logging in user" });
@@ -134,4 +136,4 @@ const authenticateToken = (req, res, next) => {
 
 app.listen(PORT,()=>{
     console.log(`Server is Running on port  ${PORT}`);
-});g
+});

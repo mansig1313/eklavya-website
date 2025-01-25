@@ -24,7 +24,6 @@ function LoginPage() {
         email,
         password,
       });
-<<<<<<< HEAD
       if (response.data.success) {
         localStorage.setItem("user", JSON.stringify(response.data.user));
         if (role === "Student") {
@@ -39,17 +38,7 @@ function LoginPage() {
           response.data.message ||
             "Login failed....Please Check Your Credentials",
         );
-=======
-     if(response.data.success){
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user',JSON.stringify(response.data.user));
-      if (role === "Student") {
-        navigate('/student-home');
-      } else if (role === "Tutor") {
-        navigate('/tutor-home');
-      } else if (role === "Parent") {
-        navigate('/parent-home');
->>>>>>> b9da5478ffae5442e69c38860dafe93511088fa5
+     
       }
     } catch (err) {
       setError("An error occurred. Please try again later.");

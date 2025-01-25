@@ -31,6 +31,7 @@ root.render(
       <Route path="/tutor-home" element={<TutorHomePage />} />
       <Route path="/parent-home" element={<ParentHomePage />} />
       <Route path = "/resource" element={<ResourcePage/>}/>
+      <Route path = "/course-page" element={<CoursePage/>}/>
     </Routes>
   </BrowserRouter>
 );
