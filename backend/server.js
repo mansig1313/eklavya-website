@@ -4,18 +4,20 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const http = require('http');  // Import http module
+const { Server } = require('socket.io');  // Import socket.io's Server class
 
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  })
+})
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('MongoDB connection error:', err));
 
 const app = express();
-const server = http.createServer(app);
+const server = http.createServer(app);  // Create the HTTP server
 
 // Dynamic CORS based on environment
 const corsOptions = {
@@ -27,7 +29,7 @@ const io = new Server(server, {
 });
 
 app.use(express.json());
-app.use(cors({origin : 'http://localhost:3000',credentials : true}));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 const PORT = process.env.PORT || 5000;
 
@@ -78,7 +80,7 @@ app.post('/api/auth/register', async (req, res) => {
             password: hashedPassword,
             role,
         });
-        
+
         await newUser.save();
         res.status(201).json({ message: "User registered successfully" });
     } catch (error) {
@@ -96,21 +98,20 @@ app.post('/api/auth/login', async (req, res) => {
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) return res.status(400).json({ error: "Invalid password" });
 
+        // Generate JWT token
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET || 'secretKey', { expiresIn: '1h' });
 
         res.status(201).json({
-            success:true,
+            success: true,
             message: "Login successful",
-            user:{
-                name:user.name,
-                email:user.email,
-                role:user.role,
-            }
+            user: {
+                name: user.name,
+                email: user.email,
+                role: user.role,
+            },
+            token,  // Send the token in the response
         });
 
-        // Generate JWT token
-        const token = jwt.sign({ id: user._id, role: user.role }, 'secretKey', { expiresIn: '1h' });
-        
     } catch (error) {
         res.status(500).json({ error: "Error logging in user" });
     }
@@ -124,7 +125,7 @@ const authenticateToken = (req, res, next) => {
         return res.status(401).json({ error: "Access denied" });
     }
 
-    jwt.verify(token, 'secretKey', (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET || 'secretKey', (err, user) => {
         if (err) return res.status(403).json({ error: "Invalid token" });
         req.user = user;
         console.log("Authenticated user:", user);
@@ -132,6 +133,7 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-app.listen(PORT,()=>{
-    console.log(`Server is Running on port  ${PORT}`);
-});g
+// Start the server
+server.listen(PORT, () => {
+    console.log(`Server is Running on port ${PORT}`);
+});

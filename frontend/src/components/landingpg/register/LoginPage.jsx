@@ -24,8 +24,8 @@ function LoginPage() {
         email,
         password,
       });
-<<<<<<< HEAD
       if (response.data.success) {
+        localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         if (role === "Student") {
           navigate("/student-home");
@@ -36,20 +36,8 @@ function LoginPage() {
         }
       } else {
         setError(
-          response.data.message ||
-            "Login failed....Please Check Your Credentials",
+          response.data.message || "Login failed....Please Check Your Credentials"
         );
-=======
-     if(response.data.success){
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user',JSON.stringify(response.data.user));
-      if (role === "Student") {
-        navigate('/student-home');
-      } else if (role === "Tutor") {
-        navigate('/tutor-home');
-      } else if (role === "Parent") {
-        navigate('/parent-home');
->>>>>>> b9da5478ffae5442e69c38860dafe93511088fa5
       }
     } catch (err) {
       setError("An error occurred. Please try again later.");
@@ -102,7 +90,7 @@ function LoginPage() {
 
           <p className="or-text">or continue with</p>
 
-          <button type="button1" className="google-signin">
+          <button type="button" className="google-signin">
             Sign in with Google
           </button>
         </form>

@@ -73,26 +73,8 @@ const FeedbackPage = () => {
           </button>
         </form>
       </div>
-
-      {/* Feedback List */}
-      <div className="feedback-list-container">
-        <h2>Received Feedback</h2>
-        {feedbacks.length === 0 ? (
-          <p>No feedback available yet.</p>
-        ) : (
-          <ul className="feedback-items">
-            {feedbacks.map((feedback) => (
-              <li key={feedback.id} className="feedback-item">
-                <strong>From:</strong> {feedback.studentName} <br />
-                <strong>To:</strong> {feedback.tutorName} <br />
-                <strong>Message:</strong> {feedback.message}
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
-    </div>
-  );
+    );
 };
 
 export default FeedbackPage;
