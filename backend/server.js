@@ -25,9 +25,8 @@ const server = http.createServer(app); // Create the HTTP server
 
 
 
-// Dynamic CORS based on environment
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',  // Default to localhost for development
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
     credentials: true,
 };
 0;
@@ -37,10 +36,14 @@ const io = new Server(server, {
     cors: corsOptions,
 });
 
-app.use(express.json());
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+io.on('connection', (socket) => {
+    console.log('A user connected');
+});
+app.use(cors(corsOptions));
 
-const PORT = process.env.PORT || 5000;
+app.use(express.json());
+
+const PORT = process.env.PORT || 3000; // Use PORT from environment or default to 3000
 
 // User schema and model
 const userSchema = new mongoose.Schema({
@@ -82,7 +85,6 @@ app.post('/api/auth/register', async (req, res) => {
         }
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Create a new user
         const newUser = new User({
             name,
             email,
@@ -107,7 +109,6 @@ app.post('/api/auth/login', async (req, res) => {
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) return res.status(400).json({ error: "Invalid password" });
 
-        // Generate JWT token
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET || 'secretKey', { expiresIn: '1h' });
 
         res.status(201).json({
@@ -121,7 +122,6 @@ app.post('/api/auth/login', async (req, res) => {
             }
               // Send the token in the response
         });
-
     } catch (error) {
         res.status(500).json({ error: "Error logging in user" });
     }
