@@ -51,6 +51,14 @@ function DashboardApp() {
     navigate('/feedback'); // Navigate to the feedback page
   };
 
+  const handleMyTutorsClick = () => {
+    navigate('/mytutors');
+  };
+
+  const handleWeeklyTestsClick = () => {
+    navigate('/WeeklyTests');
+  };
+
 
   return (
     <div className="app">
@@ -110,10 +118,10 @@ function DashboardApp() {
             <div className="box course-completion">
               <h3>Course Completion</h3>
             </div>
-            <div className="box weekly-tests">
+            <div className="box weekly-tests" onClick={handleWeeklyTestsClick}>
               <h3>Weekly Tests</h3>
             </div>
-            <div className="box my-tutors">
+           <div className="box my-tutors" onClick={handleMyTutorsClick}>
               <h3>My Tutors</h3>
             </div>
             <div className="box upcoming-sessions">

@@ -23,6 +23,10 @@ import PaymentPage from './PaymentPage/PaymentPage.jsx';
 import './PaymentPage/PaymentPage.css';
 import FeedbackPage from './FeedbackPage/Feedback.jsx';
 import './FeedbackPage/Feedback.css';
+import MyTutors from '../src/components/Stu_MyTutors/Stu_MyTutors.jsx';
+import '../src/components/Stu_MyTutors/Stu_MyTutors.css';
+import WeeklyTests from '../src/WeeklyTests/WeeklyTest.jsx';
+import '../src/WeeklyTests/WeeklyTest.css';
 
 
 
@@ -46,6 +50,10 @@ root.render(
         <Route path="/mycourse" element={<StudentMyCoursepg />} />
         <Route path="/payments" element={<PaymentPage />} />
         <Route path="/feedback" element={<FeedbackPage />} />
+        <Route path="/mytutors" element={<MyTutors />} />
+                <Route path="/WeeklyTests" element={<WeeklyTests/>} />
+
+
            
 
       </Routes>

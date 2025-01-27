@@ -1,0 +1,133 @@
+/* Stu_MyTutors.css */
+
+/* Main container to hold both left and right containers */
+.my-tutors-main-container {
+    display: flex;
+    flex-direction: row;
+    /* Arrange left and right sections side by side */
+    justify-content: space-between;
+    align-items: stretch;
+    height: 100vh;
+    /* Full viewport height */
+    padding: 20px;
+    background: linear-gradient(135deg, #5e3b67, #ffffff);
+        /* Gradient with shades of blue */
+        background-attachment: fixed;
+        /* Fixed background for a professional look */
+}
+
+/* Left container styles */
+.left-container {
+    flex: 1;
+    /* Take 1 part of the available width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Light background for contrast */
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.left-container-image {
+    width: 120%;
+    /* Adjust image size */
+    height: 660px;
+    /* Set a fixed height */
+    max-height: none;
+    /* Remove the previous height restriction */
+    /* Rounded corners */
+    object-fit: cover;
+    /* Maintain aspect ratio while filling the height */
+}
+
+/* Right container styles */
+.right-container {
+    flex: 1.8;
+    /* Reduce the width slightly (less than 2 parts) */
+    background-color: rgba(222, 199, 217, O.3);
+    /* Add transparency with an alpha value (0.7) */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: none;
+    padding-left: 50px; 
+   
+}
+
+/* Typography and layout inside the right container */
+.page-title {
+    font-size: 4.5rem;
+    /* Increased font size */
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    color: #2d0b3b;
+    margin-bottom: 10px;
+    /* Adjust spacing */
+    text-align: center;
+    /* Center-align the text */
+}
+
+.tagline {
+    font-size: 1.5rem;
+    /* Increased font size */
+    font-weight: bold;
+    font-style: italic;
+    color: #5a135f;
+    margin-bottom: 10px;
+    /* Adjust spacing */
+    text-align: center;
+    /* Center-align the text */
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+}
+.course-display {
+    font-size: 2rem;
+    color: #0d0217;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    /* Center vertically */
+    justify-content: center;
+    /* Center horizontally */
+    text-align: center;
+}
+
+.tutors-list {
+    margin-top: 20px;
+}
+
+.tutor-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #f9e1fe;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #bcadc6, #e6d8f2);
+    /* Gradient with double shades */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.tutor-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.tutor-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.tutor-expertise {
+    font-size: 1rem;
+    color: #666;
+}
