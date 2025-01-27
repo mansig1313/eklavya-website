@@ -23,6 +23,7 @@ import PaymentPage from './PaymentPage/PaymentPage.jsx';
 import './PaymentPage/PaymentPage.css';
 import FeedbackPage from './FeedbackPage/Feedback.jsx';
 import './FeedbackPage/Feedback.css';
+import StudentProfilePage from './homePage/studentprofile.jsx';
 
 
 
@@ -46,6 +47,7 @@ root.render(
         <Route path="/mycourse" element={<StudentMyCoursepg />} />
         <Route path="/payments" element={<PaymentPage />} />
         <Route path="/feedback" element={<FeedbackPage />} />
+        <Route path = "/profile" element={<StudentProfilePage/>}/>
            
 
       </Routes>
