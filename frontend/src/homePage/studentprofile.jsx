@@ -98,49 +98,56 @@ const Profile = () => {
   };
 
   const handleProfileUpdate = async () => {
-    // Add this check for parentEmail validation
     if (!parentEmail) {
-      alert("Parent's email is required. Please fill it out.");
-      return;
+        alert("Parent's email is required. Please fill it out.");
+        return;
     }
 
     try {
-      const token = localStorage.getItem("token");
-      const profileData = {
-        name,
-        email,
-        parentEmail,
-        linkedin,
-        github,
-        twitter,
-        website,
-        profilePicture,
-        profileVisibility,
-      };
-
-      const response = await axios.put("http://localhost:5000/api/profile", profileData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      if (response.data.success) {
-        alert("Profile updated successfully!");
-
-        // Update localStorage with the new user data
-        const updatedUser = {
-          name: profileData.name,   // Updated name
-          email: profileData.email, // Updated email
-          role: JSON.parse(localStorage.getItem('user')).role // Keep the role same
+        const token = localStorage.getItem("token");
+        const profileData = {
+            name,
+            email,
+            parentEmail,
+            linkedin,
+            github,
+            twitter,
+            website,
+            profilePicture,
+            profileVisibility,
         };
 
-        localStorage.setItem("user", JSON.stringify(updatedUser)); // Save updated user data
-        setUser(updatedUser); // Update user state
-      }
-    } catch (error) {
-      console.error("Error updating profile:", error);
-      alert("Failed to update profile. Please try again.");
-    }
-  };
+        console.log("Sending profile update:", profileData); // Debug log
 
+        const response = await axios.put(
+            "http://localhost:5000/api/profile",
+            profileData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+
+        if (response.data.success) {
+            const updatedUser = {
+                name: profileData.name,
+                email: profileData.email,
+                role: JSON.parse(localStorage.getItem('user')).role
+            };
+
+            localStorage.setItem("user", JSON.stringify(updatedUser));
+            window.dispatchEvent(new Event('userProfileUpdate'));
+            setUser(updatedUser);
+            alert("Profile updated successfully!");
+        }
+    } catch (error) {
+        console.error("Error updating profile:", error);
+        console.error("Error details:", error.response?.data); // Log detailed error
+        alert(error.response?.data?.error || "Failed to update profile. Please try again.");
+    }
+};
   const handlePasswordChange = async (e) => {
     e.preventDefault();
     if (newPassword !== confirmPassword) {
