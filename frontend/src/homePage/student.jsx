@@ -24,19 +24,29 @@ function DashboardApp() {
     if (loggedInUser) {
       setUser(loggedInUser);
     }
-
+  
     const interval = setInterval(() => {
       setProgressData((prevData) =>
         prevData.map((value) => Math.min(value + Math.floor(Math.random() * 10), 100))
       );
-    }, 1000); // Update every second for demonstration
-
-    // Add event listener to detect changes in localStorage
+    }, 1000);
+  
+    // Add event listener for profile updates
+    const handleProfileUpdate = () => {
+      const updatedUser = JSON.parse(localStorage.getItem('user'));
+      if (updatedUser) {
+        setUser(updatedUser);
+      }
+    };
+  
+    window.addEventListener('userProfileUpdate', handleProfileUpdate);
     window.addEventListener('storage', handleStorageChange);
-
-    return () => clearInterval(interval); // Cleanup on unmount
-    window.removeEventListener('storage', handleStorageChange);
-        
+  
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('userProfileUpdate', handleProfileUpdate);
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   // Handle localStorage changes
