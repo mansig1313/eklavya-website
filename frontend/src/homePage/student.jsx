@@ -31,8 +31,23 @@ function DashboardApp() {
       );
     }, 1000); // Update every second for demonstration
 
+    // Add event listener to detect changes in localStorage
+    window.addEventListener('storage', handleStorageChange);
+
     return () => clearInterval(interval); // Cleanup on unmount
+    window.removeEventListener('storage', handleStorageChange);
+        
   }, []);
+
+  // Handle localStorage changes
+  const handleStorageChange = () => {
+    const updatedUser = JSON.parse(localStorage.getItem('user'));
+    if (updatedUser) {
+        setUser(updatedUser); // Update user state with new data
+    }
+};
+
+ 
 
   // Navigation functions
   const handleMyCourseClick = () => {
@@ -110,7 +125,9 @@ function DashboardApp() {
           <div className="header-icons">
             <NotificationsIcon className="NotificationIcon" />
             <EmailIcon className="EmailIcon" />
-            <PersonIcon className="PersonIcon" />
+            <PersonIcon className="PersonIcon"
+             onClick={() => navigate('/profile')} // Navigate to the profile page
+             style={{ cursor: 'pointer' }}  />
           </div>
         </div>
         <div className="main-content">

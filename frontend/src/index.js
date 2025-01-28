@@ -27,6 +27,7 @@ import MyTutors from '../src/components/Stu_MyTutors/Stu_MyTutors.jsx';
 import '../src/components/Stu_MyTutors/Stu_MyTutors.css';
 import WeeklyTests from '../src/WeeklyTests/WeeklyTest.jsx';
 import '../src/WeeklyTests/WeeklyTest.css';
+import StudentProfilePage from './homePage/studentprofile.jsx';
 
 
 
@@ -54,6 +55,7 @@ root.render(
                 <Route path="/WeeklyTests" element={<WeeklyTests/>} />
 
 
+        <Route path = "/profile" element={<StudentProfilePage/>}/>
            
 
       </Routes>
