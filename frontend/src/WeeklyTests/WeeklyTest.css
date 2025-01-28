@@ -1,90 +1,153 @@
-.weekly-tests {
+/* Weekly Tests Container */
+.weekly-tests-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 150vh;
+    width: 120vw;
+    background: linear-gradient(to bottom, #bee3f3, #ede7f6);
     padding: 20px;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: auto;
+    box-sizing: border-box;
 }
 
-.weekly-tests-h2 {
+/* Header Styles */
+.weekly-tests-header {
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(to bottom, #bee3f3, #ede7f6);   
+     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.weekly-tests-table {
+.weekly-tests-header h2 {
+    font-size: 36px;
+    color: #220037;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    margin-bottom: 10px;
+}
+
+.weekly-tests-header p {
+    font-size: 18px;
+    color: #1e0f48;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+/* Test List Container */
+.weekly-tests-list {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    max-height: 70%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(225, 235, 240, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.weekly-tests-th,
-.weekly-tests-td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    font-size: 14px;
-    color: #555;
+/* Test Card Styles */
+.weekly-tests-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, #bee3f3, #f3e5f5);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.weekly-tests-th {
-    background-color: #007bff;
-    color: white;
+.weekly-tests-info {
+    flex: 1;
+}
+
+.weekly-tests-title {
+    font-size: 24px;
+    color: #4a148c;
+    margin-bottom: 10px;
+}
+
+.weekly-tests-detail {
+    font-size: 16px;
+    color: #6a1b9a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.weekly-tests-icon {
+    font-size: 18px;
+}
+
+/* Status Colors */
+.status-icon.completed {
+    color: #43a047;
+}
+
+.status-icon.scheduled {
+    color: #ff8f00;
+}
+
+.weekly-tests-status {
     font-weight: bold;
 }
 
-.weekly-tests-td {
-    background-color: #fdfdfd;
-}
-
-.weekly-tests-td:last-child {
-    text-align: center;
-}
-
-.weekly-tests-tr:hover {
-    background-color: #f1f1f1;
-    cursor: pointer;
-}
-
+/* Button Styles */
 .weekly-tests-button {
-    padding: 8px 16px;
-    background-color: #4CAF50;
+    padding: 12px 20px;
+    font-size: 16px;
     color: white;
     border: none;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 14px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.weekly-tests-button:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
-}
-
-.weekly-tests-button:active {
-    background-color: #3d8b41;
-}
-
-.weekly-tests-button.view {
-    background-color: #007bff;
-}
-
-.weekly-tests-button.view:hover {
-    background-color: #0056b3;
+    transition: all 0.3s ease;
 }
 
 .weekly-tests-button.start {
-    background-color: #ff9800;
+    background-color: #1e88e5;
 }
 
 .weekly-tests-button.start:hover {
-    background-color: #e68a00;
+    background-color: #42a5f5;
+}
+
+.weekly-tests-button.view {
+    background-color: #7f479d;
+}
+
+.weekly-tests-button.view:hover {
+    background-color: #8e24aa;
+}
+
+/* Scrollbar Styling */
+.weekly-tests-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.weekly-tests-list::-webkit-scrollbar-thumb {
+    background-color: #b39ddb;
+    border-radius: 10px;
+}
+
+.weekly-tests-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .weekly-tests-header {
+        width: 90%;
+    }
+
+    .weekly-tests-list {
+        width: 90%;
+    }
+
+    .weekly-tests-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

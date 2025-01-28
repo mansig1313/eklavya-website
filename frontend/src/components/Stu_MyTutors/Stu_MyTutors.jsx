@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { MdSchool } from "react-icons/md";
-import "./Stu_MyTutors.css"; // Ensure the CSS file path is correct
+import "../Stu_MyTutors/Stu_MyTutors.css"; // Ensure the CSS file path is correct
 import myImage from './33_Best_Work_From_Home_Online_Tutoring_Jobs-removebg-preview.png';
 
 function MyTutors() {
-  const [selectedCourse, setSelectedCourse] = useState("Mathematics");
+  const [selectedCourse, setSelectedCourse] = useState("Science");
   const tutors = [
-    { name: "John Doe", expertise: "Algebra Specialist", image: "https://via.placeholder.com/150" },
-    { name: "Jane Smith", expertise: "Geometry Expert", image: "https://via.placeholder.com/150" },
-    { name: "Alice Johnson", expertise: "Calculus Guru", image: "https://via.placeholder.com/150" },
+    { name: "Nisha Mishra", expertise: "Algebra Specialist", image: "https://via.placeholder.com/150" },
+    { name: "Vipul Vartak", expertise: "Geometry Expert", image: "https://via.placeholder.com/150" },
+    { name: "Rishabh Ahuja", expertise: "Calculus Guru", image: "https://via.placeholder.com/150" },
   ];
 
   return (
