@@ -12,7 +12,7 @@
     padding: 20px;
     background: linear-gradient(135deg, #5e3b67, #ffffff);
         /* Gradient with shades of blue */
-        background-attachment: fixed;
+    background-attachment: fixed;
         /* Fixed background for a professional look */
 }
 
@@ -42,9 +42,9 @@
 
 /* Right container styles */
 .right-container {
-    flex: 1.8;
+    flex: 1.5;
     /* Reduce the width slightly (less than 2 parts) */
-    background-color: rgba(222, 199, 217, O.3);
+    background-color: rgba(222, 199, 217, O.2);
     /* Add transparency with an alpha value (0.7) */
     padding: 30px;
     border-radius: 10px;
