@@ -200,33 +200,46 @@ app.get('/api/profile', authenticateToken,
 app.put('/api/profile', authenticateToken,
     async(req,res) => {
         try{
-            console.log("Profile update request body:",req.body); //Debugging
-            console.log("Authenticated User".req.user); //Debugging
+            console.log("Profile update request body:", req.body);
+            // Fix the syntax error in console.log
+            console.log("Authenticated User:", req.user); // Fixed the string concatenation
 
             const profileData = {
                 userId: req.user.id,
-                name:req.body.name, //Update name
-                email:req.body.email, //Update email
-                parentEmail : req.body.parentEmail,
-                linkedin : req.body.linkedin,
-                github:req.body.github,
-                twitter : req.body.twitter,
-                website : req.body.website,
+                name: req.body.name,
+                email: req.body.email,
+                parentEmail: req.body.parentEmail,
+                linkedin: req.body.linkedin,
+                github: req.body.github,
+                twitter: req.body.twitter,
+                website: req.body.website,
                 profilePicture: req.body.profilePicture,
-                profileVisibility : req.body.profileVisibility
+                profileVisibility: req.body.profileVisibility
             };
 
+            // Add validation
+            if (!profileData.name || !profileData.email) {
+                return res.status(400).json({ error: "Name and email are required" });
+            }
+
             const updatedProfile = await Profile.findOneAndUpdate(
-                {userId : req.user.id},
+                {userId: req.user.id},
                 profileData,
-                {new : true , upsert : true} //Upsert: true creates new profile if it doesn't exist
+                {new: true, upsert: true, runValidators: true}
             );
 
-            console.log("Updated Profile:",updatedProfile); //Debugging
-            res.json({success : true , message:"Profile Updated Successfully" , profile:updatedProfile});
+            console.log("Updated Profile:", updatedProfile);
+            res.json({
+                success: true,
+                message: "Profile Updated Successfully",
+                profile: updatedProfile
+            });
         } catch(error){
-            console.error("Error Updating Profile:",error);
-            res.status(500).json({error:"Error updating profile"});
+            console.error("Error Updating Profile:", error);
+            res.status(500).json({
+                error: "Error updating profile",
+                details: error.message
+            });
         }
     });
 
