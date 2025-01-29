@@ -1,25 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import './student.css';
+import '../MyResourcePage/MyResource.css';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import EmailIcon from '@mui/icons-material/Email';
 import PersonIcon from '@mui/icons-material/Person';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import SettingsIcon from '@mui/icons-material/Settings';
 import FolderIcon from '@mui/icons-material/Folder';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import Mycourse from '@mui/icons-material/LibraryBooks';
 import MessageIcon from '@mui/icons-material/Message';
 import PaymentIcon from '@mui/icons-material/Payment';
 import GradingIcon from '@mui/icons-material/Grading';
+import SettingsIcon from '@mui/icons-material/Settings';
 import logo from '../components/landingpg/register/logo_white_nobg.png';
 import { useNavigate } from 'react-router-dom';
 
-// Main App Component
-function DashboardApp() {
-  const [progressData, setProgressData] = useState([20, 40, 60, 80]); // Initial values
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate(); // Define the navigate function
+function MyResources() {
 
-  useEffect(() => {
+  const resources = [
+    { subject: "Physics", link: "#" },
+    { subject: "Chemistry", link: "#" },
+    { subject: "Mathematics", link: "#" },
+    { subject: "Biology", link: "#" }
+  ];
+  const [progressData, setProgressData] = useState([20, 40, 60, 80]);
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+ useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
     if (loggedInUser) {
       setUser(loggedInUser);
@@ -57,38 +63,6 @@ function DashboardApp() {
     }
 };
 
- 
-
-  // Navigation functions
-  const handleMyCourseClick = () => {
-    navigate('/mycourse'); // Navigate to the 'My Course' page
-  };
-
-  const handleMessageClick = () => {
-    navigate('/messages'); // Navigate to the messages page
-  };
-
-  const handlePaymentClick = () => {
-    navigate('/payments'); // Navigate to the payment page
-  };
-
-  const handleFeedbackClick = () => {
-    navigate('/feedback'); // Navigate to the feedback page
-  };
-
-  const handleMyTutorsClick = () => {
-    navigate('/mytutors');
-  };
-
-  const handleWeeklyTestsClick = () => {
-    navigate('/WeeklyTests');
-  };
-
-  const handleMyResourceClick = () => {
-    navigate('/sturesource');
-  }
-
-
   return (
     <div className="app">
       <div className="sidebar">
@@ -100,23 +74,23 @@ function DashboardApp() {
             <DashboardIcon className="dashboard-icon" />
             <span>Dashboard</span>
           </div>
-          <div className="sidebar-item" onClick={handleMyCourseClick}>
+          <div className="sidebar-item" onClick={() => navigate('/mycourse')}>
             <Mycourse className="mycourse" />
             <span>My Course</span>
           </div>
-          <div className="sidebar-item" onClick={handleMessageClick}>
+          <div className="sidebar-item" onClick={() => navigate('/messages')}>
             <MessageIcon className="messages" />
             <span>Messages</span>
           </div>
-          <div className="sidebar-item" onClick={handleMyResourceClick}>
+          <div className="sidebar-item">
             <FolderIcon className="Resourse" />
-            <span>Resourse</span>
+            <span>My Resources</span>
           </div>
-          <div className="sidebar-item" onClick={handleFeedbackClick}>
+          <div className="sidebar-item" onClick={() => navigate('/feedback')}>
             <GradingIcon className="Resourse" />
             <span>Feedback</span>
           </div>
-          <div className="sidebar-item" onClick={handlePaymentClick}>
+          <div className="sidebar-item" onClick={() => navigate('/payments')}>
             <PaymentIcon className="Reports" />
             <span>Payment</span>
           </div>
@@ -129,7 +103,7 @@ function DashboardApp() {
 
       <div className="main-container">
         <div className="header">
-          <div className="welcome-tag">
+        <div className="welcome-tag">
             <div className="welcome">WELCOME, </div>
             <div className="user-name">{user ? user.name : 'Guest'}</div>
           </div>
@@ -139,39 +113,33 @@ function DashboardApp() {
           <div className="header-icons">
             <NotificationsIcon className="NotificationIcon" />
             <EmailIcon className="EmailIcon" />
-            <PersonIcon className="PersonIcon"
-             onClick={() => navigate('/profile')} // Navigate to the profile page
-             style={{ cursor: 'pointer' }}  />
+            <PersonIcon className="PersonIcon" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }} />
           </div>
         </div>
-        <div className="main-content">
-          <div className="content-grid">
-            <div className="box course-completion">
-              <h3>Course Completion</h3>
-            </div>
-            <div className="box weekly-tests" onClick={handleWeeklyTestsClick}>
-              <h3>Weekly Tests</h3>
-            </div>
-           <div className="box my-tutors" onClick={handleMyTutorsClick}>
-              <h3>My Tutors</h3>
-            </div>
-            <div className="box upcoming-sessions">
-              <h3>Upcoming Sessions</h3>
-            </div>
-          </div>
 
-          <div className="progress-report">
-            <h3>Progress Report</h3>
-            <div className="progress-bar">
-              {progressData.map((value, index) => (
-                <div key={index} className="bar" style={{ height: `${value}%` }}></div>
-              ))}
-            </div>
-          </div>
-        </div>
+
+       
+     
+      <div className="main-content">
+        
+      <div className="my-resources-container">
+      <h2 className="resources-heading">My Resources</h2>
+      <p className="resources-description">
+        Here, students can access resources uploaded by tutors.
+      </p>
+      <div className="resource-list">
+        {resources.map((resource, index) => (
+          <a key={index} href={resource.link} className="resource-item">
+            {resource.subject}
+          </a>
+        ))}
       </div>
     </div>
+      </div>
+    </div>
+      </div>
+   
   );
 }
 
-export default DashboardApp;
+export default MyResources;

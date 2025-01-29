@@ -8,8 +8,8 @@ const WeeklyTests = () => {
   useEffect(() => {
     // Mock data for the tests (replace with API call to fetch actual data)
     const fetchedTests = [
-      { id: 1, title: "Maths Test 1", date: "2025-01-21", status: "Scheduled" },
-      { id: 2, title: "Science Test 1", date: "2025-01-23", status: "Scheduled" },
+      { id: 1, title: "Maths Test 1", date: "2025-01-29", status: "Scheduled" },
+      { id: 2, title: "Science Test 1", date: "2025-02-03", status: "Scheduled" },
       { id: 3, title: "English Test 1", date: "2025-01-25", status: "Completed" },
     ];
     setTests(fetchedTests);

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { MdSchool } from "react-icons/md";
 import "../Stu_MyTutors/Stu_MyTutors.css"; // Ensure the CSS file path is correct
-import myImage from './33_Best_Work_From_Home_Online_Tutoring_Jobs-removebg-preview.png';
+import myImage from '../Stu_MyTutors/mytutor.png';
 
 function MyTutors() {
   const [selectedCourse, setSelectedCourse] = useState("Science");

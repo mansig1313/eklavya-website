@@ -6,7 +6,7 @@
     justify-content: flex-start;
     height: 150vh;
     width: 120vw;
-    background: linear-gradient(to bottom, #bee3f3, #ede7f6);
+    background: linear-gradient(to bottom, #57048f, #000000);
     padding: 20px;
     box-sizing: border-box;
 }
@@ -16,13 +16,13 @@
     text-align: center;
     margin-bottom: 30px;
     padding: 20px;
-    background: linear-gradient(to bottom, #bee3f3, #ede7f6);   
+    background: linear-gradient(to bottom, #000000, #57048f);   
      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .weekly-tests-header h2 {
     font-size: 36px;
-    color: #220037;
+    color: #ffffff;
     font-weight: bold;
     letter-spacing: 1.2px;
     margin-bottom: 10px;
@@ -30,7 +30,7 @@
 
 .weekly-tests-header p {
     font-size: 18px;
-    color: #1e0f48;
+    color: #dad3ec;
     font-weight: 500;
     line-height: 1.6;
 }
@@ -44,7 +44,7 @@
     flex-direction: column;
     gap: 20px;
     padding: 20px;
-    background: rgba(225, 235, 240, 0.8);
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
@@ -54,7 +54,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(to bottom, #bee3f3, #f3e5f5);
+    background: linear-gradient(to bottom, #c6c6c6, #f3e5f5);
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -66,13 +66,13 @@
 
 .weekly-tests-title {
     font-size: 24px;
-    color: #4a148c;
+    color: #000000;
     margin-bottom: 10px;
 }
 
 .weekly-tests-detail {
     font-size: 16px;
-    color: #6a1b9a;
+    color: #f78412;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -107,11 +107,11 @@
 }
 
 .weekly-tests-button.start {
-    background-color: #1e88e5;
+    background-color: #510796;
 }
 
 .weekly-tests-button.start:hover {
-    background-color: #42a5f5;
+    background-color: #7230b5;
 }
 
 .weekly-tests-button.view {
