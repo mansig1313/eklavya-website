@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import tutorregister from "../register/tutorregister.png";
 import {
   TextField,
@@ -21,9 +22,12 @@ const availableDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "
 
 const TutorRegister = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
-    fullName: "John Doe",
-    email: "johndoe@example.com",
+    fullName: "",
+    email: "",
     phoneNumber: "",
     degree: "",
     institution: "",
@@ -37,6 +41,59 @@ const TutorRegister = () => {
     degreeCertificate: null,
   });
 
+  useEffect(() => {
+    const checkUserData = () => {
+      console.log('Location state:', location.state);
+      console.log('localStorage data:', localStorage.getItem('registeredUser'));
+
+      const registeredUser = location.state || JSON.parse(localStorage.getItem('registeredUser'));
+      console.log('Final user data:', registeredUser);
+
+      if (registeredUser && (registeredUser.name || registeredUser.email)) {
+        setFormData(prev => ({
+          ...prev,
+          fullName: registeredUser.name || '',
+          email: registeredUser.email || ''
+        }));
+      } else {
+        setError("Please register first");
+        setTimeout(() => navigate('/register'), 2000);
+      }
+      setLoading(false);
+    };
+
+    checkUserData();
+  }, [location, navigate]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('token');
+      const formDataToSend = new FormData();
+      
+      Object.keys(formData).forEach(key => {
+        if (formData[key] !== null) {
+          formDataToSend.append(key, formData[key]);
+        }
+      });
+
+      await axios.post('http://localhost:5000/api/tutor/register', formDataToSend, {
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      navigate("/tutor-dashboard");
+    } catch (error) {
+      setError(error.response?.data?.message || 'Error submitting form');
+      console.error('Error:', error);
+    }
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -48,12 +105,6 @@ const TutorRegister = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setFormData({ ...formData, [e.target.name]: file });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitted Data:", formData);
-    navigate("/tutor-dashboard"); // Redirect after registration
   };
 
   return (
@@ -182,7 +233,7 @@ const TutorRegister = () => {
 
         {/* Right Side: Image */}
         <Grid item xs={12} md={6} className="register-image-container">
-          <img src= {tutorregister} alt="Tutoring" className="register-image" />
+          <img src={tutorregister} alt="Tutoring" className="register-image" />
         </Grid>
       </Grid>
     </Grid>
