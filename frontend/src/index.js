@@ -29,6 +29,7 @@ import WeeklyTests from '../src/WeeklyTests/WeeklyTest.jsx';
 import '../src/WeeklyTests/WeeklyTest.css';
 import StudentProfilePage from './homePage/studentprofile.jsx';
 import StudentResourcePage from './MyResourcePage/MyResource.jsx'
+import TutorRegister from "./components/landingpg/register/tutorregister.jsx";
 
 
 
@@ -56,6 +57,7 @@ root.render(
                 <Route path="/WeeklyTests" element={<WeeklyTests/>} />
         <Route path = "/profile" element={<StudentProfilePage/>}/>
         <Route path = "/sturesource" element={<StudentResourcePage/>}/>
+        <Route path = "/tutor-register" element={<TutorRegister/>}/>
 
            
 

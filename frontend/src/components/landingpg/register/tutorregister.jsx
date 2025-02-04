@@ -1,105 +1,192 @@
-// Register.jsx
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import tutorregister from "../register/tutorregister.png";
+import {
+  TextField,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+  Button,
+  Typography,
+  Grid,
+  Paper,
+  Avatar,
+} from "@mui/material";
+import "./tutorregister.css"; // Importing the CSS file
 
-function Register({ onRegistrationSuccess }) {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        age: '',
-        certification: null,
-        resume: null,
-        profilePicture: null,
-        qualification: '',
-        gender: '',
-        availability: '',
-        password: '',
-        confirmPassword: '',
-    });
+const subjectsList = ["Mathematics", "Physics", "Chemistry", "Biology", "English"];
+const teachingModes = ["Online", "Offline", "Both"];
+const availableDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-    const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        setFormData({
-            ...formData,
-            [name]: files ? files[0] : value,
-        });
-    };
+const TutorRegister = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    fullName: "John Doe",
+    email: "johndoe@example.com",
+    phoneNumber: "",
+    degree: "",
+    institution: "",
+    graduationYear: "",
+    subjects: [],
+    schedule: [],
+    experience: "",
+    teachingMode: "",
+    bio: "",
+    profilePic: null,
+    degreeCertificate: null,
+  });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-        if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match.");
-            return;
-        }
+  const handleMultiSelectChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-        const data = new FormData();
-        Object.keys(formData).forEach((key) => {
-            data.append(key, formData[key]);
-        });
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData({ ...formData, [e.target.name]: file });
+  };
 
-        try {
-            const response = await axios.post('http://localhost:5000/register', data, {
-                headers: { 'Content-Type': 'multipart/form-data' },
-            });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitted Data:", formData);
+    navigate("/tutor-dashboard"); // Redirect after registration
+  };
 
-            if (response.status === 201) {
-                alert(response.data.message);
-                onRegistrationSuccess(response.data.user);
-            }
-        } catch (error) {
-            console.error("Error during registration:", error);
-            alert("Registration failed. Please try again.");
-        }
-    };
+  return (
+    <Grid container className="tutor-register-page">
+      {/* Title at the Top */}
+      <Grid item xs={12}>
+        <Typography variant="h3" className="register-title">
+          Complete Your Registration
+        </Typography>
+      </Grid>
 
-    return (
-        <div className="form-container">
-            <form onSubmit={handleSubmit} className="tutor-form">
-                <h2>Register</h2>
-                <label>Name<span>*</span></label>
-                <input type="text" name="name" onChange={handleChange} required />
-                
-                <label>Email<span>*</span></label>
-                <input type="email" name="email" onChange={handleChange} required />
-                
-                <label>Age</label>
-                <input type="number" name="age" onChange={handleChange} />
-                
-                <label>Gender</label>
-                <select name="gender" onChange={handleChange}>
-                    <option value="">Select</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-                
-                <label>Availability (hours/day or days/week)</label>
-                <input type="text" name="availability" onChange={handleChange} />
-                
-                <label>Highest Qualification</label>
-                <input type="text" name="qualification" onChange={handleChange} />
+      <Grid item xs={12} container className="register-content">
+        {/* Left Side: Registration Form */}
+        <Grid item xs={12} md={6}>
+          <Paper elevation={3} className="tutor-register-paper">
+            <form onSubmit={handleSubmit}>
+              <Grid container spacing={2}>
+                {/* Full Name & Email */}
+                <Grid item xs={12} sm={6}>
+                  <TextField fullWidth label="Full Name" name="fullName" value={formData.fullName} disabled />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField fullWidth label="Email" name="email" value={formData.email} disabled />
+                </Grid>
 
-                <label>Certification</label>
-                <input type="file" name="certification" onChange={handleChange} />
-                
-                <label>Resume</label>
-                <input type="file" name="resume" onChange={handleChange} />
-                
-                <label>Profile Picture</label>
-                <input type="file" name="profilePicture" onChange={handleChange} />
-                
-                
-                <label>Password<span>*</span></label>
-                <input type="password" name="password" onChange={handleChange} required />
-                
-                <label>Confirm Password<span>*</span></label>
-                <input type="password" name="confirmPassword" onChange={handleChange} required />
-                
-                <button type="submit">Register</button>
+                {/* Phone Number */}
+                <Grid item xs={12}>
+                  <TextField fullWidth label="Phone Number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required />
+                </Grid>
+
+                {/* Education Details */}
+                <Grid item xs={12} sm={4}>
+                  <TextField fullWidth label="Degree" name="degree" value={formData.degree} onChange={handleChange} required />
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <TextField fullWidth label="Institution" name="institution" value={formData.institution} onChange={handleChange} required />
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <TextField fullWidth label="Graduation Year" name="graduationYear" type="number" value={formData.graduationYear} onChange={handleChange} required />
+                </Grid>
+
+                {/* Subjects to Teach */}
+                <Grid item xs={12}>
+                  <FormControl fullWidth>
+                    <InputLabel>Subjects</InputLabel>
+                    <Select name="subjects" multiple value={formData.subjects} onChange={handleMultiSelectChange}>
+                      {subjectsList.map((subject) => (
+                        <MenuItem key={subject} value={subject}>
+                          {subject}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                {/* Available Schedule */}
+                <Grid item xs={12}>
+                  <FormControl fullWidth>
+                    <InputLabel>Available Days</InputLabel>
+                    <Select name="schedule" multiple value={formData.schedule} onChange={handleMultiSelectChange}>
+                      {availableDays.map((day) => (
+                        <MenuItem key={day} value={day}>
+                          {day}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                {/* Experience */}
+                <Grid item xs={12}>
+                  <TextField fullWidth label="Years of Experience" name="experience" type="number" value={formData.experience} onChange={handleChange} required />
+                </Grid>
+
+                {/* Teaching Mode */}
+                <Grid item xs={12}>
+                  <FormControl fullWidth>
+                    <InputLabel>Teaching Mode</InputLabel>
+                    <Select name="teachingMode" value={formData.teachingMode} onChange={handleChange}>
+                      {teachingModes.map((mode) => (
+                        <MenuItem key={mode} value={mode}>
+                          {mode}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                {/* Bio */}
+                <Grid item xs={12}>
+                  <TextField fullWidth multiline rows={3} label="Bio / Introduction" name="bio" value={formData.bio} onChange={handleChange} />
+                </Grid>
+
+                {/* Profile Picture Upload */}
+                <Grid item xs={12} className="profile-upload-container">
+                  <Avatar className="profile-avatar" src={formData.profilePic ? URL.createObjectURL(formData.profilePic) : ""} />
+                  <Button variant="contained" component="label">
+                    Upload Profile Picture
+                    <input type="file" hidden accept="image/*" name="profilePic" onChange={handleFileChange} />
+                  </Button>
+                </Grid>
+
+                {/* Graduation Degree Certificate Upload */}
+                <Grid item xs={12} className="certificate-upload-container">
+                  <Button variant="contained" component="label">
+                    Upload Graduation Degree Certificate
+                    <input type="file" hidden accept="application/pdf, image/*" name="degreeCertificate" onChange={handleFileChange} />
+                  </Button>
+                  {formData.degreeCertificate && (
+                    <Typography variant="body2" className="file-name">
+                      {formData.degreeCertificate.name}
+                    </Typography>
+                  )}
+                </Grid>
+
+                {/* Submit Button */}
+                <Grid item xs={12}>
+                  <Button type="submit" variant="contained" color="primary" fullWidth className="register-button">
+                    Register as Tutor
+                  </Button>
+                </Grid>
+              </Grid>
             </form>
-        </div>
-    );
-}
+          </Paper>
+        </Grid>
 
-export default Register;
+        {/* Right Side: Image */}
+        <Grid item xs={12} md={6} className="register-image-container">
+          <img src= {tutorregister} alt="Tutoring" className="register-image" />
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+};
+
+export default TutorRegister;
