@@ -182,7 +182,7 @@ const TutorRegister = () => {
 
         {/* Right Side: Image */}
         <Grid item xs={12} md={6} className="register-image-container">
-          <img src= {tutorregister} alt="Tutoring" className="register-image" />
+          <img src= {tutorregister} alt="Tutoring" className="tutor-register-image" />
         </Grid>
       </Grid>
     </Grid>
