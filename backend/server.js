@@ -6,6 +6,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const http = require('http');
 const { Server } = require('socket.io');
+const bodyParser = require("body-parser");
+
 
 dotenv.config();
 
@@ -17,8 +19,9 @@ mongoose.connect(process.env.MONGO_URI, {
     .catch(err => console.error('MongoDB connection error:', err));
 
 const app = express();
+app.use(bodyParser.json());
 const server = http.createServer(app);
-
+app.use(cors());
 const corsOptions = {
     origin: process.env.FRONTEND_URL || 'http://localhost:3000',
     credentials: true,
@@ -134,7 +137,35 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
+//calendar
+
+  
+  const eventSchema = new mongoose.Schema({
+    date: String,
+    text: String,
+  });
+  
+  const Event = mongoose.model("Event", eventSchema);
+  
+  app.get("/events", async (req, res) => {
+    const events = await Event.find();
+    res.json(events);
+  });
+  
+  app.post("/events", async (req, res) => {
+    const newEvent = new Event(req.body);
+    await newEvent.save();
+    res.json(newEvent);
+  });
+  
+  app.delete("/events/:id", async (req, res) => {
+    await Event.findByIdAndDelete(req.params.id);
+    res.json({ message: "Event deleted" });
+  });
+ 
 // Start the server
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+

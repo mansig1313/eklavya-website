@@ -225,7 +225,7 @@
   }
 
  /* src/components/ProgressReport.css */
- .progress-report {
+ .Calendar {
   background: linear-gradient(135deg, #e1bee7, #f3e5f5); /* Soft pinkish violet */
   border-radius: 8px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
@@ -236,8 +236,8 @@
   cursor: pointer;
 }
 
-.progress-report h3 {
-  color: #040404;
-  font-size: 1.5em;
+.Calendar h3 {
+  color: #000000;
+  font-size: 2.5em;
   text-align: center;
 }
