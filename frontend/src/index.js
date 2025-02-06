@@ -28,9 +28,11 @@ import '../src/components/Stu_MyTutors/Stu_MyTutors.css';
 import WeeklyTests from '../src/WeeklyTests/WeeklyTest.jsx';
 import '../src/WeeklyTests/WeeklyTest.css';
 import StudentProfilePage from './homePage/studentprofile.jsx';
-import StudentResourcePage from './MyResourcePage/MyResource.jsx'
-
-
+import StudentResourcePage from './MyResourcePage/MyResource.jsx';
+import StuCourseCompletion from "./components/StuCourseCompletion/StuCourseCompletion.jsx";
+import './components/StuCourseCompletion/StuCourseCompletion.css';
+import UpcomingSessions from './components/UpcomingSessions/UpcomingSessions.jsx';
+import './components/UpcomingSessions/UpcomingSessions.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -53,12 +55,11 @@ root.render(
         <Route path="/payments" element={<PaymentPage />} />
         <Route path="/feedback" element={<FeedbackPage />} />
         <Route path="/mytutors" element={<MyTutors />} />
-                <Route path="/WeeklyTests" element={<WeeklyTests/>} />
+        <Route path="/WeeklyTests" element={<WeeklyTests/>} />
         <Route path = "/profile" element={<StudentProfilePage/>}/>
-        <Route path = "/sturesource" element={<StudentResourcePage/>}/>
-
-           
-
+        <Route path="/sturesource" element={<StudentResourcePage />} />
+        <Route path="/StuCourseCompletion" element={<StuCourseCompletion />} />
+        <Route path="/UpcomingSessions" element={<UpcomingSessions/>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
