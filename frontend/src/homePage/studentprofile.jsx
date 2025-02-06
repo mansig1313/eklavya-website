@@ -117,59 +117,64 @@ const Profile = () => {
             profileVisibility,
         };
 
-        const response = await axios.put("http://localhost:5000/api/profile", profileData, {
-            headers: { Authorization: `Bearer ${token}` },
-        });
+        console.log("Sending profile update:", profileData); // Debug log
+
+        const response = await axios.put(
+            "http://localhost:5000/api/profile",
+            profileData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
 
         if (response.data.success) {
-            alert("Profile updated successfully!");
-
-            // Update localStorage with the new user data
             const updatedUser = {
-                name: profileData.name,   // Updated name
-                email: profileData.email, // Updated email
-                role: JSON.parse(localStorage.getItem('user')).role // Keep the role same
+                name: profileData.name,
+                email: profileData.email,
+                role: JSON.parse(localStorage.getItem('user')).role
             };
 
-            localStorage.setItem("user", JSON.stringify(updatedUser)); // Save updated user data
-            setUser(updatedUser); // Update user state
+            localStorage.setItem("user", JSON.stringify(updatedUser));
+            window.dispatchEvent(new Event('userProfileUpdate'));
+            setUser(updatedUser);
+            alert("Profile updated successfully!");
         }
     } catch (error) {
         console.error("Error updating profile:", error);
-        alert("Failed to update profile. Please try again.");
+        console.error("Error details:", error.response?.data); // Log detailed error
+        alert(error.response?.data?.error || "Failed to update profile. Please try again.");
     }
 };
-
-
-
-const handlePasswordChange = async (e) => {
-  e.preventDefault();
-  if (newPassword !== confirmPassword) {
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
+    if (newPassword !== confirmPassword) {
       alert("Passwords do not match.");
       return;
-  }
+    }
 
-  try {
+    try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-          "http://localhost:5000/api/change-password",
-          { currentPassword, newPassword },
-          { headers: { Authorization: `Bearer ${token}` } }
+        "http://localhost:5000/api/change-password",
+        { currentPassword, newPassword },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       if (response.status === 200) {
-          alert("Password changed successfully!");
-          setCurrentPassword("");
-          setNewPassword("");
-          setConfirmPassword("");
-          setShowChangePassword(false);
+        alert("Password changed successfully!");
+        setCurrentPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
+        setShowChangePassword(false);
       }
-  } catch (error) {
+    } catch (error) {
       console.error("Error changing password:", error);
       alert("Failed to change password. Please check your current password and try again.");
-  }
-};
-
+    }
+  };
 
   const handleConfirmPasswordChange = (e) => {
     const confirmPasswordValue = e.target.value;
@@ -334,24 +339,30 @@ const handlePasswordChange = async (e) => {
                     value={confirmPassword}
                     onChange={handleConfirmPasswordChange}
                   />
-                  {!passwordsMatch && confirmPassword && (
-                    <span className="error-message">
-                      Confirm password does not match the new password
-                    </span>
-                  )}
                 </div>
-                {passwordsMatch && confirmPassword && (
-                  <button type="submit">Save Password</button>
+                {!passwordsMatch && (
+                  <span className="error-message">Passwords do not match.</span>
                 )}
+                <button
+                  type="submit"
+                  className="update-profile-btn"
+                  disabled={!passwordsMatch}
+                >
+                  Update Password
+                </button>
               </form>
             )}
-
-            <button onClick={handleProfileUpdate}>Save Profile</button>
           </div>
 
-          <div className="profile-field">
-            <button className="logout-btn" onClick={handleLogout}>
-              Log Out
+          <div className="profile-section">
+            <button onClick={handleProfileUpdate} className="update-profile-btn">
+              Update Profile
+            </button>
+          </div>
+
+          <div className="profile-section">
+            <button onClick={handleLogout} className="logout-btn">
+              Logout
             </button>
           </div>
         </div>

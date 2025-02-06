@@ -1,0 +1,153 @@
+/* Weekly Tests Container */
+.weekly-tests-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 150vh;
+    width: 120vw;
+    background: linear-gradient(to bottom, #57048f, #000000);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Header Styles */
+.weekly-tests-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(to bottom, #000000, #57048f);   
+     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.weekly-tests-header h2 {
+    font-size: 36px;
+    color: #ffffff;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    margin-bottom: 10px;
+}
+
+.weekly-tests-header p {
+    font-size: 18px;
+    color: #dad3ec;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+/* Test List Container */
+.weekly-tests-list {
+    width: 100%;
+    max-height: 70%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Test Card Styles */
+.weekly-tests-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, #c6c6c6, #f3e5f5);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.weekly-tests-info {
+    flex: 1;
+}
+
+.weekly-tests-title {
+    font-size: 24px;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.weekly-tests-detail {
+    font-size: 16px;
+    color: #f78412;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.weekly-tests-icon {
+    font-size: 18px;
+}
+
+/* Status Colors */
+.status-icon.completed {
+    color: #43a047;
+}
+
+.status-icon.scheduled {
+    color: #ff8f00;
+}
+
+.weekly-tests-status {
+    font-weight: bold;
+}
+
+/* Button Styles */
+.weekly-tests-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.weekly-tests-button.start {
+    background-color: #510796;
+}
+
+.weekly-tests-button.start:hover {
+    background-color: #7230b5;
+}
+
+.weekly-tests-button.view {
+    background-color: #7f479d;
+}
+
+.weekly-tests-button.view:hover {
+    background-color: #8e24aa;
+}
+
+/* Scrollbar Styling */
+.weekly-tests-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.weekly-tests-list::-webkit-scrollbar-thumb {
+    background-color: #b39ddb;
+    border-radius: 10px;
+}
+
+.weekly-tests-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .weekly-tests-header {
+        width: 90%;
+    }
+
+    .weekly-tests-list {
+        width: 90%;
+    }
+
+    .weekly-tests-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
