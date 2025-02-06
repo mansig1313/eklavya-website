@@ -87,6 +87,7 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
+
 const PORT = process.env.PORT || 3000; // Use PORT from environment or default to 3000
 
 // User schema and model

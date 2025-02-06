@@ -14,7 +14,7 @@
     margin-bottom: 50px;
   }
   
-  .register-content {
+  .tutor-register-content {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -29,24 +29,26 @@
     margin-top: 20px;
   }
   
-  .register-image-container {
+  .tutor-register-image-container {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #674981;
   }
   
   .tutor-register-image {
-    width: 400px;
-    height: 400px;
+    width: 550px;
+    height: 550px;
+   
   }
   
-  .register-button {
+  .tutor-register-button {
     background-color: #530a8f !important;
     color: white !important;
   }
   
-  .certificate-upload-container,
-  .profile-upload-container {
+  .tutor-certificate-upload-container,
+  .tutor-profile-upload-container {
     text-align: center;
     color: #530a8f;
   }

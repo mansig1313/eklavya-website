@@ -95,6 +95,15 @@ function DashboardApp() {
     navigate('/sturesource');
   }
 
+   const handleCourseCompletionClick = () => {
+    navigate('/StuCourseCompletion');
+  }
+
+   const handleUpcomingSessionsClick = () => {
+    navigate('/UpcomingSessions');
+  }
+
+
 
   return (
     <div className="app">
@@ -153,7 +162,7 @@ function DashboardApp() {
         </div>
         <div className="main-content">
           <div className="content-grid">
-            <div className="box course-completion">
+            <div className="box course-completion" onClick={handleCourseCompletionClick}>
               <h3>Course Completion</h3>
             </div>
             <div className="box weekly-tests" onClick={handleWeeklyTestsClick}>
@@ -162,7 +171,7 @@ function DashboardApp() {
            <div className="box my-tutors" onClick={handleMyTutorsClick}>
               <h3>My Tutors</h3>
             </div>
-            <div className="box upcoming-sessions">
+            <div className="box upcoming-sessions" onClick={handleUpcomingSessionsClick}> 
               <h3>Upcoming Sessions</h3>
             </div>
           </div>

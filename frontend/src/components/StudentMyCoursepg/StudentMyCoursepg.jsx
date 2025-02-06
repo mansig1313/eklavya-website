@@ -11,7 +11,7 @@ const MyCourse = ({ studentName, courses }) => {
       {/* Header Section */}
       <header className="course-header">
         <h1>
-          <i className="fas fa-user-graduate"></i> Hello, {studentName}! Welcome to your Learning Hub!
+          <i className="fas fa-user-graduate"></i> Hello,Mansi Gawde {studentName} ! Welcome to your Learning Hub!
         </h1>
         <p>Your personalized journey to knowledge and growth begins here.</p>
       </header>

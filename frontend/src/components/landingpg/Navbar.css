@@ -123,6 +123,8 @@ a {
   transform: translate(-1130px, 50px);
 }
 .navbar-logo img {
-  height: 60px;
-  width: 110px;
+  height: 90px;
+  width: 150px;
+  margin-right: 100px;
+  margin-top: 10px;
 }
