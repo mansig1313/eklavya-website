@@ -4,14 +4,16 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const http = require('http');
+const { Server } = require('socket.io');
+const bodyParser = require("body-parser");
 const multer = require('multer');
 const path = require('path');
 const fileUpload = require('express-fileupload');
-const http = require('http');  // Import http module
-const { Server } = require('socket.io');  // Import socket.io's Server class
+
+
 const { authenticate } = require('passport');
-const tutorRoutes = require('./routes/tutorRoutes');
-const bodyParser = require('body-parser');
+
 
 dotenv.config();
 const authenticateToken = (req, res, next) => {
@@ -60,15 +62,18 @@ mongoose.connect(process.env.MONGO_URI, {
     .catch(err => console.error('MongoDB connection error:', err));
 
 const app = express();
-const server = http.createServer(app); // Create the HTTP server
 
+app.use(bodyParser.json());
+const server = http.createServer(app);
+app.use(cors());
+//const server = http.createServer(app); // Create the HTTP server
 
 
 const corsOptions = {
     origin: process.env.FRONTEND_URL || 'http://localhost:3000',
     credentials: true,
 };
-0;
+
 
 
 const io = new Server(server, {
@@ -344,10 +349,37 @@ app.put("/update-profile", authenticateToken, async (req, res) => {
    //Server Uploaded Files
    app.use('/uploads' , express.static(path.join(__dirname , 'uploads')));
 
+//calendar
+
+  
+  const eventSchema = new mongoose.Schema({
+    date: String,
+    text: String,
+  });
+  
+  const Event = mongoose.model("Event", eventSchema);
+  
+  app.get("/events", async (req, res) => {
+    const events = await Event.find();
+    res.json(events);
+  });
+  
+  app.post("/events", async (req, res) => {
+    const newEvent = new Event(req.body);
+    await newEvent.save();
+    res.json(newEvent);
+  });
+  
+  app.delete("/events/:id", async (req, res) => {
+    await Event.findByIdAndDelete(req.params.id);
+    res.json({ message: "Event deleted" });
+  });
+ 
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is Running on port ${PORT}`);
 });
+
 
 app.post('/api/change-password', authenticateToken ,
     async(req,res) => {
@@ -375,9 +407,4 @@ app.post('/api/change-password', authenticateToken ,
         }
 
     });
-
-// Routes
-app.use('/api/tregister', tutorRoutes);
-app.use(express.urlencoded({ extended: true }));
-
 
