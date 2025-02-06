@@ -33,6 +33,10 @@ import StudentProfilePage from './homePage/studentprofile.jsx';
 import StudentResourcePage from './MyResourcePage/MyResource.jsx'
 import TutorRegister from "./components/landingpg/register/tutorregister.jsx";
 import Progress from './homePage/progress.jsx';
+import StuCourseCompletion from "./components/StuCourseCompletion/StuCourseCompletion.jsx";
+import './components/StuCourseCompletion/StuCourseCompletion.css';
+import UpcomingSessions from './components/UpcomingSessions/UpcomingSessions.jsx';
+import './components/UpcomingSessions/UpcomingSessions.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -61,7 +65,9 @@ root.render(
         <Route path = "/profile" element={<StudentProfilePage/>}/>
         <Route path = "/sturesource" element={<StudentResourcePage/>}/>
         <Route path = "/tutor-register" element={<TutorRegister/>}/>
-        <Route path = "/progress" element={<Progress/>}/>          
+        <Route path="/progress" element={<Progress />} />  
+        <Route path="/StuCourseCompletion" element={<StuCourseCompletion/>} />  
+        <Route path="/UpcomingSessions" element={<UpcomingSessions/>} />  
 
 
       </Routes>
