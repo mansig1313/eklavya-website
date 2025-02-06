@@ -12,7 +12,7 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import logo from '../components/landingpg/register/logo_white_nobg.png';
 import { useNavigate } from 'react-router-dom';
-
+import Calendar from './calendar';
 
 // Main App Component
 function DashboardApp() {
@@ -91,11 +91,9 @@ function DashboardApp() {
 
        
       </div>
-      <div className="progress-report">
-      <h3>Calendar</h3>
-
-
-      
+      <div className="Calendar" >
+      <h3>Calendar</h3> 
+      <Calendar userType="tutor" />
       </div>
       
       

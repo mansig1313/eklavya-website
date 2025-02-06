@@ -4,14 +4,55 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const http = require('http');
+const { Server } = require('socket.io');
+const bodyParser = require("body-parser");
 const multer = require('multer');
 const path = require('path');
 const fileUpload = require('express-fileupload');
-const http = require('http');  // Import http module
-const { Server } = require('socket.io');  // Import socket.io's Server class
+
+
 const { authenticate } = require('passport');
 
+
 dotenv.config();
+const authenticateToken = (req, res, next) => {
+    try {
+        // Retrieve token from headers
+        const authHeader = req.headers['authorization'];
+        if (!authHeader) {
+            console.log("No token provided");
+            return res.status(401).json({ error: "Access denied. No token provided." });
+        }
+
+        // Extract token from 'Bearer <token>' format
+        const token = authHeader.split(" ")[1];
+        if (!token) {
+            console.log("Malformed authorization header");
+            return res.status(401).json({ error: "Access denied. Invalid token format." });
+        }
+
+        // Verify the token
+        jwt.verify(token, process.env.JWT_SECRET || 'secretKey', (err, decoded) => {
+            if (err) {
+                console.log("Token verification failed:", err.message);
+                return res.status(403).json({ error: "Invalid or expired token." });
+            }
+
+            // Attach decoded user details to the request
+            req.user = decoded;
+
+            // Log authenticated user for debugging
+            console.log("Authenticated user:", decoded);
+
+            // Proceed to the next middleware or route
+            next();
+        });
+    } catch (error) {
+        console.error("Error in authentication middleware:", error.message);
+        return res.status(500).json({ error: "Internal server error." });
+    }
+};
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -21,15 +62,18 @@ mongoose.connect(process.env.MONGO_URI, {
     .catch(err => console.error('MongoDB connection error:', err));
 
 const app = express();
-const server = http.createServer(app); // Create the HTTP server
 
+app.use(bodyParser.json());
+const server = http.createServer(app);
+app.use(cors());
+//const server = http.createServer(app); // Create the HTTP server
 
 
 const corsOptions = {
     origin: process.env.FRONTEND_URL || 'http://localhost:3000',
     credentials: true,
 };
-0;
+
 
 
 const io = new Server(server, {
@@ -42,6 +86,7 @@ io.on('connection', (socket) => {
 app.use(cors(corsOptions));
 
 app.use(express.json());
+
 
 const PORT = process.env.PORT || 3000; // Use PORT from environment or default to 3000
 
@@ -99,6 +144,26 @@ app.post('/api/auth/register', async (req, res) => {
     }
 });
 
+// Add this endpoint
+app.get('/api/auth/user-data', authenticateToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+        res.json({ 
+            success: true, 
+            user: {
+                name: user.name,
+                email: user.email,
+                role: user.role
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ error: "Error fetching user data" });
+    }
+});
+
 // Login Route
 app.post('/api/auth/login', async (req, res) => {
     const { email, password } = req.body;
@@ -128,43 +193,6 @@ app.post('/api/auth/login', async (req, res) => {
 });
 
 // Middleware to authenticate JWT
-const authenticateToken = (req, res, next) => {
-    try {
-        // Retrieve token from headers
-        const authHeader = req.headers['authorization'];
-        if (!authHeader) {
-            console.log("No token provided");
-            return res.status(401).json({ error: "Access denied. No token provided." });
-        }
-
-        // Extract token from 'Bearer <token>' format
-        const token = authHeader.split(" ")[1];
-        if (!token) {
-            console.log("Malformed authorization header");
-            return res.status(401).json({ error: "Access denied. Invalid token format." });
-        }
-
-        // Verify the token
-        jwt.verify(token, process.env.JWT_SECRET || 'secretKey', (err, decoded) => {
-            if (err) {
-                console.log("Token verification failed:", err.message);
-                return res.status(403).json({ error: "Invalid or expired token." });
-            }
-
-            // Attach decoded user details to the request
-            req.user = decoded;
-
-            // Log authenticated user for debugging
-            console.log("Authenticated user:", decoded);
-
-            // Proceed to the next middleware or route
-            next();
-        });
-    } catch (error) {
-        console.error("Error in authentication middleware:", error.message);
-        return res.status(500).json({ error: "Internal server error." });
-    }
-};
 
 
 //Profile Schema
@@ -321,10 +349,37 @@ app.put("/update-profile", authenticateToken, async (req, res) => {
    //Server Uploaded Files
    app.use('/uploads' , express.static(path.join(__dirname , 'uploads')));
 
+//calendar
+
+  
+  const eventSchema = new mongoose.Schema({
+    date: String,
+    text: String,
+  });
+  
+  const Event = mongoose.model("Event", eventSchema);
+  
+  app.get("/events", async (req, res) => {
+    const events = await Event.find();
+    res.json(events);
+  });
+  
+  app.post("/events", async (req, res) => {
+    const newEvent = new Event(req.body);
+    await newEvent.save();
+    res.json(newEvent);
+  });
+  
+  app.delete("/events/:id", async (req, res) => {
+    await Event.findByIdAndDelete(req.params.id);
+    res.json({ message: "Event deleted" });
+  });
+ 
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is Running on port ${PORT}`);
 });
+
 
 app.post('/api/change-password', authenticateToken ,
     async(req,res) => {
@@ -352,3 +407,4 @@ app.post('/api/change-password', authenticateToken ,
         }
 
     });
+
