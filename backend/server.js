@@ -10,6 +10,8 @@ const fileUpload = require('express-fileupload');
 const http = require('http');  // Import http module
 const { Server } = require('socket.io');  // Import socket.io's Server class
 const { authenticate } = require('passport');
+const tutorRoutes = require('./routes/tutorRoutes');
+const bodyParser = require('body-parser');
 
 dotenv.config();
 const authenticateToken = (req, res, next) => {
@@ -79,6 +81,7 @@ io.on('connection', (socket) => {
 app.use(cors(corsOptions));
 
 app.use(express.json());
+
 
 const PORT = process.env.PORT || 3000; // Use PORT from environment or default to 3000
 
@@ -372,3 +375,9 @@ app.post('/api/change-password', authenticateToken ,
         }
 
     });
+
+// Routes
+app.use('/api/tregister', tutorRoutes);
+app.use(express.urlencoded({ extended: true }));
+
+
