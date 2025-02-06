@@ -23,10 +23,10 @@ import PaymentPage from './PaymentPage/PaymentPage.jsx';
 import './PaymentPage/PaymentPage.css';
 import FeedbackPage from './FeedbackPage/Feedback.jsx';
 import './FeedbackPage/Feedback.css';
-<<<<<<< HEAD
+
 import Calendar from './homePage/calendar.jsx';
 import './homePage/calendar.css';
-=======
+
 import MyTutors from '../src/components/Stu_MyTutors/Stu_MyTutors.jsx';
 import '../src/components/Stu_MyTutors/Stu_MyTutors.css';
 import WeeklyTests from '../src/WeeklyTests/WeeklyTest.jsx';
@@ -35,7 +35,7 @@ import StudentProfilePage from './homePage/studentprofile.jsx';
 import StudentResourcePage from './MyResourcePage/MyResource.jsx'
 import TutorRegister from "./components/landingpg/register/tutorregister.jsx";
 
->>>>>>> 8cbba083ff66b3f5ceb240df3c2206f7a9989518
+
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -58,16 +58,12 @@ root.render(
         <Route path="/mycourse" element={<StudentMyCoursepg />} />
         <Route path="/payments" element={<PaymentPage />} />
         <Route path="/feedback" element={<FeedbackPage />} />
-<<<<<<< HEAD
         <Route path="/calendar" element={<Calendar />} />
-=======
         <Route path="/mytutors" element={<MyTutors />} />
-                <Route path="/WeeklyTests" element={<WeeklyTests/>} />
+        <Route path="/WeeklyTests" element={<WeeklyTests/>} />
         <Route path = "/profile" element={<StudentProfilePage/>}/>
         <Route path = "/sturesource" element={<StudentResourcePage/>}/>
         <Route path = "/tutor-register" element={<TutorRegister/>}/>
-
->>>>>>> 8cbba083ff66b3f5ceb240df3c2206f7a9989518
            
 
       </Routes>

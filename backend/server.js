@@ -4,19 +4,16 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-<<<<<<< HEAD
 const http = require('http');
 const { Server } = require('socket.io');
 const bodyParser = require("body-parser");
-
-=======
 const multer = require('multer');
 const path = require('path');
 const fileUpload = require('express-fileupload');
-const http = require('http');  // Import http module
+
 const { Server } = require('socket.io');  // Import socket.io's Server class
 const { authenticate } = require('passport');
->>>>>>> 8cbba083ff66b3f5ceb240df3c2206f7a9989518
+
 
 dotenv.config();
 const authenticateToken = (req, res, next) => {
@@ -65,21 +62,18 @@ mongoose.connect(process.env.MONGO_URI, {
     .catch(err => console.error('MongoDB connection error:', err));
 
 const app = express();
-<<<<<<< HEAD
+
 app.use(bodyParser.json());
 const server = http.createServer(app);
 app.use(cors());
-=======
-const server = http.createServer(app); // Create the HTTP server
+//const server = http.createServer(app); // Create the HTTP server
 
 
-
->>>>>>> 8cbba083ff66b3f5ceb240df3c2206f7a9989518
 const corsOptions = {
     origin: process.env.FRONTEND_URL || 'http://localhost:3000',
     credentials: true,
 };
-0;
+
 
 
 const io = new Server(server, {
@@ -385,9 +379,7 @@ app.listen(PORT, () => {
     console.log(`Server is Running on port ${PORT}`);
 });
 
-<<<<<<< HEAD
 
-=======
 app.post('/api/change-password', authenticateToken ,
     async(req,res) => {
         const{ currentPassword , newPassword} = req.body;
@@ -414,4 +406,4 @@ app.post('/api/change-password', authenticateToken ,
         }
 
     });
->>>>>>> 8cbba083ff66b3f5ceb240df3c2206f7a9989518
+
