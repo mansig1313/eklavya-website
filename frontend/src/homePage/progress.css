@@ -1,0 +1,52 @@
+
+  
+  .progress-report-container h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .recharts-wrapper {
+    margin: 0 auto;
+  }
+  
+  .recharts-cartesian-grid line {
+    stroke: #e0e0e0; /* Light grid lines */
+  }
+  
+  .recharts-xAxis .recharts-cartesian-axis-line,
+  .recharts-yAxis .recharts-cartesian-axis-line {
+    stroke: #333; /* Axis lines */
+  }
+  
+  .recharts-xAxis .recharts-cartesian-axis-tick line,
+  .recharts-yAxis .recharts-cartesian-axis-tick line {
+    stroke: #333; /* Tick lines */
+  }
+  
+  .recharts-xAxis .recharts-cartesian-axis-tick text,
+  .recharts-yAxis .recharts-cartesian-axis-tick text {
+    fill: #333; /* Tick text color */
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .recharts-tooltip-wrapper {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+  
+  .recharts-legend-item text {
+    font-size: 12px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .recharts-legend-item {
+    margin-right: 10px;
+  }
+  

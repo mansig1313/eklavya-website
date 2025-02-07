@@ -11,32 +11,21 @@ import MessageIcon from '@mui/icons-material/Message';
 import PaymentIcon from '@mui/icons-material/Payment';
 import GradingIcon from '@mui/icons-material/Grading';
 import logo from '../components/landingpg/register/logo_white_nobg.png';
-//import Progress  from './progress';
-
 import { useNavigate } from 'react-router-dom';
-
-const progressData = [80, 70, 85, 90, 60, 75, 95];
-const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
-console.log(progressData);
+import Progress from './progress.jsx'
 
 // Main App Component
 function DashboardApp() {
-  const [progressData, setProgressData] = useState([20, 40, 60, 80]); // Initial values
+ 
   const [user, setUser] = useState(null);
   const navigate = useNavigate(); // Define the navigate function
-  const maxValue = 100;
-  useEffect(() => {
+   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
     if (loggedInUser) {
       setUser(loggedInUser);
     }
   
-    const interval = setInterval(() => {
-      setProgressData((prevData) =>
-        prevData.map((value) => Math.min(value + Math.floor(Math.random() * 10), 100))
-      );
-    }, 1000);
+    
   
     // Add event listener for profile updates
     const handleProfileUpdate = () => {
@@ -49,11 +38,7 @@ function DashboardApp() {
     window.addEventListener('userProfileUpdate', handleProfileUpdate);
     window.addEventListener('storage', handleStorageChange);
   
-    return () => {
-      clearInterval(interval);
-      window.removeEventListener('userProfileUpdate', handleProfileUpdate);
-      window.removeEventListener('storage', handleStorageChange);
-    };
+  
   }, []);
 
   // Handle localStorage changes
@@ -64,7 +49,6 @@ function DashboardApp() {
     }
 };
 
- 
 
   // Navigation functions
   const handleMyCourseClick = () => {
@@ -179,27 +163,8 @@ function DashboardApp() {
           
           <div className="progress-report">
             <h3>Progress Report</h3>
-            <div className="graph-container">
-               {/* Y-axis labels */}
-             <div className="y-axis-labels">
-              <span>100%</span>
-              <span>80%</span>
-              <span>60%</span>
-              <span>40%</span>
-              <span>20%</span>
-              <span>0%</span>
-            </div>
-
-              {/* Bars for each day */}
-              <div className="bars">
-                {progressData.map((value, index) => (
-                  <div key={index} className="bar">
-                    <div className="bar-fill" style={{ height: `${(value / maxValue) * 100}%` }}></div>
-                    <span className="x-label">{days[index]}</span>
-                  </div>
-                ))}
-             </div>
-            </div>
+            <Progress/>
+           
           </div>
         </div>
       </div>

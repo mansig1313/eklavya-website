@@ -208,87 +208,26 @@
 }
 
 /* Progress report styling */
-/* Progress Report Container */
 .progress-report {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  margin: 30px auto;
-  text-align: center;
+  background-color: #ffffff; /* White background for better contrast */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 20px; /* Inner padding for content spacing */
+  margin: 20px auto; /* Center the graph with margin */
+  max-width: 800px; /* Limit the max width for better visibility on larger screens */
 }
 
-/* Title */
-.title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 20px;
+.progress-report h3 {
+  font-size: 1.5rem; /* Slightly larger font for the title */
+  font-weight: bold; /* Bold text for emphasis */
+  text-align: center; /* Center-align the title */
+  margin-bottom: 20px; /* Space below the title */
+  color: #333; /* Neutral text color */
 }
 
-/* Graph Container */
-.graph-container {
-  position: relative;
-  width: 90%;
-  height: 250px;
-  margin: auto;
-  border-left: 2px solid #333; /* Y-axis */
-  border-bottom: 2px solid #333; /* X-axis */
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding-bottom: 30px;
-  padding-left: 30px;
+.recharts-wrapper {
+  overflow: hidden; /* Prevent overflow issues */
+  border-radius: 12px; /* Match the container's border radius */
 }
-
-/* Y-axis Labels */
-.y-axis-labels {
-  position: absolute;
-  left: -30px;
-  top: 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-size: 12px;
-  font-weight: bold;
-  color: #333;
-}
-
-/* Bars */
-.bars {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  align-items: flex-end;
-  position: relative;
-}
-
-/* Each Bar */
-.bar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 12%;
-}
-
-/* Bar Fill */
-.bar-fill {
-  width: 25px;
-  background: #3498db;
-  border-radius: 4px;
-  transition: height 0.3s ease-in-out;
-}
-
-/* X-axis Labels (Days) */
-.x-label {
-  margin-top: 10px; /* Pushes text below the X-axis */
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-  position: absolute;
-  bottom: -55px; /* Moves labels below the X-axis */
-}
-
 
 
