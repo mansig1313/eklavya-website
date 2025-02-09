@@ -209,32 +209,25 @@
 
 /* Progress report styling */
 .progress-report {
-  background: linear-gradient(135deg, #e1bee7, #f3e5f5);
-  border-radius: 8px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-  width: 450px;
-  height: 450px;
-  padding-top: 20px;
-  margin-top: 20px;
-  cursor: pointer;
+  background-color: #ffffff; /* White background for better contrast */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 20px; /* Inner padding for content spacing */
+  margin: 20px auto; /* Center the graph with margin */
+  max-width: 800px; /* Limit the max width for better visibility on larger screens */
 }
 
 .progress-report h3 {
-  color: #040404;
-  font-size: 1.5em;
-  text-align: center;
+  font-size: 1.5rem; /* Slightly larger font for the title */
+  font-weight: bold; /* Bold text for emphasis */
+  text-align: center; /* Center-align the title */
+  margin-bottom: 20px; /* Space below the title */
+  color: #333; /* Neutral text color */
 }
 
-.progress-bar {
-  display: flex;
-  gap: 5px;
-  margin-top: 10px;
-  align-items: flex-end;
+.recharts-wrapper {
+  overflow: hidden; /* Prevent overflow issues */
+  border-radius: 12px; /* Match the container's border radius */
 }
 
-.bar {
-  width: 20px;
-  background-color: #000000;
-  border-radius: 3px;
-  transition: height 0.5s ease;
-}
+

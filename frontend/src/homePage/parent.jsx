@@ -11,13 +11,15 @@ import FeedbackIcon from '@mui/icons-material/Feedback';
 import PaymentIcon from '@mui/icons-material/Payment';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import logo from '../components/landingpg/register/logo_white_nobg.png';
-
+import { useNavigate } from 'react-router-dom';
+import Progress from './progress.jsx';
 
 
 // Main App Component
 function DashboardApp() {
     const [progressData, setProgressData] = useState([20, 40, 60, 80]); // Initial values
-    const[user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate(); // Define the navigate function
   useEffect(() => {
 
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
@@ -34,6 +36,24 @@ function DashboardApp() {
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
   
+  const handleMyTutorsClick = () => {
+    navigate('/mytutors');
+  };
+
+  const handleWeeklyTestsClick = () => {
+    navigate('/WeeklyTests');
+  };
+
+   const handleCourseCompletionClick = () => {
+    navigate('/StuCourseCompletion');
+  }
+
+   const handleUpcomingSessionsClick = () => {
+    navigate('/UpcomingSessions');
+  }
+
+
+
 
   return (
     <div className="app">
@@ -94,17 +114,17 @@ function DashboardApp() {
         
     
       <div className="content-grid">
-        <div className="box course-completion">
+        <div className="box course-completion" onClick= {handleCourseCompletionClick}>
           <h3>Course Completion</h3>
           
         </div>
-        <div className="box weekly-tests">
+        <div className="box weekly-tests" onClick={handleWeeklyTestsClick}>
           <h3>Weekly Tests</h3>
         </div>
-        <div className="box my-tutors">
+        <div className="box my-tutors" onClick={handleMyTutorsClick}>
           <h3>My Tutors</h3>
         </div>
-        <div className="box upcoming-sessions">
+            <div className="box upcoming-sessions"  onClick= {handleUpcomingSessionsClick}>
           <h3>Upcoming Sessions</h3>
         </div>
 
@@ -113,6 +133,7 @@ function DashboardApp() {
       
       <div className="progress-report">
       <h3>Progress Report</h3>
+      <Progress/>
       <div className="progress-bar">
         {progressData.map((value, index) => (
           <div

@@ -12,24 +12,20 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import GradingIcon from '@mui/icons-material/Grading';
 import logo from '../components/landingpg/register/logo_white_nobg.png';
 import { useNavigate } from 'react-router-dom';
+import Progress from './progress.jsx';
 
 // Main App Component
 function DashboardApp() {
-  const [progressData, setProgressData] = useState([20, 40, 60, 80]); // Initial values
+ 
   const [user, setUser] = useState(null);
   const navigate = useNavigate(); // Define the navigate function
-
-  useEffect(() => {
+   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
     if (loggedInUser) {
       setUser(loggedInUser);
     }
   
-    const interval = setInterval(() => {
-      setProgressData((prevData) =>
-        prevData.map((value) => Math.min(value + Math.floor(Math.random() * 10), 100))
-      );
-    }, 1000);
+    
   
     // Add event listener for profile updates
     const handleProfileUpdate = () => {
@@ -42,11 +38,7 @@ function DashboardApp() {
     window.addEventListener('userProfileUpdate', handleProfileUpdate);
     window.addEventListener('storage', handleStorageChange);
   
-    return () => {
-      clearInterval(interval);
-      window.removeEventListener('userProfileUpdate', handleProfileUpdate);
-      window.removeEventListener('storage', handleStorageChange);
-    };
+  
   }, []);
 
   // Handle localStorage changes
@@ -57,7 +49,6 @@ function DashboardApp() {
     }
 };
 
- 
 
   // Navigation functions
   const handleMyCourseClick = () => {
@@ -87,6 +78,15 @@ function DashboardApp() {
   const handleMyResourceClick = () => {
     navigate('/sturesource');
   }
+
+   const handleCourseCompletionClick = () => {
+    navigate('/StuCourseCompletion');
+  }
+
+   const handleUpcomingSessionsClick = () => {
+    navigate('/UpcomingSessions');
+  }
+
 
 
   return (
@@ -146,7 +146,7 @@ function DashboardApp() {
         </div>
         <div className="main-content">
           <div className="content-grid">
-            <div className="box course-completion">
+            <div className="box course-completion" onClick={handleCourseCompletionClick}>
               <h3>Course Completion</h3>
             </div>
             <div className="box weekly-tests" onClick={handleWeeklyTestsClick}>
@@ -155,18 +155,16 @@ function DashboardApp() {
            <div className="box my-tutors" onClick={handleMyTutorsClick}>
               <h3>My Tutors</h3>
             </div>
-            <div className="box upcoming-sessions">
+            <div className="box upcoming-sessions" onClick={handleUpcomingSessionsClick}> 
               <h3>Upcoming Sessions</h3>
             </div>
           </div>
-
+             
+          
           <div className="progress-report">
             <h3>Progress Report</h3>
-            <div className="progress-bar">
-              {progressData.map((value, index) => (
-                <div key={index} className="bar" style={{ height: `${value}%` }}></div>
-              ))}
-            </div>
+            <Progress/>
+           
           </div>
         </div>
       </div>

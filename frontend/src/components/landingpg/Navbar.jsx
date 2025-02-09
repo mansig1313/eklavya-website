@@ -1,7 +1,6 @@
 import React from "react";
 import "./Navbar.css";
-import eklavya from "./EKLAVYA.png";
-
+import eklavya from "../landingpg/register/logo_white_nobg.png";
 function Navbar() {
   const menus = [
     { name: "Home", id: "home-section" },
