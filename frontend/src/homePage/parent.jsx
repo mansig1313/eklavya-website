@@ -12,7 +12,7 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import logo from '../components/landingpg/register/logo_white_nobg.png';
 import { useNavigate } from 'react-router-dom';
-
+import Progress from './progress.jsx';
 
 
 // Main App Component
@@ -133,6 +133,7 @@ function DashboardApp() {
       
       <div className="progress-report">
       <h3>Progress Report</h3>
+      <Progress/>
       <div className="progress-bar">
         {progressData.map((value, index) => (
           <div
