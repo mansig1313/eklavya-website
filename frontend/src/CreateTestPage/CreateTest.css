@@ -1,0 +1,70 @@
+.create-test-container {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #530a8f;
+}
+
+.search-box {
+  width: 50%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #530a8f;
+  border-radius: 5px;
+  outline: none;
+}
+
+.previous-tests {
+  margin: 20px 0;
+}
+
+
+.test-card {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.test-card:hover {
+  transform: scale(1.03);
+}
+
+.edit-btn {
+  background: #530a8f;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.create-btn {
+  background: #530a8f;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.create-btn:hover {
+  background: #3e0870;
+}

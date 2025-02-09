@@ -79,7 +79,7 @@ function DashboardApp() {
         <div className="box course-completion" onClick={() => navigate('/resource')}>
           <h3>Upload Resource</h3>
         </div>
-        <div className="box weekly-tests">
+        <div className="box weekly-tests" onClick={() => navigate('/create-test')}>
           <h3>Create Tests</h3>
         </div>
         <div className="box my-tutors">

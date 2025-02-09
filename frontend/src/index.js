@@ -34,6 +34,12 @@ import '../src/WeeklyTests/WeeklyTest.css';
 import StudentProfilePage from './homePage/studentprofile.jsx';
 import StudentResourcePage from './MyResourcePage/MyResource.jsx'
 import TutorRegister from "./components/landingpg/register/tutorregister.jsx";
+import CreateTest from "../src/CreateTestPage/CreateTest.jsx";
+import TestEditor from "./CreateTestPage/TestEditor.jsx";
+import TestList from "./CreateTestPage/TestList";
+
+
+
 
 
 
@@ -64,7 +70,9 @@ root.render(
         <Route path = "/profile" element={<StudentProfilePage/>}/>
         <Route path = "/sturesource" element={<StudentResourcePage/>}/>
         <Route path = "/tutor-register" element={<TutorRegister/>}/>
-           
+        <Route path = "/create-test" element = {<CreateTest/>}/>
+        <Route path="/tl" element={<TestList />} />
+        <Route path="/edit-test/:testId" element={<TestEditor />} />           
 
       </Routes>
     </BrowserRouter>
