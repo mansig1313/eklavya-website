@@ -37,7 +37,7 @@ import StuCourseCompletion from "./components/StuCourseCompletion/StuCourseCompl
 import './components/StuCourseCompletion/StuCourseCompletion.css';
 import UpcomingSessions from './components/UpcomingSessions/UpcomingSessions.jsx';
 import './components/UpcomingSessions/UpcomingSessions.css';
-
+import TutorFeedback from './homePage/tutorfeedback.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -67,7 +67,8 @@ root.render(
         <Route path = "/tutor-register" element={<TutorRegister/>}/>
         <Route path="/progress" element={<Progress />} />  
         <Route path="/StuCourseCompletion" element={<StuCourseCompletion/>} />  
-        <Route path="/UpcomingSessions" element={<UpcomingSessions/>} />  
+        <Route path="/UpcomingSessions" element={<UpcomingSessions/>} /> 
+        <Route path="/tutorfeedback" element={<TutorFeedback/>} /> 
 
 
       </Routes>

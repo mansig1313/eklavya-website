@@ -13,7 +13,7 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import logo from '../components/landingpg/register/logo_white_nobg.png';
 import { useNavigate } from 'react-router-dom';
 import Progress from './progress.jsx';
-
+import TutorFeedback from './tutorfeedback.jsx';
 
 // Main App Component
 function DashboardApp() {
@@ -51,9 +51,7 @@ function DashboardApp() {
    const handleUpcomingSessionsClick = () => {
     navigate('/UpcomingSessions');
   }
-
-
-
+  
 
   return (
     <div className="app">
@@ -71,9 +69,10 @@ function DashboardApp() {
         <PageviewIcon className="StudentOverview-icon" />
         <span>Student Overview</span>
         </div>
-        <div className="sidebar-item">
+        <div className="sidebar-item" onClick={() => navigate("/tutorfeedback")}>
         <FeedbackIcon className="TutorFeedback" />
         <span>Tutor Feedback</span>
+         
         </div>
         <div className="sidebar-item">
         <ReportIcon className="Reports" />
