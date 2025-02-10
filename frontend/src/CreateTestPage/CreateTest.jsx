@@ -11,7 +11,7 @@ import "./CreateTest.css";
 
     const handleEdit = (testId) => {
       console.log("Edit button clicked for test ID:", testId); // Debugging
-      navigate(`/edit-test/${testId}`); // Ensure this route exists
+      navigate(`/test-editor/${testId}`); // Ensure this route exists
     };
   
     useEffect(() => {
@@ -23,9 +23,10 @@ import "./CreateTest.css";
   
     const filteredTests = tests.filter(
       (test) =>
-        test.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        test.date.includes(searchQuery)
+        (test.subject?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
+        (test.date || "").includes(searchQuery)
     );
+    
 
   return (
     <div className="create-test-container">
