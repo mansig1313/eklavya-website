@@ -75,13 +75,12 @@ root.render(
 <<<<<<< HEAD
         <Route path="/UpcomingSessions" element={<UpcomingSessions/>} /> 
         <Route path="/tutorfeedback" element={<TutorFeedback/>} /> 
-=======
         <Route path="/UpcomingSessions" element={<UpcomingSessions/>} />
         <Route path = "/create-test" element={<CreateTest/>}/>
         <Route path="/test-editor/:testId" element={<EditTestPage />} />
 
 
->>>>>>> d710a343c8f027e63b3d8298b255e8b46a1c89f1
+
 
 
       </Routes>
