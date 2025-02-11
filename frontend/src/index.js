@@ -37,13 +37,9 @@ import StuCourseCompletion from "./components/StuCourseCompletion/StuCourseCompl
 import './components/StuCourseCompletion/StuCourseCompletion.css';
 import UpcomingSessions from './components/UpcomingSessions/UpcomingSessions.jsx';
 import './components/UpcomingSessions/UpcomingSessions.css';
-<<<<<<< HEAD
-import TutorFeedback from './homePage/tutorfeedback.jsx';
-=======
-import CreateTest from "./CreateTestPage/CreateTest.jsx";
-import EditTestPage from "../src/CreateTestPage/TestEditor.jsx"
->>>>>>> d710a343c8f027e63b3d8298b255e8b46a1c89f1
-
+import TutorFeedback from './homePage/Tutorfeedback.jsx';
+import CreateTest from './CreateTestPage/CreateTest.jsx';
+import EditTestPage from './CreateTestPage/TestEditor.jsx';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -72,15 +68,11 @@ root.render(
         <Route path = "/tutor-register" element={<TutorRegister/>}/>
         <Route path="/progress" element={<Progress />} />  
         <Route path="/StuCourseCompletion" element={<StuCourseCompletion/>} />  
-<<<<<<< HEAD
         <Route path="/UpcomingSessions" element={<UpcomingSessions/>} /> 
         <Route path="/tutorfeedback" element={<TutorFeedback/>} /> 
         <Route path="/UpcomingSessions" element={<UpcomingSessions/>} />
         <Route path = "/create-test" element={<CreateTest/>}/>
         <Route path="/test-editor/:testId" element={<EditTestPage />} />
-
-
-
 
 
       </Routes>

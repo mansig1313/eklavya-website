@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Star } from "lucide-react";
-import "./tutorfeedback.css";
+import "./Tutorfeedback.css";
 
 export default function TutorFeedbackPage() {
   const [selectedSubject, setSelectedSubject] = useState(null);

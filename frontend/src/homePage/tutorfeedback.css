@@ -1,176 +1,149 @@
-/* Main Container */
+/* Tutor Feedback Page Styles */
 .feedback-container {
-    display: fi;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(135deg, #6b2a92, #8a4bc3);
-    height: 100vh;
-    padding: 20px;
-  }
-  
-  /* Header - Move to Top */
-  .feedback-header {
-    width: 100%;
-    background-color: #4a046e;
-    color: white;
-    font-size: 26px;
-    font-weight: bold;
-    text-align: center;
-    padding: 18px;
-    border-radius: 10px;
-    text-transform: uppercase;
-    margin-bottom: 20px; /* Added space below header */
-  }
-  
-  /* Content Layout */
-  .feedback-content {
-    display: flex;
-    width: 100%;
-    justify-content: space-between; /* Aligns left and right properly */
-    align-items: center; /* Prevents the card from moving down */
-    gap: 30px;
-  }
-  
-  /* Feedback Card */
-  .feedback-card {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%; /* Adjust width as needed */
-    max-width: 600px; /* Prevents it from becoming too large */
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    margin-top: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f3e8ff; /* Soft violet background */
+  min-height: 100vh;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
 
-  .feedback-card h2 {
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-    color: #4a046e;
-  }
-  
-  .student-name, .student-grade, .rating-stars {
-    font-size: 15px;
-    font-weight: bold;
-    color: #4a046e;
-    text-align: center;
-    display: block;
-    width: 100%;
-    margin: 0 auto; /* Centers elements horizontally */
-    position: relative;
+.feedback-header {
+  font-size: 24px;
+  font-weight: bold;
+  color: #5b21b6; /* Deep violet */
+  margin-bottom: 20px;
+}
+
+.feedback-content {
+  display: flex;
+  gap: 20px;
+  width: 80%;
+  max-width: 900px;
+}
+
+.subject-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  background: #ede9fe;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.subject-option {
+  background: #7c3aed;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.subject-option:hover {
+  background: #6d28d9;
+}
+
+.feedback-card {
+  flex: 1;
+  background: #ede9fe;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  text-align: center;
+}
+
+.student-details {
+  text-align: center;
+}
+
+.student-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #4c1d95;
+  text-align: center;
+}
+
+.student-grade {
+  color: #6b21a8;
+  text-align: center;
+}
+
+.rating-stars {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.star-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.feedback-section {
+  background: #e9d5ff; /* Subtle violet contrast */
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .section-title {
-    font-size: 2px; /* Adjust as needed */
-    
-    text-align: center;
-    color: #4a046e;
-}
-
-/* Smaller Text */
-.section-text {
-    font-size: 15px; /* Adjust as needed */
-    text-align: center;
-    color: #333;
-}
-  
-  /* Sidebar (Subjects) - Move to Bottom */
-  .subject-menu {
-    display: flex;
-    flex-direction: row; /* Align buttons horizontally */
-    justify-content: center;
-    gap: 15px;
-    position: absolute;
-    bottom: 20px; /* Move to bottom */
-    width: 100%;
-  }
-
-  /* Language Buttons */
-.language-button {
-  background-color: #4a046e;
-  color: white;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #5b21b6;
 }
 
-/* Hover Effect */
-.language-button:hover {
-  background-color: #732dad;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+.section-text {
+  font-size: 14px;
+  color: #6b21a8;
 }
 
-/* Active (Click) Effect */
-.language-button:active {
-  background-color: #3b0249;
-  transform: translateY(2px);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Aligning the Buttons */
-.subject-menu {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 15px;
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
-}
-
-/* Subject Menu Button Styles */
-.subject-menu button {
-    background: linear-gradient(135deg, #4a046e, #732dad);
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    outline: none;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .feedback-content {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  /* Hover Effect */
-  .subject-menu button:hover {
-    background: linear-gradient(135deg, #732dad, #9a48d0);
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-  }
-  
-  /* Active (Click) Effect */
-  .subject-menu button:active {
-    background: linear-gradient(135deg, #3b0249, #5a1e7c);
-    transform: scale(0.98);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Button Layout */
+
   .subject-menu {
-    display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 15px;
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
+    gap: 5px;
   }
-  
-  /* Smooth Button Appearance */
-  .subject-menu button {
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  .subject-option {
+    padding: 8px 12px;
+    font-size: 14px;
   }
-  
+}
+
+@media (max-width: 480px) {
+  .feedback-header {
+    font-size: 20px;
+  }
+
+  .student-name {
+    font-size: 16px;
+  }
+
+  .student-grade {
+    font-size: 14px;
+  }
+
+  .section-title {
+    font-size: 14px;
+  }
+
+  .section-text {
+    font-size: 12px;
+  }
+}
