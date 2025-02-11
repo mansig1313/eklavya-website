@@ -12,8 +12,13 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import logo from '../components/landingpg/register/logo_white_nobg.png';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 import Progress from './progress.jsx';
 import TutorFeedback from './tutorfeedback.jsx';
+=======
+import Progress from './Progress.jsx';
+
+>>>>>>> d710a343c8f027e63b3d8298b255e8b46a1c89f1
 
 // Main App Component
 function DashboardApp() {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import TestEditor from "../CreateTestPage/TestEditor";
 import "./TestList.css";
 import { useNavigate } from "react-router-dom";
 
@@ -13,10 +12,13 @@ const TestList = () => {
 
     useEffect(() => {
       fetch("http://localhost:5000/api/tests")
-        .then((res) => res.json())
-        .then((data) => setTests(data))
-        .catch((err) => console.error("Error fetching tests:", err));
-    }, []);
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Fetched tests:", data);
+        setTests(data);
+      })
+      .catch((err) => console.error("Error fetching tests:", err));
+  }, []);
 
   // ✅ Filter tests based on search input & subject selection
   const filteredTests = tests.filter((test) => 
@@ -25,19 +27,14 @@ const TestList = () => {
   );
 
   // ✅ Handle clicking the "Edit" button
-  const handleEditTest = (testId, status) => {
+  const handleEditTest = (testId) => {
     if (!testId) {
       console.error("Error: testId is undefined.");
       return;
     }
-
-    if (status === "unattempted") {
       console.log(`Navigating to edit test: ${testId}`);
       navigate(`/edit-test/${testId}`);
-    } else {
-      alert("This test has already been attempted and cannot be edited.");
-    }
-  };
+  }
 
   return (
     <div className="test-list-container">
@@ -76,7 +73,7 @@ const TestList = () => {
             <li key={test.id} className="test-item">
               <span>{test.subject} - {test.duration} min</span>
               {test.status === "unattempted" && (
-                <button className="edit-btn" onClick={() => handleEditTest(test.id, test.status)}>
+                <button className="edit-btn" onClick={() => handleEditTest(test._id)}>
                   Edit
                 </button>
               )}

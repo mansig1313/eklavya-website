@@ -14,8 +14,8 @@ router.post("/create", async (req, res) => {
   }
 });
 
-// 📌 Get all tests
-router.get("/api/tests", async (req, res) => {
+// 📌 Get ALL tests
+router.get("/", async (req, res) => {
   try {
     const tests = await Test.find();
     res.status(200).json(tests);
@@ -24,11 +24,20 @@ router.get("/api/tests", async (req, res) => {
   }
 });
 
-// 📌 Get a specific test by ID
-router.get("/:id", async (req, res) => {
+// 📌 Get a SPECIFIC test by ID
+router.get("/:testId", async (req, res) => {
   try {
-    const test = await Test.findById(req.params.id);
-    if (!test) return res.status(404).json({ message: "Test not found" });
+    console.log("Fetching test with ID:", req.params.testId);
+
+    if (!req.params.testId) {
+      return res.status(400).json({ error: "Test ID is required" });
+    }
+
+    const test = await Test.findById(req.params.testId);
+    if (!test) {
+      return res.status(404).json({ message: "Test not found" });
+    }
+
     res.status(200).json(test);
   } catch (error) {
     res.status(500).json({ message: "Error fetching test", error: error.message });
@@ -36,19 +45,31 @@ router.get("/:id", async (req, res) => {
 });
 
 // 📌 Update a test
-router.put("/update/:id", async (req, res) => {
+router.put("/api/tests/update/:id", async (req, res) => {
+  const { testId } = req.params;
+  const { title, questions } = req.body;
+
+  // Validate ObjectId format
+  if (!mongoose.Types.ObjectId.isValid(testId)) {
+      return res.status(400).json({ error: "Invalid Test ID format" });
+  }
+
   try {
-    const { title, questions } = req.body;
-    const updatedTest = await Test.findByIdAndUpdate(
-      req.params.id,
-      { title, questions },
-      { new: true }
-    );
-    if (!updatedTest) return res.status(404).json({ message: "Test not found" });
-    res.status(200).json({ message: "Test updated successfully", test: updatedTest });
+      const test = await TestModel.findById(testId);
+      if (!test) {
+          return res.status(404).json({ error: "Test not found" });
+      }
+
+      test.title = title || test.title;
+      test.questions = questions || test.questions;
+
+      await test.save();
+      res.json({ message: "Test updated successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Error updating test", error: error.message });
+      console.error("Error updating test:", error);
+      res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 module.exports = router;

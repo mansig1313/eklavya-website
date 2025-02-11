@@ -7,9 +7,9 @@ import LoginPage from './components/landingpg/register/LoginPage';
 import AboutUs from './components/landingpg/AboutUs';
 import Services from './components/landingpg/Services';
 import Register from './components/landingpg/register/Register';
-import TutorHomePage from './homePage/tutor.jsx';
-import StudentHomePage from './homePage/student.jsx';
-import ParentHomePage from './homePage/parent.jsx';
+import TutorHomePage from './homePage/Tutor.jsx';
+import StudentHomePage from './homePage/Student.jsx';
+import ParentHomePage from './homePage/Parent.jsx';
 import CoursePage from './CourseMainPage/CoursePage/CoursePage.jsx';
 import './CourseMainPage/CoursePage/CoursePage.css';
 import TutorSelectionPage from './components/TutorSelectionPage/TutorSelectionPage.jsx';
@@ -23,21 +23,26 @@ import PaymentPage from './PaymentPage/PaymentPage.jsx';
 import './PaymentPage/PaymentPage.css';
 import FeedbackPage from './FeedbackPage/Feedback.jsx';
 import './FeedbackPage/Feedback.css';
-import Calendar from './homePage/calendar.jsx';
-import './homePage/calendar.css';
+import Calendar from './homePage/Calendar.jsx';
+import './homePage/Calendar.css';
 import MyTutors from '../src/components/Stu_MyTutors/Stu_MyTutors.jsx';
 import '../src/components/Stu_MyTutors/Stu_MyTutors.css';
 import WeeklyTests from '../src/WeeklyTests/WeeklyTest.jsx';
 import '../src/WeeklyTests/WeeklyTest.css';
-import StudentProfilePage from './homePage/studentprofile.jsx';
+import StudentProfilePage from './homePage/Studentprofile.jsx';
 import StudentResourcePage from './MyResourcePage/MyResource.jsx'
-import TutorRegister from "./components/landingpg/register/tutorregister.jsx";
-import Progress from './homePage/progress.jsx';
+import TutorRegister from "./components/landingpg/register/Tutorregister.jsx";
+import Progress from './homePage/Progress.jsx';
 import StuCourseCompletion from "./components/StuCourseCompletion/StuCourseCompletion.jsx";
 import './components/StuCourseCompletion/StuCourseCompletion.css';
 import UpcomingSessions from './components/UpcomingSessions/UpcomingSessions.jsx';
 import './components/UpcomingSessions/UpcomingSessions.css';
+<<<<<<< HEAD
 import TutorFeedback from './homePage/tutorfeedback.jsx';
+=======
+import CreateTest from "./CreateTestPage/CreateTest.jsx";
+import EditTestPage from "../src/CreateTestPage/TestEditor.jsx"
+>>>>>>> d710a343c8f027e63b3d8298b255e8b46a1c89f1
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -67,8 +72,16 @@ root.render(
         <Route path = "/tutor-register" element={<TutorRegister/>}/>
         <Route path="/progress" element={<Progress />} />  
         <Route path="/StuCourseCompletion" element={<StuCourseCompletion/>} />  
+<<<<<<< HEAD
         <Route path="/UpcomingSessions" element={<UpcomingSessions/>} /> 
         <Route path="/tutorfeedback" element={<TutorFeedback/>} /> 
+=======
+        <Route path="/UpcomingSessions" element={<UpcomingSessions/>} />
+        <Route path = "/create-test" element={<CreateTest/>}/>
+        <Route path="/test-editor/:testId" element={<EditTestPage />} />
+
+
+>>>>>>> d710a343c8f027e63b3d8298b255e8b46a1c89f1
 
 
       </Routes>
