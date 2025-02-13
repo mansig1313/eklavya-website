@@ -40,6 +40,7 @@ import './components/UpcomingSessions/UpcomingSessions.css';
 import TutorFeedback from './homePage/Tutorfeedback.jsx';
 import CreateTest from './CreateTestPage/CreateTest.jsx';
 import EditTestPage from './CreateTestPage/TestEditor.jsx';
+import PaymentHistory from './homePage/Paymenthistory.jsx';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -73,6 +74,7 @@ root.render(
         <Route path="/UpcomingSessions" element={<UpcomingSessions/>} />
         <Route path = "/create-test" element={<CreateTest/>}/>
         <Route path="/test-editor/:testId" element={<EditTestPage />} />
+        <Route path="/paymenthistory" element={<PaymentHistory />} />
 
 
       </Routes>

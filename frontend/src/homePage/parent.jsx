@@ -14,6 +14,7 @@ import logo from '../components/landingpg/register/logo_white_nobg.png';
 import { useNavigate } from 'react-router-dom';
 import Progress from './Progress.jsx';
 import TutorFeedback from './Tutorfeedback.jsx';
+import PaymentHistory from './Paymenthistory.jsx';
 
 
 
@@ -84,7 +85,7 @@ function DashboardApp() {
         <PaymentIcon className="FinancialOverview" />
         <span>Financial Overview</span>
         </div>
-        <div className="sidebar-item">
+        <div className="sidebar-item" onClick={() => navigate("/paymenthistory")}>
         <EventNoteIcon  className="SessionHistory" />
         <span>Session History</span>
         </div>
