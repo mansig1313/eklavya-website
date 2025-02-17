@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Tutorfeedback.css";
+import "./TutorFeedback.css";
 
 const feedbackData = {
   Physics: {

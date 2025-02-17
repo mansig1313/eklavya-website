@@ -13,7 +13,7 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import logo from '../components/landingpg/register/logo_white_nobg.png';
 import { useNavigate } from 'react-router-dom';
 import Progress from './Progress.jsx';
-import TutorFeedback from './Tutorfeedback.jsx';
+import TutorFeedback from './TutorFeedback.jsx';
 import PaymentHistory from './Paymenthistory.jsx';
 
 

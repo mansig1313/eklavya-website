@@ -37,10 +37,12 @@ import StuCourseCompletion from "./components/StuCourseCompletion/StuCourseCompl
 import './components/StuCourseCompletion/StuCourseCompletion.css';
 import UpcomingSessions from './components/UpcomingSessions/UpcomingSessions.jsx';
 import './components/UpcomingSessions/UpcomingSessions.css';
-import TutorFeedback from './homePage/Tutorfeedback.jsx';
+import TutorFeedback from './homePage/TutorFeedback.jsx';
 import CreateTest from './CreateTestPage/CreateTest.jsx';
 import EditTestPage from './CreateTestPage/TestEditor.jsx';
 import PaymentHistory from './homePage/Paymenthistory.jsx';
+import JitsiMeeting from "./components/UpcomingSessions/JitsiMeeting.jsx";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -75,7 +77,7 @@ root.render(
         <Route path = "/create-test" element={<CreateTest/>}/>
         <Route path="/test-editor/:testId" element={<EditTestPage />} />
         <Route path="/paymenthistory" element={<PaymentHistory />} />
-
+        <Route path="/session/:roomId" element={<JitsiMeeting />} />
 
       </Routes>
     </BrowserRouter>

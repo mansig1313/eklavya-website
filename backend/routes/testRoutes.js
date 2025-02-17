@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Test = require("../models/Test");
+const mongoose = require("mongoose");
 
 // 📌 Create a new test
 router.post("/create", async (req, res) => {
@@ -45,7 +46,7 @@ router.get("/:testId", async (req, res) => {
 });
 
 // 📌 Update a test
-router.put("/api/tests/update/:id", async (req, res) => {
+router.put("/update/:id", async (req, res) => {
   const { testId } = req.params;
   const { title, questions } = req.body;
 
@@ -55,7 +56,7 @@ router.put("/api/tests/update/:id", async (req, res) => {
   }
 
   try {
-      const test = await TestModel.findById(testId);
+      const test = await Test.findById(testId);
       if (!test) {
           return res.status(404).json({ error: "Test not found" });
       }
