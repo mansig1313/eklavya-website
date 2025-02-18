@@ -45,10 +45,14 @@ import JitsiMeeting from "./components/UpcomingSessions/JitsiMeeting.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
+
         <Route path="/" element={<App />} />
+       <Route path="/" element={<Layout />} /> 
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/service" element={<Services />} />

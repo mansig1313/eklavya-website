@@ -20,36 +20,37 @@ import PaymentHistory from './Paymenthistory.jsx';
 
 // Main App Component
 function DashboardApp() {
-    const [progressData, setProgressData] = useState([20, 40, 60, 80]); // Initial values
+  const [progressData, setProgressData] = useState([20, 40, 60, 80]); // Initial values
   const [user, setUser] = useState(null);
   const navigate = useNavigate(); // Define the navigate function
   useEffect(() => {
-
-    const loggedInUser = JSON.parse(localStorage.getItem('user'));
-    if (loggedInUser){
+    const loggedInUser = JSON.parse(localStorage.getItem("user"));
+    if (loggedInUser) {
       setUser(loggedInUser);
     }
-  
+
     const interval = setInterval(() => {
       setProgressData((prevData) =>
-        prevData.map((value) => Math.min(value + Math.floor(Math.random() * 10), 100))
+        prevData.map((value) =>
+          Math.min(value + Math.floor(Math.random() * 10), 100)
+        )
       );
     }, 1000); // Update every second for demonstration
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
-  
+
   const handleMyTutorsClick = () => {
-    navigate('/mytutors');
+    navigate("/mytutors");
   };
 
   const handleWeeklyTestsClick = () => {
-    navigate('/WeeklyTests');
+    navigate("/WeeklyTests");
   };
 
-   const handleCourseCompletionClick = () => {
-    navigate('/StuCourseCompletion');
-  }
+  const handleCourseCompletionClick = () => {
+    navigate("/StuCourseCompletion");
+  };
 
    const handleUpcomingSessionsClick = () => {
     navigate('/UpcomingSessions');
@@ -59,10 +60,10 @@ function DashboardApp() {
   return (
     <div className="app">
       <div className="sidebar">
-      <div className="logo-container">
-        <img src={logo} alt="Logo" className="logo" />
-      </div>
-      
+        <div className="logo-container">
+          <img src={logo} alt="Logo" className="logo" />
+        </div>
+
         <ul>
         <div className="sidebar-item">
         <DashboardIcon className="dashboard-icon" />
@@ -80,8 +81,8 @@ function DashboardApp() {
         <div className="sidebar-item">
         <ReportIcon className="Reports" />
         <span>Reports</span>
-        </div>
-        <div className="sidebar-item">
+        </div> */}
+          {/* <div className="sidebar-item">
         <PaymentIcon className="FinancialOverview" />
         <span>Financial Overview</span>
         </div>
@@ -95,22 +96,21 @@ function DashboardApp() {
        </div>  
         </ul>
       </div>
-      
+
       <div className="main-container">
         <div className="header">
-          <div className='welcome-tag'>
-          <div className="welcome">WELCOME</div>
-          <div className='user-name'>{user ? user.name : 'Guest'}</div>
+          <div className="welcome-tag">
+            <div className="welcome">WELCOME</div>
+            <div className="user-name">{user ? user.name : "Guest"}</div>
           </div>
           <div className="header-search">
-          <input type="text" placeholder="Search..." />
+            <input type="text" placeholder="Search..." />
           </div>
-          <div className="header-icons"> 
-          <NotificationsIcon className="NotificationIcon" />
-          <EmailIcon className="EmailIcon" />
-          <PersonIcon className="PersonIcon"/>
-        </div>
-        
+          <div className="header-icons">
+            <NotificationsIcon className="NotificationIcon" />
+            <EmailIcon className="EmailIcon" />
+            <PersonIcon className="PersonIcon" />
+          </div>
         </div>
         <div div className="main-content">
         
@@ -156,7 +156,7 @@ function DashboardApp() {
 
        
       </div>
-    
+    </div>
   );
 }
 
