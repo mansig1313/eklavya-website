@@ -1,5 +1,5 @@
 import React from "react";
-import "./tutor.css";
+import "./Tutor.css";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
@@ -12,7 +12,7 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
 import logo from "../components/landingpg/register/logo_white_nobg.png";
 import { useNavigate } from "react-router-dom";
-import Calendar from "./calendar";
+import Calendar from "./Calendar";
 
 // Main App Component
 function DashboardApp() {
@@ -88,7 +88,10 @@ function DashboardApp() {
             >
               <h3>Upload Resource</h3>
             </div>
-            <div className="box weekly-tests">
+            <div
+              className="box weekly-tests"
+              onClick={() => navigate("/create-test")}
+            >
               <h3>Create Tests</h3>
             </div>
             <div className="box my-tutors">

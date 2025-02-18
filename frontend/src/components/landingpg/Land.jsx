@@ -11,6 +11,10 @@ const Land = () => {
     navigate("/course-page"); // Redirect to course page
   };
 
+  const handleBecomeTutorClick = () => {
+    navigate("/register");
+  };
+
   return (
     <div id = 'home-section'>
     <div className='landPg'>
@@ -41,7 +45,7 @@ const Land = () => {
               <button onClick={handleFindTutorClick}> Find A Tutor</button>
             </div>
             <div className="btn2">
-              <button> Become A Tutor </button>
+              <button onClick={handleBecomeTutorClick}> Become A Tutor </button>
             </div>
           </div>
         </div>

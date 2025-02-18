@@ -1,0 +1,118 @@
+/* TutorFeedback.css */
+
+/* Container */
+.tutorfeedback-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+.tutorfeedback-header {
+  background-color: #5a189a;
+  color: white;
+  text-align: center; /* Align text to the right */
+  padding: 15px 0px;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Content Layout */
+.tutorfeedback-content {
+  display: flex;
+  margin-top: 70px; /* To prevent overlap with the fixed header */
+}
+
+/* Sidebar */
+.tutorfeedback-sidebar {
+  width: 15%;
+  background-color: #5a189a;
+  color: white;
+  padding: 20px;
+  height: 120vh;
+  position: fixed;
+  top: 50px;
+  left: 0;
+}
+
+.tutorfeedback-sidebar h2 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: white;
+}
+
+.tutorfeedback-subject-btn {
+  display: block;
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.tutorfeedback-subject-btn:hover,
+.tutorfeedback-subject-btn.active {
+  background-color: #7b2cbf;
+}
+
+/* Feedback Card */
+.tutorfeedback-card {
+  margin-left: 22%; /* To avoid overlapping with the sidebar */
+ margin-top: 30px;
+  padding: 20px;
+  background-color: #f4f4f4;
+  width: 75%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Student Info */
+.tutorfeedback-student-name {
+  font-size: 22px;
+  font-weight: bold;
+  color: #5a189a;
+}
+
+.tutorfeedback-grade,
+.tutorfeedback-tutor {
+  font-size: 18px;
+  margin-top: 5px;
+  color: #333;
+}
+
+/* Stars */
+.tutorfeedback-stars {
+  font-size: 20px;
+  margin: 10px 0;
+  color: gold;
+}
+
+/* Sections */
+.tutorfeedback-section {
+  background-color: #e0aaff;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.tutorfeedback-section h3 {
+  font-size: 18px;
+  color: #5a189a;
+  margin-bottom: 5px;
+}
+
+.tutorfeedback-section p {
+  font-size: 16px;
+  color: #333;
+}

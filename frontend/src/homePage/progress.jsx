@@ -1,6 +1,7 @@
-import React from "react";
+import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
-import "./progress.css";
+import "./Progress.css";
+
 
 const progressData = [
   { day: "Mon", week1: 80, week2: 70, week3: 75, week4: 85 },

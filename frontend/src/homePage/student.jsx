@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './student.css';
+import './Student.css';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import EmailIcon from '@mui/icons-material/Email';
 import PersonIcon from '@mui/icons-material/Person';
@@ -12,7 +12,7 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import GradingIcon from '@mui/icons-material/Grading';
 import logo from '../components/landingpg/register/logo_white_nobg.png';
 import { useNavigate } from 'react-router-dom';
-import Progress from './progress.jsx'
+import Progress from './Progress.jsx';
 
 // Main App Component
 function DashboardApp() {

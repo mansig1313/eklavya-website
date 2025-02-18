@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const multer = require('multer');
 const path = require('path');
 const fileUpload = require('express-fileupload');
+const testRoutes = require("./routes/testRoutes");
 
 
 const { authenticate } = require('passport');
@@ -66,6 +67,9 @@ const app = express();
 app.use(bodyParser.json());
 const server = http.createServer(app);
 app.use(cors());
+// Routes
+app.use("/api/tests", testRoutes);
+
 //const server = http.createServer(app); // Create the HTTP server
 
 

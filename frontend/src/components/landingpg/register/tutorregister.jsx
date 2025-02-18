@@ -10,7 +10,7 @@ import {
   Paper,
   Avatar,
 } from "@mui/material";
-import "./tutorregister.css"; // Importing the CSS file
+import "./Tutorregister.css"; // Importing the CSS file
 
 const TutorRegister = () => {
   const navigate = useNavigate();
