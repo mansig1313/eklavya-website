@@ -1,0 +1,138 @@
+/* General Styles */
+.StuOver-body {
+    margin: 0;
+    font-family: "Arial", sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Dashboard Container */
+.StuOver-dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header */
+.StuOver-header {
+    background: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+/* Sidebar */
+.StuOver-sidebar {
+    background-color: white;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    /* Default expanded width */
+    height: calc(100vh - 60px);
+    /* Start below the header */
+    margin-top: 100px;
+    /* Push sidebar below the header */
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.StuOver-sidebar.closed {
+    width: 60px;
+}
+
+/* Sidebar Toggle */
+.StuOver-sidebar-toggle {
+    /* background: #007bff; */
+    padding: 10px;
+    cursor: pointer;
+    /* text-align: center; */
+    color: rgb(6, 3, 18);
+}
+
+.StuOver-menu-icon {
+    font-size: 24px;
+    margin-left: 5px;
+}
+
+/* Sidebar Menu */
+.StuOver-sidebar-menu {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+.StuOver-sidebar-menu li {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.StuOver-sidebar-menu li:hover {
+    background: #f0f0f0;
+}
+
+.StuOver-sidebar-menu .menu-icon {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+/* Main Content */
+.StuOver-main-content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 220px;
+    /* Same width as sidebar */
+    margin-top: 80px;
+    /* Below header */
+    transition: margin-left 0.3s ease;
+}
+
+.StuOver-sidebar.closed+.main-content {
+    margin-left: 80px;
+}
+
+/* Content Containers */
+.StuOver-content-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Cards */
+.StuOver-card {
+    background: white;
+    padding: 200px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.StuOver-card h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.StuOver-card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.StuOver-card ul li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}

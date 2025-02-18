@@ -37,14 +37,23 @@ import StuCourseCompletion from "./components/StuCourseCompletion/StuCourseCompl
 import './components/StuCourseCompletion/StuCourseCompletion.css';
 import UpcomingSessions from './components/UpcomingSessions/UpcomingSessions.jsx';
 import './components/UpcomingSessions/UpcomingSessions.css';
+import StudentOverview from './components/StudentOverview/StudentOverview.jsx';
+import './components/StudentOverview/StudentOverview.css';
+import FeedbackTutor from './FeedbackPage/FeedbackTutor.jsx';
+import './FeedbackPage/FeedbackTutor.css';
+import Layout from './Layout.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
+
         <Route path="/" element={<App />} />
+       <Route path="/" element={<Layout />} /> 
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/service" element={<Services />} />
@@ -67,9 +76,14 @@ root.render(
         <Route path = "/tutor-register" element={<TutorRegister/>}/>
         <Route path="/progress" element={<Progress />} />  
         <Route path="/StuCourseCompletion" element={<StuCourseCompletion/>} />  
-        <Route path="/UpcomingSessions" element={<UpcomingSessions/>} />  
+        <Route path="/UpcomingSessions" element={<UpcomingSessions />} />  
+        <Route path="/StudentOverview" element={<StudentOverview />} />  
+        <Route path="/Layout" element={<Layout />} /> 
+        <Route path="/FeedbackTutor" element={<FeedbackTutor/>} />  
 
 
+
+        
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
