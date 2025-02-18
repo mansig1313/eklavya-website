@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Studentprofile.css";
+import "./StudentProfile.css";
 import axios from "axios";
 
 const Profile = () => {

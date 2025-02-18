@@ -18,7 +18,7 @@ const TestEditor = () => {
       return;
     }
 
-    fetch(`http://localhost:5000/api/tests/${testId}`)
+    fetch(`http://localhost:5000/api/tests/${Number(testId)}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Test not found");

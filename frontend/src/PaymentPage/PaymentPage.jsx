@@ -1,46 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../PaymentPage/PaymentPage.css";
 import { FaGooglePay, FaCreditCard, FaWallet } from "react-icons/fa";
 
 const PaymentPage = () => {
-  const [step, setStep] = useState(1);
+  const [tutors, setTutors] = useState([]); // List of added tutors
+  const [selectedTutor, setSelectedTutor] = useState(null); // Selected tutor for payment
   const [paymentMethod, setPaymentMethod] = useState("");
   const [paymentStatus, setPaymentStatus] = useState(null);
   const [details, setDetails] = useState({
-    studentName: "",
-    studentId: "",
     upiId: "",
     cardNumber: "",
     expiry: "",
     cvv: "",
     bank: "",
+    amount: "",
   });
 
+  // Fetch tutors added by the student
+  useEffect(() => {
+    const fetchTutors = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/students/tutors"); 
+        setTutors(response.data);
+      } catch (error) {
+        console.error("Error fetching tutors:", error);
+      }
+    };
+
+    fetchTutors();
+  }, []);
+
+  // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setDetails({ ...details, [name]: value });
   };
 
-  const handleNext = () => {
-    if (step < 3) setStep(step + 1);
-  };
-
-  const handleBack = () => {
-    if (step > 1) setStep(step - 1);
-  };
-
-  const handlePaymentMethod = (method) => {
-    setPaymentMethod(method);
-    setStep(3);
-  };
-
+  // Initiate payment
   const initiatePayment = async () => {
     try {
       const response = await axios.post("http://localhost:3000/api/payments/initiate", {
         amount: parseInt(details.amount) * 100, // Convert to smallest currency unit
         currency: "INR",
-        sessionId: details.sessionId,
+        tutorId: selectedTutor.id, // Pass selected tutor
       });
 
       const { orderId, amount: orderAmount, currency } = response.data;
@@ -50,18 +53,18 @@ const PaymentPage = () => {
         amount: orderAmount,
         currency,
         name: "Eklavya Tutoring",
-        description: "Session Booking Payment",
+        description: `Payment for ${selectedTutor.name}`,
         order_id: orderId,
         handler: async function (response) {
           await validatePayment(response);
         },
         prefill: {
-          name: details.studentName,
+          name: selectedTutor.name,
           email: "your.email@example.com",
           contact: "1234567890",
         },
         theme: {
-          color: "#3399cc",
+          color: "#530a8f",
         },
       };
 
@@ -85,7 +88,6 @@ const PaymentPage = () => {
 
       if (response.data.success) {
         setPaymentStatus("Payment Successful!");
-        await linkPaymentToSession(razorpay_payment_id);
       } else {
         setPaymentStatus("Payment validation failed.");
       }
@@ -95,90 +97,66 @@ const PaymentPage = () => {
     }
   };
 
-  const linkPaymentToSession = async (paymentId) => {
-    try {
-      const response = await axios.post("http://localhost:3000/api/payments/link-session", {
-        sessionId: details.sessionId,
-        paymentId,
-      });
-
-      if (response.data.success) {
-        setPaymentStatus("Payment linked to session successfully!");
-      } else {
-        setPaymentStatus("Failed to link payment to session.");
-      }
-    } catch (error) {
-      console.error("Error linking payment to session:", error);
-      setPaymentStatus("Error linking payment. Please contact support.");
-    }
-  };
-
-  const handlePayment = () => {
-    initiatePayment();
-  };
-
   return (
     <div className="payment-page-body">
-      {/* Header Section */}
       <header className="payment-header">
         <h1>Secure Your Learning Journey</h1>
         <p>Invest in Knowledge, Pay Seamlessly</p>
       </header>
 
-      {/* Student Details Section */}
-      {step === 1 && (
-        <div className="student-details">
-          <h2>Step 1: Enter Your Details</h2>
-          <input
-            type="text"
-            name="studentName"
-            placeholder="Student Name"
-            value={details.studentName}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="studentId"
-            placeholder="Student ID"
-            value={details.studentId}
-            onChange={handleInputChange}
-          />
-          <button onClick={handleNext}>Next</button>
+      {/* Step 1: Select Tutor */}
+      {!selectedTutor && (
+        <div className="tutor-selection">
+          <h2>Select a Tutor to Make Payment</h2>
+          <ul>
+            {tutors.map((tutor) => (
+              <li key={tutor.id} onClick={() => setSelectedTutor(tutor)}>
+                {tutor.name}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 
-      {/* Payment Method Selection */}
-      {step === 2 && (
-        <div className="payment-method">
-          <h2>Step 2: Select Payment Method</h2>
-          <div className="methods">
-            <button onClick={() => handlePaymentMethod("UPI")}>
-              <FaGooglePay /> UPI
-            </button>
-            <button onClick={() => handlePaymentMethod("Card")}>
-              <FaCreditCard /> Credit/Debit Card
-            </button>
-            <button onClick={() => handlePaymentMethod("Wallet")}>
-              <FaWallet /> Wallet
-            </button>
+      {/* Step 2: Payment Section */}
+      {selectedTutor && (
+        <div className="payment-section">
+          <h2>Payment for {selectedTutor.name}</h2>
+
+          <input
+            type="number"
+            name="amount"
+            placeholder="Enter Amount"
+            value={details.amount}
+            onChange={handleInputChange}
+          />
+
+          <div className="payment-method">
+            <h3>Select Payment Method</h3>
+            <div className="methods">
+              <button onClick={() => setPaymentMethod("UPI")}>
+                <FaGooglePay /> UPI
+              </button>
+              <button onClick={() => setPaymentMethod("Card")}>
+                <FaCreditCard /> Credit/Debit Card
+              </button>
+              <button onClick={() => setPaymentMethod("Wallet")}>
+                <FaWallet /> Wallet
+              </button>
+            </div>
           </div>
-          <button onClick={handleBack}>Back</button>
-        </div>
-      )}
 
-      {/* Payment Details Section */}
-      {step === 3 && (
-        <div className="payment-details">
-          <h2>Step 3: Enter Payment Details</h2>
+          {/* Payment Details Input */}
           {paymentMethod === "UPI" && (
             <input
               type="text"
               name="upiId"
-              placeholder="UPI ID"
+              placeholder="Enter UPI ID"
               value={details.upiId}
               onChange={handleInputChange}
             />
           )}
+
           {paymentMethod === "Card" && (
             <>
               <input
@@ -204,6 +182,7 @@ const PaymentPage = () => {
               />
             </>
           )}
+
           {paymentMethod === "Wallet" && (
             <input
               type="text"
@@ -213,19 +192,10 @@ const PaymentPage = () => {
               onChange={handleInputChange}
             />
           )}
-          <button onClick={handlePayment}>Pay Now</button>
-          <button onClick={handleBack}>Back</button>
-        </div>
-      )}
 
-      {/* Payment Success Section */}
-      {step === 4 && (
-        <div className="payment-success">
-          <h2>Thank You for Your Payment!</h2>
-          <div className="flying-wallet">
-            <FaWallet />
-          </div>
-          <button onClick={() => setStep(1)}>Back to Dashboard</button>
+          <button onClick={initiatePayment} disabled={!paymentMethod}>
+            Pay Now
+          </button>
         </div>
       )}
 

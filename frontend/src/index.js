@@ -29,7 +29,7 @@ import MyTutors from '../src/components/Stu_MyTutors/Stu_MyTutors.jsx';
 import '../src/components/Stu_MyTutors/Stu_MyTutors.css';
 import WeeklyTests from '../src/WeeklyTests/WeeklyTest.jsx';
 import '../src/WeeklyTests/WeeklyTest.css';
-import StudentProfilePage from './homePage/Studentprofile.jsx';
+import StudentProfilePage from './homePage/StudentProfile.jsx';
 import StudentResourcePage from './MyResourcePage/MyResource.jsx'
 import TutorRegister from "./components/landingpg/register/Tutorregister.jsx";
 import Progress from './homePage/Progress.jsx';
