@@ -13,81 +13,39 @@ import GradingIcon from '@mui/icons-material/Grading';
 import logo from '../components/landingpg/register/logo_white_nobg.png';
 import { useNavigate } from 'react-router-dom';
 import Progress from './Progress.jsx';
+import axios from "axios";
 
-// Main App Component
 function DashboardApp() {
- 
   const [user, setUser] = useState(null);
-  const navigate = useNavigate(); // Define the navigate function
-   useEffect(() => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch user from localStorage
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
     if (loggedInUser) {
       setUser(loggedInUser);
     }
-  
+
+    // Enrollment functionality
     
-  
-    // Add event listener for profile updates
+
+    // Handle user profile updates
     const handleProfileUpdate = () => {
       const updatedUser = JSON.parse(localStorage.getItem('user'));
       if (updatedUser) {
         setUser(updatedUser);
       }
     };
-  
+
     window.addEventListener('userProfileUpdate', handleProfileUpdate);
-    window.addEventListener('storage', handleStorageChange);
-  
-  
-  }, []);
-
-  // Handle localStorage changes
-  const handleStorageChange = () => {
-    const updatedUser = JSON.parse(localStorage.getItem('user'));
-    if (updatedUser) {
-        setUser(updatedUser); // Update user state with new data
-    }
-};
-
+    
+    return () => {
+      window.removeEventListener('userProfileUpdate', handleProfileUpdate);
+    };
+  }, []); // Runs only once when component mounts
 
   // Navigation functions
-  const handleMyCourseClick = () => {
-    navigate('/mycourse'); // Navigate to the 'My Course' page
-  };
-
-  const handleMessageClick = () => {
-    navigate('/messages'); // Navigate to the messages page
-  };
-
-  const handlePaymentClick = () => {
-    navigate('/payments'); // Navigate to the payment page
-  };
-
-  const handleFeedbackClick = () => {
-    navigate('/feedback'); // Navigate to the feedback page
-  };
-
-  const handleMyTutorsClick = () => {
-    navigate('/mytutors');
-  };
-
-  const handleWeeklyTestsClick = () => {
-    navigate('/WeeklyTests');
-  };
-
-  const handleMyResourceClick = () => {
-    navigate('/sturesource');
-  }
-
-   const handleCourseCompletionClick = () => {
-    navigate('/StuCourseCompletion');
-  }
-
-   const handleUpcomingSessionsClick = () => {
-    navigate('/UpcomingSessions');
-  }
-
-
+  const handleNavigation = (path) => navigate(path);
 
   return (
     <div className="app">
@@ -96,31 +54,31 @@ function DashboardApp() {
           <img src={logo} alt="Logo" className="logo" />
         </div>
         <ul>
-          <div className="sidebar-item">
+          <div className="sidebar-item" onClick={() => handleNavigation("/")}>
             <DashboardIcon className="dashboard-icon" />
             <span>Dashboard</span>
           </div>
-          <div className="sidebar-item" onClick={handleMyCourseClick}>
+          <div className="sidebar-item" onClick={() => handleNavigation("/mycourse")}>
             <Mycourse className="mycourse" />
             <span>My Course</span>
           </div>
-          <div className="sidebar-item" onClick={handleMessageClick}>
+          <div className="sidebar-item" onClick={() => handleNavigation("/messages")}>
             <MessageIcon className="messages" />
             <span>Messages</span>
           </div>
-          <div className="sidebar-item" onClick={handleMyResourceClick}>
+          <div className="sidebar-item" onClick={() => handleNavigation("/sturesource")}>
             <FolderIcon className="Resourse" />
-            <span>Resourse</span>
+            <span>Resource</span>
           </div>
-          <div className="sidebar-item" onClick={handleFeedbackClick}>
+          <div className="sidebar-item" onClick={() => handleNavigation("/feedback")}>
             <GradingIcon className="Resourse" />
             <span>Feedback</span>
           </div>
-          <div className="sidebar-item" onClick={handlePaymentClick}>
+          <div className="sidebar-item" onClick={() => handleNavigation("/payments")}>
             <PaymentIcon className="Reports" />
             <span>Payment</span>
           </div>
-          <div className="sidebar-item">
+          <div className="sidebar-item" onClick={() => handleNavigation("/settings")}>
             <SettingsIcon className="Settings" />
             <span>Settings</span>
           </div>
@@ -139,32 +97,32 @@ function DashboardApp() {
           <div className="header-icons">
             <NotificationsIcon className="NotificationIcon" />
             <EmailIcon className="EmailIcon" />
-            <PersonIcon className="PersonIcon"
-             onClick={() => navigate('/profile')} // Navigate to the profile page
-             style={{ cursor: 'pointer' }}  />
+            <PersonIcon 
+              className="PersonIcon"
+              onClick={() => handleNavigation('/profile')}
+              style={{ cursor: 'pointer' }}
+            />
           </div>
         </div>
         <div className="main-content">
           <div className="content-grid">
-            <div className="box course-completion" onClick={handleCourseCompletionClick}>
+            <div className="box course-completion" onClick={() => handleNavigation("/StuCourseCompletion")}>
               <h3>Course Completion</h3>
             </div>
-            <div className="box weekly-tests" onClick={handleWeeklyTestsClick}>
+            <div className="box weekly-tests" onClick={() => handleNavigation("/WeeklyTests")}>
               <h3>Weekly Tests</h3>
             </div>
-           <div className="box my-tutors" onClick={handleMyTutorsClick}>
+            <div className="box my-tutors" onClick={() => handleNavigation("/mytutors")}>
               <h3>My Tutors</h3>
             </div>
-            <div className="box upcoming-sessions" onClick={handleUpcomingSessionsClick}> 
+            <div className="box upcoming-sessions" onClick={() => handleNavigation("/UpcomingSessions")}>
               <h3>Upcoming Sessions</h3>
             </div>
           </div>
-             
-          
+
           <div className="progress-report">
             <h3>Progress Report</h3>
-            <Progress/>
-           
+            <Progress />
           </div>
         </div>
       </div>

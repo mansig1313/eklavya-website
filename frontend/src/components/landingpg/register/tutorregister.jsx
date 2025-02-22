@@ -50,25 +50,50 @@ const TutorRegister = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
+
     try {
-      const token = localStorage.getItem("token");
       const formDataToSend = new FormData();
-      Object.keys(formData).forEach((key) => {
-        if (formData[key] !== null) {
-          formDataToSend.append(key, formData[key]);
+
+      // Append form fields
+      formDataToSend.append("fullName", formData.fullName);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("phone", formData.phoneNumber); // Backend expects "phone"
+      formDataToSend.append("education", JSON.stringify({
+        degree: formData.degree,
+        institution: formData.institution,
+        year: formData.graduationYear, // Backend expects "year"
+      }));
+      formDataToSend.append("subjects", JSON.stringify(formData.subjects.split(",")));
+      formDataToSend.append("availableSchedule", JSON.stringify(formData.schedule.split(",")));
+      formDataToSend.append("experience", formData.experience);
+      formDataToSend.append("teachingMode", formData.teachingMode.charAt(0).toUpperCase() + formData.teachingMode.slice(1).toLowerCase());
+      formDataToSend.append("bio", formData.bio);
+
+      // Append files
+      if (formData.profilePic) formDataToSend.append("profilePicture", formData.profilePic); // Backend expects "profilePicture"
+      if (formData.degreeCertificate) formDataToSend.append("degreeCertificate", formData.degreeCertificate);
+
+      // Log payload for debugging
+      console.log("Sending FormData:", Object.fromEntries(formDataToSend.entries()));
+
+      // Send request to backend
+      const response = await axios.post(
+        "http://localhost:5000/api/tregister",
+        formDataToSend,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
         }
-      });
+      );
 
-      await axios.post("http://localhost:5000/api/tregister", formDataToSend, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      navigate("/tutor-home");
+      console.log("Registration successful:", response.data);
+      navigate("/login");
     } catch (error) {
-      setError(error.response?.data?.message || "Error submitting form");
+      console.error("Error:", error);
+      setError(error.response?.data?.error || "Error submitting form");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,7 +117,6 @@ const TutorRegister = () => {
           Complete Your Registration !!!
         </Typography>
       </Grid>
-
       <Grid item xs={12} container className="tutor-register-content">
         {/* Left Side: Registration Form */}
         <Grid item xs={12} md={6}>
@@ -105,11 +129,9 @@ const TutorRegister = () => {
                 <Grid item xs={12} sm={6}>
                   <TextField fullWidth label="Email" name="email" value={formData.email} disabled />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField fullWidth label="Phone Number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required />
                 </Grid>
-
                 <Grid item xs={12} sm={4}>
                   <TextField fullWidth label="Degree" name="degree" value={formData.degree} onChange={handleChange} required />
                 </Grid>
@@ -119,27 +141,21 @@ const TutorRegister = () => {
                 <Grid item xs={12} sm={4}>
                   <TextField fullWidth label="Graduation Year" name="graduationYear" type="number" value={formData.graduationYear} onChange={handleChange} required />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField fullWidth label="Subjects" name="subjects" value={formData.subjects} onChange={handleChange} placeholder="Enter subjects (comma separated)" />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField fullWidth label="Available Days" name="schedule" value={formData.schedule} onChange={handleChange} placeholder="Enter days (comma separated)" />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField fullWidth label="Years of Experience" name="experience" type="number" value={formData.experience} onChange={handleChange} required />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField fullWidth label="Teaching Mode" name="teachingMode" value={formData.teachingMode} onChange={handleChange} placeholder="Enter Teaching Mode (Online/Offline/Both)" />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField fullWidth multiline rows={3} label="Bio / Introduction" name="bio" value={formData.bio} onChange={handleChange} />
                 </Grid>
-
                 <Grid item xs={12}>
                   <Avatar className="profile-avatar" src={formData.profilePic ? URL.createObjectURL(formData.profilePic) : ""} />
                   <Button variant="contained" component="label">
@@ -147,7 +163,6 @@ const TutorRegister = () => {
                     <input type="file" hidden accept="image/*" name="profilePic" onChange={handleFileChange} />
                   </Button>
                 </Grid>
-
                 <Grid item xs={12}>
                   <Button variant="contained" component="label">
                     Upload Graduation Degree Certificate
@@ -159,7 +174,6 @@ const TutorRegister = () => {
                     </Typography>
                   )}
                 </Grid>
-
                 <Grid item xs={12}>
                   <Button type="submit" variant="contained" fullWidth className="tutor-register-button">
                     Register as Tutor
@@ -169,7 +183,6 @@ const TutorRegister = () => {
             </form>
           </Paper>
         </Grid>
-
         {/* Right Side: Image */}
         <Grid item xs={12} md={6} className="tutor-register-image-container">
           <img src={tutorregister} alt="Tutoring" className="tutor-register-image" />

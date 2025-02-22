@@ -11,7 +11,8 @@ const multer = require('multer');
 const path = require('path');
 const fileUpload = require('express-fileupload');
 const testRoutes = require("./routes/testRoutes");
-
+const tutorRoutes = require("./routes/tutorRoutes");
+const resourceRoutes = require("./routes/resourceRoutes");
 
 const { authenticate } = require('passport');
 
@@ -186,8 +187,8 @@ app.post('/api/auth/login', async (req, res) => {
             token,
             user: {
                 name: user.name,
-                email: user.email,
                 role: user.role,
+                email:user.email
             }
               // Send the token in the response
         });
@@ -287,6 +288,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+app.use('/api/resources', resourceRoutes);
+
 app.post('/upload-profile-picture', authenticateToken, upload.single('profilePicture'), async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ message: 'No file uploaded' });
@@ -379,11 +382,140 @@ app.put("/update-profile", authenticateToken, async (req, res) => {
     res.json({ message: "Event deleted" });
   });
  
+
+// MongoDB Schema for Courses
+const CourseSchema = new mongoose.Schema({
+    tutorEmail: { type: String, required: true }, // Store tutor email
+    standard: { type: String, required: true },
+    subject: { type: String, required: true },
+    demoVideo: { type: String, required: true }, // Correct key for video path
+    overview: { type: String, required: true },
+    syllabus: [{ title: String }],
+    lectureDays: [{ type: String, required: true }], // Store days of lectures
+    hoursPerDay: { type: Number, required: true },
+    price: { type: Number, required: true },
+    studentsEnrolled: [{ type: mongoose.Schema.Types.ObjectId, ref: "Student" }],
+    tests: [{ type: mongoose.Schema.Types.ObjectId, ref: "Test" }],
+    resources: [{ type: String }], // Resource file paths
+});
+
+const Course = mongoose.model("Course", CourseSchema);
+
+// 🟢 **Create a Course**
+app.post("/courses", upload.single("demoVideo"), async (req, res) => {
+    try {
+      const { tutorEmail, standard, subject, overview, syllabus, lectureDays, hoursPerDay, price } = req.body;
+      
+      const demoVideo = req.file ? req.file.path : ""; // ✅ Fix: Store correct key
+  
+      const newCourse = new Course({
+        tutorEmail,
+        standard,
+        subject,
+        demoVideo, // ✅ Fix: Store under correct field name
+        overview,
+        syllabus: JSON.parse(syllabus), // ✅ Fix: Parse syllabus correctly
+        lectureDays: JSON.parse(lectureDays), // ✅ Fix: Parse lecture days
+        hoursPerDay,
+        price,
+      });
+  
+      await newCourse.save();
+      res.status(201).json({ message: "Course created successfully", course: newCourse });
+  
+    } catch (err) {
+      console.error("Error creating course:", err);
+      res.status(500).json({ error: err.message });
+    }
+  });
+  
+
+// 🟢 **Fetch Courses by Tutor**
+app.get("/courses", async (req, res) => {
+    try {
+        const { tutorEmail } = req.query; // Get email from query params
+        const filter = tutorEmail ? { tutorEmail } : {}; // Filter by tutor if provided
+
+        const courses = await Course.find(filter);
+        res.json(courses);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// 🟢 **Fetch a Specific Course for Dashboard**
+app.get("/courses/:id", async (req, res) => {
+    try {
+        const course = await Course.findById(req.params.id).populate("studentsEnrolled tests");
+        if (!course) return res.status(404).json({ error: "Course not found" });
+        res.json(course);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// 🟢 **Add a Resource to a Course**
+app.post("/courses/:id/resources", async (req, res) => {
+    try {
+        const { resource } = req.body;
+        const course = await Course.findById(req.params.id);
+        if (!course) return res.status(404).json({ error: "Course not found" });
+
+        course.resources.push(resource);
+        await course.save();
+
+        res.json({ message: "Resource added successfully", course });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+app.post("/enroll", async (req, res) => {
+    console.log("🚀 Enrollment Request Received!", req.body);
+  
+    try {
+      const { studentEmail, courseId } = req.body;
+  
+      if (!studentEmail || !courseId) {
+        return res.status(400).json({ error: "Missing studentEmail or courseId" });
+      }
+  
+      // Find the student by email
+      const student = await User.findOne({ email: studentEmail });
+      if (!student) {
+        return res.status(404).json({ error: "Student not found" });
+      }
+  
+      // Find the course
+      const course = await Course.findById(courseId);
+      if (!course) {
+        return res.status(404).json({ error: "Course not found" });
+      }
+  
+      // Check if student is already enrolled
+      if (course.studentsEnrolled.includes(student._id)) {
+        return res.status(400).json({ error: "Already enrolled" });
+      }
+  
+      // Add student ID to enrolled list
+      course.studentsEnrolled.push(student._id);
+      await course.save();
+  
+      return res.status(200).json({ message: "Enrollment successful", course });
+    } catch (err) {
+      console.error("❌ Server Error:", err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+  });
+  
+  
+  
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is Running on port ${PORT}`);
 });
 
+app.use(tutorRoutes);
 
 app.post('/api/change-password', authenticateToken ,
     async(req,res) => {

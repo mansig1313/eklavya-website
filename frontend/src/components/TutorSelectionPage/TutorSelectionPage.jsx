@@ -1,240 +1,127 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { FaBook, FaChalkboardTeacher, FaGraduationCap, FaStar } from "react-icons/fa";
 import "./TutorSelectionPage.css";
 
-const tutorsData = {
-  Science: [
-    {
-      name: "Dr. John Smith",
-      subject: "Physics",
-      qualification: "PhD in Physics",
-      specialization: "Quantum Mechanics",
-      experience: "10 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Ms. Jane Doe",
-      subject: "Chemistry",
-      qualification: "MSc in Chemistry",
-      specialization: "Organic Chemistry",
-      experience: "8 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Mr. Alex Johnson",
-      subject: "Mathematics",
-      qualification: "MSc in Mathematics",
-      specialization: "Calculus",
-      experience: "12 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Dr. Emily Davis",
-      subject: "Biology",
-      qualification: "PhD in Biology",
-      specialization: "Microbiology",
-      experience: "7 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Ms. Sarah White",
-      subject: "English",
-      qualification: "MA in English Literature",
-      specialization: "Creative Writing",
-      experience: "5 years",
-      image: "https://via.placeholder.com/120",
-    },
-  ],
-  Commerce: [
-    {
-      name: "Mr. Richard Lee",
-      subject: "Accountancy",
-      qualification: "MBA in Finance",
-      specialization: "Accounting Principles",
-      experience: "15 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Ms. Rachel Green",
-      subject: "Business Studies",
-      qualification: "MBA in Marketing",
-      specialization: "Marketing Strategies",
-      experience: "10 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Mr. Samuel Roberts",
-      subject: "Economics",
-      qualification: "MSc in Economics",
-      specialization: "Macroeconomics",
-      experience: "12 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Ms. Emma Johnson",
-      subject: "English",
-      qualification: "MA in English Literature",
-      specialization: "Creative Writing",
-      experience: "7 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Mr. James Hall",
-      subject: "Informatics Practices",
-      qualification: "BSc in Information Technology",
-      specialization: "Data Structures and Algorithms",
-      experience: "8 years",
-      image: "https://via.placeholder.com/120",
-    },
-  ],
-  Arts: [
-    {
-      name: "Dr. Anna Wilson",
-      subject: "History",
-      qualification: "PhD in History",
-      specialization: "Ancient Civilizations",
-      experience: "20 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Mr. Peter Clarke",
-      subject: "Sociology",
-      qualification: "MA in Sociology",
-      specialization: "Social Stratification",
-      experience: "15 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Ms. Clara Brown",
-      subject: "Economics",
-      qualification: "MSc in Economics",
-      specialization: "Microeconomics",
-      experience: "10 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Dr. Linda Green",
-      subject: "Geography",
-      qualification: "PhD in Geography",
-      specialization: "Urban Geography",
-      experience: "18 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Mr. James Walker",
-      subject: "Psychology",
-      qualification: "MA in Psychology",
-      specialization: "Clinical Psychology",
-      experience: "12 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Ms. Maria Evans",
-      subject: "Hindi",
-      qualification: "MA in Hindi Literature",
-      specialization: "Poetry and Prose",
-      experience: "8 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Mr. Richard Moore",
-      subject: "English",
-      qualification: "MA in English Literature",
-      specialization: "Literary Criticism",
-      experience: "6 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Dr. Eleanor White",
-      subject: "Philosophy",
-      qualification: "PhD in Philosophy",
-      specialization: "Ethics",
-      experience: "14 years",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      name: "Mr. David Harris",
-      subject: "Political Science",
-      qualification: "MA in Political Science",
-      specialization: "International Relations",
-      experience: "10 years",
-      image: "https://via.placeholder.com/120",
-    },
-  ],
+const TutorSelectionPage = () => {
+  const [tutors, setTutors] = useState([]);
+  const [selectedTutor, setSelectedTutor] = useState(null);
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Fetch all tutors
+  useEffect(() => {
+    const fetchTutors = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get("http://localhost:5000/api/tutors");
+        setTutors(response.data);
+      } catch (err) {
+        setError(err.response?.data?.error || "Failed to fetch tutors");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTutors();
+  }, []);
+
+  // Fetch courses for selected tutor
+  const handleTutorClick = async (tutor) => {
+    setSelectedTutor(tutor);
+    setModalOpen(true);
+
+    try {
+        const response = await axios.get(`http://localhost:5000/courses?tutorEmail=${tutor.email}`);
+        console.log("📚 Courses fetched:", response.data); // Debug courses
+        setCourses(response.data);
+    } catch (err) {
+        console.error("Error fetching courses:", err);
+        setCourses([]);
+    }
 };
 
-const TutorSelectionPage = () => {
-  const { stream } = useParams();
-  const normalizedStream = stream.charAt(0).toUpperCase() + stream.slice(1).toLowerCase();
-  const [selectedSubject, setSelectedSubject] = useState("");
-  const tutors = tutorsData[normalizedStream] || [];
 
-  const handleFilterChange = (e) => {
-    const subject = e.target.value;
-    setSelectedSubject(subject);
-  };
+  const handleEnroll = async (courseId) => {
+    console.log("🚀 Attempting to enroll in course:", courseId); // Debug log
+    if (!courseId) {
+        console.error("❌ courseId is undefined!");
+        return;
+    }
 
-  const filteredTutors = selectedSubject
-    ? tutors.filter((tutor) => tutor.subject === selectedSubject)
-    : tutors;
+    localStorage.setItem("courseToEnroll", courseId); // Store in localStorage
+    window.location.href = "/login"; // Redirect
+};
 
-  if (tutors.length === 0) {
-    return <div>No tutors available for this stream.</div>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (tutors.length === 0) return <div>No tutors available.</div>;
 
   return (
     <div className="tutor-selection-body">
-      {/* Dynamic Heading */}
-      <h1>{normalizedStream.toUpperCase()} TUTORS</h1>
-      <p className="tutor-subtitle">
-        Find the best tutors for {normalizedStream} subjects to excel in your studies!
-      </p>
-
-      <div className="filter-bar">
-        <label htmlFor="subject-filter">SELECT A SUBJECT :</label>
-        <select id="subject-filter" onChange={handleFilterChange}>
-          <option value="">All Subjects</option>
-          {/* Dynamically generate the subject options based on the stream */}
-          {tutors.map((tutor, index) => (
-            <option key={index} value={tutor.subject}>
-              {tutor.subject}
-            </option>
-          ))}
-        </select>
-      </div>
+      <h1>ALL TUTORS</h1>
+      <p className="tutor-subtitle">Find the best tutors to excel in your studies!</p>
 
       <div className="tutors-list">
-        {filteredTutors.map((tutor, index) => (
-          <div key={index} className="tutor-card">
+        {tutors.map((tutor, index) => (
+          <div key={index} className="tutor-card" onClick={() => handleTutorClick(tutor)}>
             <div className="tutor-image">
-              <img src={tutor.image} alt={`${tutor.name}'s profile`} />
+              <img src={tutor.profilePicture || "https://via.placeholder.com/120"} alt={tutor.fullName} />
             </div>
             <div className="tutor-info">
               <h3>
                 <FaChalkboardTeacher style={{ color: "#1976d2", marginRight: "10px" }} />
-                {tutor.name}
+                {tutor.fullName}
               </h3>
               <p>
                 <FaBook style={{ color: "#ff9800", marginRight: "5px" }} />
-                <strong>Subject:</strong> {tutor.subject}
+                <strong>Subjects:</strong> {tutor.subjects.join(", ")}
               </p>
               <p>
                 <FaGraduationCap style={{ color: "#4caf50", marginRight: "5px" }} />
-                <strong>Qualification:</strong> {tutor.qualification}
+                <strong>Education:</strong>{" "}
+                {tutor.education.map((edu, idx) => (
+                  <span key={idx}>{edu.degree} from {edu.institution} ({edu.year})<br /></span>
+                ))}
               </p>
               <p>
                 <FaStar style={{ color: "#fbc02d", marginRight: "5px" }} />
-                <strong>Specialization:</strong> {tutor.specialization}
+                <strong>Experience:</strong> {tutor.experience} years
               </p>
               <p>
                 <FaChalkboardTeacher style={{ color: "#1976d2", marginRight: "5px" }} />
-                <strong>Experience:</strong> {tutor.experience}
+                <strong>Teaching Mode:</strong> {tutor.teachingMode}
               </p>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Floating Modal */}
+      {modalOpen && selectedTutor && (
+        <div className="modal-overlay" onClick={() => setModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2>Courses by {selectedTutor.fullName}</h2>
+            {courses.length > 0 ? (
+              <div className="courses-list">
+                {courses.map((course) => (
+                  <div key={course._id} className="course-card">
+                    <h3>{course.subject} ({course.standard})</h3>
+                    <p><strong>Overview:</strong> {course.overview}</p>
+                    <p><strong>Lecture Days:</strong> {course.lectureDays.join(", ")}</p>
+                    <p><strong>Hours/Day:</strong> {course.hoursPerDay}</p>
+                    <p><strong>Price:</strong> ${course.price}</p>
+                    <button className="enroll-button" onClick={() => handleEnroll(course._id)}>Enroll</button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>No courses available for this tutor.</p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

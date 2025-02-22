@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./tutorprofile.css";
+import "./TutorProfile.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";

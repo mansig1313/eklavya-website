@@ -15,29 +15,39 @@ const TutorSchema = new mongoose.Schema({
         required: true
     },
     education: [{
-        degree: String,
-        institution: String,
-        year: Number
+        degree: {
+            type: String,
+            required: true
+        },
+        institution: {
+            type: String,
+            required: true
+        },
+        year: {
+            type: Number,
+            required: true
+        }
     }],
     subjects: {
         type: [String], // Array of subject names
         required: true
     },
-    availableSchedule: [{
-        day: String,
-        timeSlots: [String] // Example: ["10:00 AM - 12:00 PM", "2:00 PM - 4:00 PM"]
-    }],
+    availableSchedule: {
+        type: [String], // Simplified to an array of day names (e.g., ["mon", "wed"])
+        required: true
+    },
     experience: {
         type: Number,
         required: true
     },
     teachingMode: {
         type: String,
-        enum: ['Online', 'Offline', 'Both'],
+        enum: ['Online', 'Offline', 'Both'], // Case-sensitive values
         required: true
     },
     bio: {
-        type: String
+        type: String,
+        default: '' // Default empty string if not provided
     },
     profilePicture: {
         type: String, // File path

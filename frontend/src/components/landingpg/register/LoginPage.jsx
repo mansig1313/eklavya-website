@@ -15,7 +15,7 @@ function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(null);
-
+  
     try {
       const axiosInstance = axios.create({
         baseURL: "http://localhost:5000/api",
@@ -24,25 +24,52 @@ function LoginPage() {
         email,
         password,
       });
+  
       if (response.data.success) {
+        // ✅ Store user details in localStorage
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
-        if (role === "Student") {
+        localStorage.setItem("email", response.data.user.email);
+  
+        console.log("✅ Login Successful!");
+  
+        // ✅ Check if user was trying to enroll
+        const courseToEnroll = localStorage.getItem("courseToEnroll");
+        if (courseToEnroll) {
+          console.log("🚀 Attempting to enroll in course:", courseToEnroll);
+  
+          // 🔥 FIX: Ensure we send `courseId` (not `enrollment`)
+          await axios.post("http://localhost:5000/enroll", {
+            studentEmail: response.data.user.email,
+            courseId: courseToEnroll, // ✅ Correct key
+          });
+  
+          console.log("🎉 Enrollment successful!");
+          localStorage.removeItem("courseToEnroll"); // ✅ Clear stored course after enrolling
+        }
+  
+        // ✅ Redirect user based on role
+        if (response.data.user.role === "student") {
           navigate("/student-home");
-        } else if (role === "Tutor") {
+        } else if (response.data.user.role === "tutor") {
           navigate("/tutor-home");
-        } else if (role === "Parent") {
+        } else if (response.data.user.role === "parent") {
           navigate("/parent-home");
         }
       } else {
-        setError(
-          response.data.message || "Login failed....Please Check Your Credentials"
-        );
+        setError(response.data.message || "Login failed. Please check your credentials.");
       }
     } catch (err) {
+      console.error("❌ Error during login:", err);
       setError("An error occurred. Please try again later.");
     }
   };
+  
+
+
+
+
+
 
   return (
     <div className="login-page">

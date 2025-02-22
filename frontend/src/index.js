@@ -42,17 +42,15 @@ import CreateTest from './CreateTestPage/CreateTest.jsx';
 import EditTestPage from './CreateTestPage/TestEditor.jsx';
 import PaymentHistory from './homePage/Paymenthistory.jsx';
 import JitsiMeeting from "./components/UpcomingSessions/JitsiMeeting.jsx";
-
+import TutorProfile from "./homePage/TutorProfile.jsx";
+import Coursepage from "./CourseMainPage/course_dash/Coursepage.jsx"
+import TestPage from "./testpage/TestPage.jsx"
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-
         <Route path="/" element={<App />} />
-       <Route path="/" element={<Layout />} /> 
-
         <Route path="/login" element={<LoginPage />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/service" element={<Services />} />
@@ -82,7 +80,9 @@ root.render(
         <Route path="/test-editor/:testId" element={<EditTestPage />} />
         <Route path="/paymenthistory" element={<PaymentHistory />} />
         <Route path="/session/:roomId" element={<JitsiMeeting />} />
-
+        <Route path="/tutor-profile" element={<TutorProfile />} />
+        <Route path="/coursepage" element={<Coursepage />} />
+        <Route path="/testpage" element={<TestPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

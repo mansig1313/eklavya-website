@@ -47,16 +47,16 @@ router.get("/:testId", async (req, res) => {
 
 // 📌 Update a test
 router.put("/update/:id", async (req, res) => {
-  const { id : testId } = req.params;
+  const { testId } = req.params;
   const { title, questions } = req.body;
-console.log("Updating test with ID:", typeof(Number(testId)), testId);
+
   // Validate ObjectId format
-  // //if (!mongoose.Types.ObjectId.isValid(testId)) {
-  // /    return res.status(400).json({ error: "Invalid Test ID format" });
-  // }
+  if (!mongoose.Types.ObjectId.isValid(testId)) {
+      return res.status(400).json({ error: "Invalid Test ID format" });
+  }
 
   try {
-      const test = await Test.findById(Number(testId));
+      const test = await Test.findById(testId);
       if (!test) {
           return res.status(404).json({ error: "Test not found" });
       }
