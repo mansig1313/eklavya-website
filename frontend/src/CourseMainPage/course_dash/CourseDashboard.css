@@ -1,0 +1,219 @@
+/* General Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  body {
+    background: #f0f0f0;
+    color: #333;
+  }
+  
+  /* Course Dashboard */
+  .course-dashboard {
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .course-dashboard h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Now 3 columns */
+    gap: 30px;
+  }
+  
+  /* Card Styles */
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #444;
+  }
+  
+  .card-content {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  /* Test Card */
+  .test-card .item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s ease;
+  }
+  
+  .test-card .item:hover {
+    background: #f8f8f8;
+  }
+  
+  /* Resource Card */
+  .resource-card .file-input {
+    display: none;
+  }
+  
+  .resource-card .btn-upload {
+    background: #666;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .resource-card .btn-upload:hover {
+    background: #888;
+  }
+  
+  .resource-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .resource-item a {
+    color: #555;
+    text-decoration: none;
+  }
+  
+  .resource-item a:hover {
+    color: #333;
+    text-decoration: underline;
+  }
+  
+  /* Schedule Card */
+  .schedule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .item-actions button {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: color 0.2s ease;
+  }
+  
+  .item-actions button:hover {
+    color: #333;
+  }
+  
+  /* Students Card */
+  .students-card .item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  /* Buttons */
+  .btn-create,
+  .btn-add,
+  .btn-submit {
+    background: #555;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn-create:hover,
+  .btn-add:hover,
+  .btn-submit:hover {
+    background: #777;
+    transform: scale(1.05);
+  }
+  
+  /* Test Creation Page */
+  .test-creation {
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .test-creation h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .test-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .test-form input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .question-block {
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .question-block input,
+  .question-block textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+  }
+  
+  .question-block textarea {
+    min-height: 80px;
+  }
+  
+  .btn-add {
+    margin: 10px 0;
+  }

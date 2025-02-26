@@ -10,7 +10,6 @@ const bodyParser = require("body-parser");
 const multer = require('multer');
 const path = require('path');
 const fileUpload = require('express-fileupload');
-const testRoutes = require("./routes/testRoutes");
 const tutorRoutes = require("./routes/tutorRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
 
@@ -68,8 +67,7 @@ const app = express();
 app.use(bodyParser.json());
 const server = http.createServer(app);
 app.use(cors());
-// Routes
-app.use("/api/tests", testRoutes);
+
 
 //const server = http.createServer(app); // Create the HTTP server
 
@@ -394,7 +392,7 @@ const CourseSchema = new mongoose.Schema({
     lectureDays: [{ type: String, required: true }], // Store days of lectures
     hoursPerDay: { type: Number, required: true },
     price: { type: Number, required: true },
-    studentsEnrolled: [{ type: mongoose.Schema.Types.ObjectId, ref: "Student" }],
+    studentsEnrolled: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     tests: [{ type: mongoose.Schema.Types.ObjectId, ref: "Test" }],
     resources: [{ type: String }], // Resource file paths
 });
@@ -402,73 +400,94 @@ const CourseSchema = new mongoose.Schema({
 const Course = mongoose.model("Course", CourseSchema);
 
 // 🟢 **Create a Course**
+// Create a Course
 app.post("/courses", upload.single("demoVideo"), async (req, res) => {
     try {
       const { tutorEmail, standard, subject, overview, syllabus, lectureDays, hoursPerDay, price } = req.body;
-      
-      const demoVideo = req.file ? req.file.path : ""; // ✅ Fix: Store correct key
+      if (!tutorEmail) return res.status(400).json({ error: "Tutor email required" });
   
+      const demoVideo = req.file ? `/uploads/${req.file.filename}` : "";
       const newCourse = new Course({
         tutorEmail,
         standard,
         subject,
-        demoVideo, // ✅ Fix: Store under correct field name
+        demoVideo,
         overview,
-        syllabus: JSON.parse(syllabus), // ✅ Fix: Parse syllabus correctly
-        lectureDays: JSON.parse(lectureDays), // ✅ Fix: Parse lecture days
+        syllabus: JSON.parse(syllabus),
+        lectureDays: JSON.parse(lectureDays),
         hoursPerDay,
         price,
       });
-  
       await newCourse.save();
       res.status(201).json({ message: "Course created successfully", course: newCourse });
-  
     } catch (err) {
       console.error("Error creating course:", err);
       res.status(500).json({ error: err.message });
     }
   });
   
-
-// 🟢 **Fetch Courses by Tutor**
-app.get("/courses", async (req, res) => {
+  // Fetch Courses by Tutor
+  app.get("/courses", async (req, res) => {
     try {
-        const { tutorEmail } = req.query; // Get email from query params
-        const filter = tutorEmail ? { tutorEmail } : {}; // Filter by tutor if provided
-
-        const courses = await Course.find(filter);
-        res.json(courses);
+      const { tutorEmail } = req.query;
+      if (!tutorEmail) return res.status(400).json({ error: "Tutor email required" });
+      const courses = await Course.find({ tutorEmail });
+      res.json(courses);
     } catch (err) {
-        res.status(500).json({ error: err.message });
+      res.status(500).json({ error: err.message });
     }
-});
-
-// 🟢 **Fetch a Specific Course for Dashboard**
-app.get("/courses/:id", async (req, res) => {
+  });
+  
+  // Fetch a Specific Course
+  app.get("/courses/:id", async (req, res) => {
     try {
-        const course = await Course.findById(req.params.id).populate("studentsEnrolled tests");
-        if (!course) return res.status(404).json({ error: "Course not found" });
-        res.json(course);
+      const course = await Course.findById(req.params.id)
+        .populate("studentsEnrolled", "name email -_id") // Populate from User, not Student
+        .populate("tests", "name subject duration");
+      if (!course) {
+        console.log(`Course not found for ID: ${req.params.id}`);
+        return res.status(404).json({ error: "Course not found" });
+      }
+      console.log(`Fetched course: ${course._id}`);
+      res.json(course);
     } catch (err) {
-        res.status(500).json({ error: err.message });
+      console.error(`Error fetching course ${req.params.id}:`, err.message, err.stack);
+      res.status(500).json({ error: "Internal server error" });
     }
-});
+  });
+
+  app.get("/api/student/courses", async (req, res) => {
+    try {
+      const { studentEmail } = req.query;
+      if (!studentEmail) return res.status(400).json({ error: "Student email required" });
+  
+      const courses = await Course.find({ studentsEnrolled: { $in: await User.find({ email: studentEmail }).distinct('_id') } })
+        .populate("tests", "name subject duration")
+        .populate("studentsEnrolled", "name email -_id");
+      res.json(courses);
+    } catch (err) {
+      console.error("Error fetching student courses:", err.message, err.stack);
+      res.status(500).json({ error: err.message });
+    }
+  });
 
 // 🟢 **Add a Resource to a Course**
-app.post("/courses/:id/resources", async (req, res) => {
+app.post("/api/courses/:id/resources", upload.single("resource"), async (req, res) => {
     try {
-        const { resource } = req.body;
-        const course = await Course.findById(req.params.id);
-        if (!course) return res.status(404).json({ error: "Course not found" });
-
-        course.resources.push(resource);
-        await course.save();
-
-        res.json({ message: "Resource added successfully", course });
+      const { tutorEmail } = req.body;
+      if (!tutorEmail) return res.status(400).json({ error: "Tutor email required" });
+  
+      const course = await Course.findById(req.params.id);
+      if (!course || course.tutorEmail !== tutorEmail) return res.status(403).json({ error: "Unauthorized" });
+  
+      const resourceUrl = `/uploads/${req.file.filename}`;
+      course.resources.push(resourceUrl);
+      await course.save();
+      res.json({ message: "Resource added", course });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+      res.status(500).json({ error: err.message });
     }
-});
+  });
 app.post("/enroll", async (req, res) => {
     console.log("🚀 Enrollment Request Received!", req.body);
   
@@ -506,10 +525,63 @@ app.post("/enroll", async (req, res) => {
       return res.status(500).json({ error: "Internal server error" });
     }
   });
+
+
+  // TEST CREATION BACKEND
+
+  const testSchema = new mongoose.Schema({
+    courseId: { type: mongoose.Schema.Types.ObjectId, ref: "Course", required: true },
+    name: { type: String, required: true },
+    subject: { type: String, required: true },
+    duration: { type: String, required: true },
+    questions: [
+      {
+        image: { type: String },
+        text: { type: String, required: true },
+        options: [{ type: String, required: true }],
+        correctAnswer: { type: String, required: true },
+      },
+    ],
+    createdAt: { type: Date, default: Date.now },
+  });
   
+  const Test = mongoose.model("Test", testSchema);
   
+  // Create Test
+  app.post("/api/tests", upload.array("images", 10), async (req, res) => { // Match frontend "images"
+    try {
+      const { courseId, tutorEmail, name, subject, duration, questions } = req.body;
+      if (!tutorEmail) return res.status(400).json({ error: "Tutor email required" });
+  
+      const parsedQuestions = JSON.parse(questions).map((q, i) => ({
+        ...q,
+        image: req.files && req.files[i] ? `/uploads/${req.files[i].filename}` : null,
+      }));
+  
+      const test = new Test({ courseId, name, subject, duration, questions: parsedQuestions });
+      await test.save();
+      await Course.findByIdAndUpdate(courseId, { $push: { tests: test._id } });
+      res.status(201).json({ message: "Test created", test });
+    } catch (err) {
+      console.error("Error creating test:", err.message, err.stack);
+      res.status(500).json({ error: err.message });
+    }
+  });
+  
+  // Fetch Tests for a Course
+  app.get("/api/courses/:id/tests", async (req, res) => {
+    try {
+      const course = await Course.findById(req.params.id).populate("tests");
+      if (!course) return res.status(404).json({ error: "Course not found" });
+      res.json(course.tests);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
   
 
+  // Schedule BACKEND
+  
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is Running on port ${PORT}`);

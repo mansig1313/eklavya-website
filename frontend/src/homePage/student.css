@@ -1,233 +1,153 @@
-/* General styling */
-.body {
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
+.student-app {
   display: flex;
-  height: 100vh;
-  width: 100vw;
-  margin: 0; /* Remove default margin */
+  min-height: 100vh;
+  background: #f0f0f0;
+  color: #333;
 }
 
-/* Sidebar styling */
 .sidebar {
-  display: flex;
-  flex-direction: column; /* Arrange items vertically */
-  width: 190px;
-  background-color: #ffffff;
-  height: 100vh;
-  gap: 10px;
-  position: fixed; /* Fix sidebar position */
-  top: 0;
-  left: 0;
-  
+  width: 250px;
+  background: #333;
+  color: #fff;
+  padding: 20px;
 }
 
-.sidebar ul {
-  padding: 0;
-  margin-top: 1px;
-  list-style-type: none;
-  display: inline;
-   
+.logo-container img {
+  width: 100px;
 }
 
-
-/* Sidebar item styling */
 .sidebar-item {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 15px;
   cursor: pointer;
-  gap: 5px;
-  margin-left: 10px;
-  margin-bottom: 20px;
-  margin-top: 5px;
+  transition: background 0.3s ease;
 }
 
-/* Logo image */
-.logo {
-  width: 150px;
-  height: 115px;
-  border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0px 4px 15px rgba(244, 240, 244, 0.5);
-  filter: brightness(1.1);
-  padding: 10px;
+.sidebar-item:hover {
+  background: #444;
 }
 
-.logo:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 6px 20px #6c12a8b3;
-  filter: brightness(1.3);
+.sidebar-item svg {
+  margin-right: 10px;
 }
 
-/* Styling for sidebar icons */
-.sidebar-item .dashboard-icon,
-.sidebar-item .StudentOverview-icon,
-.sidebar-item .TutorFeedback,
-.sidebar-item .Reports,
-.sidebar-item .FinancialOverview,
-.sidebar-item .SessionHistory,
-.sidebar-item .Settings {
-  font-size: 25px;
-  color: #ffffff;
-  margin-right: 8px;
-  
-}
-
-.sidebar-item .mycourse{
-  color: #ffffff;
-  font-size: 25px;
-}
-
-.sidebar-item .messages{
-  color: #ffffff;
-  font-size: 25px;;
-}
-
-.sidebar-item .Resourse{
-  color: #ffffff;
-  font-size: 25px;
-}
-
-/* Sidebar text */
-.sidebar-item span {
-  font-size: 10px;
-  color: #ffffff;
-}
-
-/* Main container styling */
 .main-container {
-  display: flex;
-  flex-direction: column;
-  margin-left: 190px; /* Offset main content to account for sidebar */
-  width: calc(100vw - 190px); /* Adjust main content width */
+  flex: 1;
+  padding: 20px;
 }
 
-/* Header styling */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
-  padding: 20px;
-  border-bottom: 1px solid #000000;
-  height: 100px;
+  background: #fff;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
-/* Welcome text */
-.header .welcome {
-  font-size: 24px;
+.welcome-tag {
+  display: flex;
+  align-items: center;
+}
+
+.welcome {
+  font-size: 1.2rem;
   font-weight: bold;
 }
-.header .welcome-tag{
-  display: inline;
+
+.user-name {
+  font-size: 1.2rem;
+  margin-left: 5px;
+  color: #1976d2;
 }
 
-.header .user-name{
-  display: block;
-  font-size: 16px;
-  margin-top: 5px;
-}
-
-/* Center the search bar */
-.header-search {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-/* Search bar input styling */
 .header-search input {
-  width: 300px;
-  border: 1px solid #000000;
-  border-radius: 20px;
-  outline: none;
-  font-size: 16px;
   padding: 8px;
-  transition: width 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
-/* Search bar focus effect */
-.header-search input:focus {
-  width: 350px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Header icons */
-.header-icons {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-
-.header-icons .NotificationIcon,
-.header-icons .EmailIcon,
-.header-icons .PersonIcon {
-  font-size: 30px;
-  color: #000000;
+.header-icons svg {
+  margin-left: 15px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: color 0.3s ease;
 }
 
-.header-icons .NotificationIcon:hover,
-.header-icons .EmailIcon:hover,
-.header-icons .PersonIcon:hover {
-  transform: scale(1.2);
+.header-icons svg:hover {
+  color: #1976d2;
 }
 
-/* Main content styling */
 .main-content {
-  display: flex;
   padding: 20px;
-  gap: 60px;
 }
 
-/* Content grid */
 .content-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto auto;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  width: 520px;
-  height: 500px;
-  padding: 10px;
+  margin-bottom: 20px;
 }
 
-/* Content boxes */
 .box {
-  background-color: #60728e;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 1.5em;
-  justify-content: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  transition: transform 0.2s ease;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
-/* Progress report styling */
+.box h3 {
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.my-courses .course-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  transition: background 0.3s ease;
+}
+
+.my-courses .course-item:hover {
+  background: #f8f8f8;
+}
+
+.course-details {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.tests-section, .resources-section {
+  padding: 10px;
+}
+
+.test-item, .resource-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.test-item:hover, .resource-item:hover {
+  background: #f8f8f8;
+}
+
 .progress-report {
-  background-color: #ffffff; /* White background for better contrast */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  padding: 20px; /* Inner padding for content spacing */
-  margin: 20px auto; /* Center the graph with margin */
-  max-width: 800px; /* Limit the max width for better visibility on larger screens */
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
-.progress-report h3 {
-  font-size: 1.5rem; /* Slightly larger font for the title */
-  font-weight: bold; /* Bold text for emphasis */
-  text-align: center; /* Center-align the title */
-  margin-bottom: 20px; /* Space below the title */
-  color: #333; /* Neutral text color */
-}
-
-.recharts-wrapper {
-  overflow: hidden; /* Prevent overflow issues */
-  border-radius: 12px; /* Match the container's border radius */
-}
-
-

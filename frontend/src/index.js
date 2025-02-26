@@ -8,7 +8,7 @@ import AboutUs from './components/landingpg/AboutUs';
 import Services from './components/landingpg/Services';
 import Register from './components/landingpg/register/Register';
 import TutorHomePage from './homePage/Tutor.jsx';
-import StudentHomePage from './homePage/Student.jsx';
+import StudentDashboard from './homePage/Student.jsx';
 import ParentHomePage from './homePage/Parent.jsx';
 import CoursePage from './CourseMainPage/CoursePage/CoursePage.jsx';
 import './CourseMainPage/CoursePage/CoursePage.css';
@@ -45,6 +45,8 @@ import JitsiMeeting from "./components/UpcomingSessions/JitsiMeeting.jsx";
 import TutorProfile from "./homePage/TutorProfile.jsx";
 import Coursepage from "./CourseMainPage/course_dash/Coursepage.jsx"
 import TestPage from "./testpage/TestPage.jsx"
+import CourseDashboard from "./CourseMainPage/course_dash/CourseDashboard.jsx";
+import TestCreation from "./CourseMainPage/course_dash/TestCreation.jsx";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -55,7 +57,7 @@ root.render(
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/service" element={<Services />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/student-home" element={<StudentHomePage />} />
+        <Route path="/student-home" element={<StudentDashboard />} />
         <Route path="/tutor-home" element={<TutorHomePage />} />
         <Route path="/parent-home" element={<ParentHomePage />} />
         <Route path="/course-page" element={<CoursePage />} />
@@ -76,14 +78,13 @@ root.render(
         <Route path="/UpcomingSessions" element={<UpcomingSessions/>} /> 
         <Route path="/tutorfeedback" element={<TutorFeedback/>} /> 
         <Route path="/UpcomingSessions" element={<UpcomingSessions/>} />
-        <Route path = "/create-test" element={<CreateTest/>}/>
-        <Route path="/test-editor/:testId" element={<EditTestPage />} />
+        <Route path="/create-test/:courseId" element={<TestCreation />} />        <Route path="/test-editor/:testId" element={<EditTestPage />} />
         <Route path="/paymenthistory" element={<PaymentHistory />} />
         <Route path="/session/:roomId" element={<JitsiMeeting />} />
         <Route path="/tutor-profile" element={<TutorProfile />} />
         <Route path="/coursepage" element={<Coursepage />} />
         <Route path="/testpage" element={<TestPage />} />
-      </Routes>
+        <Route path="/course-dashboard/:courseId" element={<CourseDashboard />} />      </Routes>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -11,13 +11,21 @@ const TutorSelectionPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch all tutors
   useEffect(() => {
     const fetchTutors = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:5000/api/tutors");
-        setTutors(response.data);
+        const response = await axios.get("http://localhost:5000/api/profile"); // Assuming tutors are profiles with role "tutor"
+        const tutorProfiles = response.data.filter(profile => profile.role === "tutor"); // Filter tutors
+        setTutors(tutorProfiles.map(profile => ({
+          email: profile.email,
+          fullName: profile.name,
+          profilePicture: profile.profilePicture,
+          subjects: ["Math", "Science"], // Replace with actual data if available
+          education: [{ degree: "B.Ed", institution: "XYZ University", year: "2015" }], // Static for now
+          experience: 5, // Static for now
+          teachingMode: "Online", // Static for now
+        })));
       } catch (err) {
         setError(err.response?.data?.error || "Failed to fetch tutors");
       } finally {
@@ -27,32 +35,28 @@ const TutorSelectionPage = () => {
     fetchTutors();
   }, []);
 
-  // Fetch courses for selected tutor
   const handleTutorClick = async (tutor) => {
     setSelectedTutor(tutor);
     setModalOpen(true);
-
     try {
-        const response = await axios.get(`http://localhost:5000/courses?tutorEmail=${tutor.email}`);
-        console.log("📚 Courses fetched:", response.data); // Debug courses
-        setCourses(response.data);
+      const response = await axios.get(`http://localhost:5000/courses?tutorEmail=${tutor.email}`);
+      console.log("📚 Courses fetched:", response.data);
+      setCourses(response.data);
     } catch (err) {
-        console.error("Error fetching courses:", err);
-        setCourses([]);
+      console.error("Error fetching courses:", err);
+      setCourses([]);
     }
-};
-
+  };
 
   const handleEnroll = async (courseId) => {
-    console.log("🚀 Attempting to enroll in course:", courseId); // Debug log
+    console.log("🚀 Attempting to enroll in course:", courseId);
     if (!courseId) {
-        console.error("❌ courseId is undefined!");
-        return;
+      console.error("❌ courseId is undefined!");
+      return;
     }
-
-    localStorage.setItem("courseToEnroll", courseId); // Store in localStorage
-    window.location.href = "/login"; // Redirect
-};
+    localStorage.setItem("courseToEnroll", courseId);
+    window.location.href = "/login";
+  };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -70,35 +74,18 @@ const TutorSelectionPage = () => {
               <img src={tutor.profilePicture || "https://via.placeholder.com/120"} alt={tutor.fullName} />
             </div>
             <div className="tutor-info">
-              <h3>
-                <FaChalkboardTeacher style={{ color: "#1976d2", marginRight: "10px" }} />
-                {tutor.fullName}
-              </h3>
-              <p>
-                <FaBook style={{ color: "#ff9800", marginRight: "5px" }} />
-                <strong>Subjects:</strong> {tutor.subjects.join(", ")}
-              </p>
-              <p>
-                <FaGraduationCap style={{ color: "#4caf50", marginRight: "5px" }} />
-                <strong>Education:</strong>{" "}
-                {tutor.education.map((edu, idx) => (
-                  <span key={idx}>{edu.degree} from {edu.institution} ({edu.year})<br /></span>
-                ))}
-              </p>
-              <p>
-                <FaStar style={{ color: "#fbc02d", marginRight: "5px" }} />
-                <strong>Experience:</strong> {tutor.experience} years
-              </p>
-              <p>
-                <FaChalkboardTeacher style={{ color: "#1976d2", marginRight: "5px" }} />
-                <strong>Teaching Mode:</strong> {tutor.teachingMode}
-              </p>
+              <h3><FaChalkboardTeacher style={{ color: "#1976d2", marginRight: "10px" }} />{tutor.fullName}</h3>
+              <p><FaBook style={{ color: "#ff9800", marginRight: "5px" }} /><strong>Subjects:</strong> {tutor.subjects.join(", ")}</p>
+              <p><FaGraduationCap style={{ color: "#4caf50", marginRight: "5px" }} /><strong>Education:</strong> {tutor.education.map((edu, idx) => (
+                <span key={idx}>{edu.degree} from {edu.institution} ({edu.year})<br /></span>
+              ))}</p>
+              <p><FaStar style={{ color: "#fbc02d", marginRight: "5px" }} /><strong>Experience:</strong> {tutor.experience} years</p>
+              <p><FaChalkboardTeacher style={{ color: "#1976d2", marginRight: "5px" }} /><strong>Teaching Mode:</strong> {tutor.teachingMode}</p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Floating Modal */}
       {modalOpen && selectedTutor && (
         <div className="modal-overlay" onClick={() => setModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
