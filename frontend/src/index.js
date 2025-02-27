@@ -43,8 +43,8 @@ import EditTestPage from "./CreateTestPage/TestEditor.jsx";
 import PaymentHistory from "./homePage/Paymenthistory.jsx";
 import JitsiMeeting from "./components/UpcomingSessions/JitsiMeeting.jsx";
 import TutorProfile from "./homePage/TutorProfile.jsx";
-import Coursepage from "./CourseMainPage/course_dash/Coursepage.jsx";
-import TestPage from "./testpage/TestPage.jsx";
+import Coursepage from "./CourseMainPage/course_dash/Coursepage.jsx"
+import TestPage from "./testpage/TestPage.jsx"
 import CourseDashboard from "./CourseMainPage/course_dash/CourseDashboard.jsx";
 import TestCreation from "./CourseMainPage/course_dash/TestCreation.jsx";
 import MyCourses from "./CourseMainPage/course_dash/MyCourses.jsx";
