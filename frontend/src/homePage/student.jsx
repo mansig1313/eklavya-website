@@ -64,7 +64,7 @@ const StudentDashboard = () => {
             <DashboardIcon className="dashboard-icon" />
             <span>Dashboard</span>
           </div>
-          <div className="sidebar-item" onClick={() => handleNavigation("/mycourse")}>
+          <div className="sidebar-item" onClick={() => handleNavigation("/my-courses")}>
             <Mycourse className="mycourse" />
             <span>My Course</span>
           </div>

@@ -1,12 +1,5 @@
 /* General styling */
-.body {
-    font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    display: flex;
-    height: 100%;
-    width: 100%;
-  }
-  
+
   /* Sidebar styling */
   .sidebar {
     width: 190px;
