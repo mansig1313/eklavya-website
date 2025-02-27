@@ -15,17 +15,8 @@ const TutorSelectionPage = () => {
     const fetchTutors = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:5000/api/profile"); // Assuming tutors are profiles with role "tutor"
-        const tutorProfiles = response.data.filter(profile => profile.role === "tutor"); // Filter tutors
-        setTutors(tutorProfiles.map(profile => ({
-          email: profile.email,
-          fullName: profile.name,
-          profilePicture: profile.profilePicture,
-          subjects: ["Math", "Science"], // Replace with actual data if available
-          education: [{ degree: "B.Ed", institution: "XYZ University", year: "2015" }], // Static for now
-          experience: 5, // Static for now
-          teachingMode: "Online", // Static for now
-        })));
+        const response = await axios.get("http://localhost:5000/api/tutors");
+        setTutors(response.data);
       } catch (err) {
         setError(err.response?.data?.error || "Failed to fetch tutors");
       } finally {
