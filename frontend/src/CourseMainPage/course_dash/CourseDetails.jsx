@@ -35,7 +35,7 @@ const CourseDetails = () => {
     fetchCourseDetails();
   }, [courseId, navigate]);
 
-  const handleTestClick = (testId) => {
+  const handleStartTest = (testId) => {
     navigate(`/courses/${courseId}/tests/${testId}`);
   };
 
@@ -65,11 +65,22 @@ const CourseDetails = () => {
               <motion.div
                 key={test._id}
                 className="test-card"
-                onClick={() => handleTestClick(test._id)}
-                whileHover={{ scale: 1.05, boxShadow: "0 6px 15px rgba(0, 0, 0, 0.2)" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
               >
-                <span>{test.name}</span>
-                <span>{test.duration}</span>
+                <div className="test-info">
+                  <span>{test.name}</span>
+                  <span>{test.duration}</span>
+                </div>
+                <motion.button
+                  className="start-test-btn"
+                  onClick={() => handleStartTest(test._id)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Start Test
+                </motion.button>
               </motion.div>
             ))
           ) : (

@@ -72,10 +72,10 @@ const StudentDashboard = () => {
             <MessageIcon className="messages" />
             <span>Messages</span>
           </div>
-          <div className="sidebar-item" onClick={() => handleNavigation("/sturesource")}>
+          {/*<div className="sidebar-item" onClick={() => handleNavigation("/sturesource")}>
             <FolderIcon className="Resourse" />
             <span>Resource</span>
-          </div>
+          </div>*/}
           <div className="sidebar-item" onClick={() => handleNavigation("/feedback")}>
             <GradingIcon className="Resourse" />
             <span>Feedback</span>

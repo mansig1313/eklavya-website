@@ -15,7 +15,7 @@
   
   .details-container {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns for tests and resources */
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
   }
   
@@ -32,26 +32,44 @@
     margin-bottom: 15px;
   }
   
-  .test-card, .resource-card {
+  .test-card {
     padding: 15px;
     border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     transition: all 0.3s ease;
   }
   
-  .test-card {
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
+  .test-info {
+    flex: 1;
   }
   
   .test-card:hover {
     background: #f8f9fa;
   }
   
+  .start-test-btn {
+    padding: 8px 15px;
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .start-test-btn:hover {
+    background: #45a049;
+  }
+  
   .resource-card {
     display: block;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
     color: #2c3e50;
     text-decoration: none;
+    transition: all 0.3s ease;
   }
   
   .resource-card:hover {

@@ -489,7 +489,42 @@ app.post("/api/courses/:id/resources", upload.single("resource"), async (req, re
     res.status(500).json({ error: err.message });
   }
 });
-app.post("/enroll", async (req, res) => {
+
+app.get("/api/student/tutors", async (req, res) => {
+  try {
+    const { studentEmail } = req.query;
+    if (!studentEmail) return res.status(400).json({ error: "Student email required" });
+
+    // Find the student's ID
+    const student = await User.findOne({ email: studentEmail });
+    if (!student) return res.status(404).json({ error: "Student not found" });
+
+    // Find enrolled courses
+    const courses = await Course.find({ studentsEnrolled: student._id });
+    console.log("Enrolled courses for", studentEmail, ":", courses);
+
+    // Extract unique tutor emails
+    const tutorEmails = [...new Set(courses.map(course => course.tutorEmail))];
+    console.log("Tutor emails:", tutorEmails);
+
+    // Find tutor users
+    const tutors = await User.find({ email: { $in: tutorEmails }, role: "tutor" });
+    console.log("Tutor users:", tutors);
+
+    const tutorData = tutors.map(tutor => ({
+      name: tutor.name,
+      email: tutor.email,
+      profilePicture: tutor.profilePicture || "https://via.placeholder.com/150",
+      expertise: "Specialist", // Placeholder
+    }));
+
+    console.log("Tutor data sent:", tutorData);
+    res.json(tutorData);
+  } catch (err) {
+    console.error("Error fetching student tutors:", err.message, err.stack);
+    res.status(500).json({ error: err.message });
+  }
+});  app.post("/enroll", async (req, res) => {
     console.log("🚀 Enrollment Request Received!", req.body);
   
     try {
@@ -576,6 +611,30 @@ app.post("/enroll", async (req, res) => {
       if (!course) return res.status(404).json({ error: "Course not found" });
       res.json(course.tests);
     } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/tests/:id", async (req, res) => {
+    try {
+      const test = await Test.findById(req.params.id);
+      if (!test) {
+        console.log(`Test not found for ID: ${req.params.id}`);
+        return res.status(404).json({ error: "Test not found" });
+      }
+  
+      const course = await Course.findById(test.courseId);
+      const studentEmail = req.query.studentEmail || "";
+      const student = await User.findOne({ email: studentEmail });
+      if (!course.studentsEnrolled.some(id => id.equals(student?._id))) {
+        console.log(`Student ${studentEmail} not enrolled in course ${test.courseId}`);
+        return res.status(403).json({ error: "Not enrolled in this course" });
+      }
+  
+      console.log(`Fetched test ${test._id} for student ${studentEmail}`);
+      res.json(test);
+    } catch (err) {
+      console.error("Error fetching test:", err.message, err.stack);
       res.status(500).json({ error: err.message });
     }
   });

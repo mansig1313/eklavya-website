@@ -87,7 +87,7 @@ root.render(
         <Route path="/session/:roomId" element={<JitsiMeeting />} />
         <Route path="/tutor-profile" element={<TutorProfile />} />
         <Route path="/coursepage" element={<Coursepage />} />
-        <Route path="/testpage" element={<TestPage />} />
+        <Route path="/courses/:courseId/tests/:testId" element={<TestPage />} />
         <Route
           path="/course-dashboard/:courseId"
           element={<CourseDashboard />}

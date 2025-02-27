@@ -1,63 +1,77 @@
 import React, { useState, useEffect, useCallback } from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 import "./TestPage.css";
-
-const dummyQuestions = [
-  {
-    id: 1,
-    text: "What is the capital of France?",
-    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
-    options: [
-      { id: "a", text: "Paris" },
-      { id: "b", text: "London" },
-      { id: "c", text: "Berlin" },
-      { id: "d", text: "Madrid" }
-    ]
-  },
-  {
-    id: 2,
-    text: "What is the largest planet in the solar system?",
-    options: [
-      { id: "a", text: "Earth" },
-      { id: "b", text: "Jupiter" },
-      { id: "c", text: "Mars" },
-      { id: "d", text: "Saturn" }
-    ]
-  },
-  {
-    id: 3,
-    text: "Which programming language is known as the 'language of the web'?",
-    options: [
-      { id: "a", text: "Python" },
-      { id: "b", text: "Java" },
-      { id: "c", text: "JavaScript" },
-      { id: "d", text: "C++" }
-    ]
-  }
-];
+import { motion } from "framer-motion";
 
 const TestPage = () => {
+  const { courseId, testId } = useParams();
+  const navigate = useNavigate();
+  const studentEmail = localStorage.getItem("email") || "";
+
+  const [test, setTest] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
   const [questionStatus, setQuestionStatus] = useState({});
-  const [timeLeft, setTimeLeft] = useState(3600); // 1 hour in seconds
+  const [timeLeft, setTimeLeft] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    const fetchTest = async () => {
+      if (!studentEmail) {
+        navigate("/login");
+        return;
+      }
+      try {
+        console.log(`Fetching test ${testId} for course ${courseId} with email ${studentEmail}`);
+        const response = await axios.get(`http://localhost:5000/api/tests/${testId}?studentEmail=${studentEmail}`);
+        console.log("Test response:", response.data);
+        setTest(response.data);
+        const [hours] = response.data.duration.match(/\d+/) || [1];
+        setTimeLeft(parseInt(hours) * 3600);
+      } catch (err) {
+        console.error("Error fetching test:", err);
+        setError(err.response?.data?.error || "Failed to load test");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTest();
+  }, [testId, navigate]);
+
+  useEffect(() => {
+    if (timeLeft === null || timeLeft <= 0) return;
     const timer = setInterval(() => {
       setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
     return () => clearInterval(timer);
+  }, [timeLeft]);
+
+  const handleOptionSelect = useCallback((questionIndex, optionText) => {
+    setAnswers((prev) => ({ ...prev, [questionIndex]: optionText }));
+    setQuestionStatus((prev) => ({ ...prev, [questionIndex]: "attempted" }));
   }, []);
 
-  const handleOptionSelect = useCallback((questionId, optionId) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: optionId }));
-    setQuestionStatus((prev) => ({ ...prev, [questionId]: "attempted" }));
-  }, []);
+  const handleMarkForReview = useCallback((questionIndex) => {
+    setQuestionStatus((prev) => ({ ...prev, [questionIndex]: "review" }));
+    setCurrentQuestion((prev) => (prev + 1) % test.questions.length);
+  }, [test]);
 
-  const handleMarkForReview = useCallback((questionId) => {
-    setQuestionStatus((prev) => ({ ...prev, [questionId]: "review" }));
-    setCurrentQuestion((prev) => (prev + 1) % dummyQuestions.length);
-  }, []);
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(`http://localhost:5000/api/tests/${testId}/submit`, {
+        studentEmail,
+        answers,
+      });
+      alert(`Test submitted! Score: ${response.data.score}/${response.data.total}`);
+      navigate("/student-dashboard");
+    } catch (err) {
+      console.error("Error submitting test:", err);
+      alert("Failed to submit test: " + (err.response?.data?.error || err.message));
+    }
+  };
 
   const formatTime = (seconds) => {
     const hrs = Math.floor(seconds / 3600);
@@ -66,44 +80,58 @@ const TestPage = () => {
     return `${String(hrs).padStart(2, "0")}:${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
   };
 
-  const currentQuestionData = dummyQuestions[currentQuestion];
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!test) return <div>No test data available.</div>;
+
+  const currentQuestionData = test.questions[currentQuestion];
 
   return (
     <div className={`test-container ${darkMode ? "dark-mode" : ""}`}>
-      {/* Header */}
-      <header className="header">
-        <h1>Online Test Platform</h1>
+      <motion.header
+        className="header"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h1>{test.name} - {test.subject}</h1>
         <button className="theme-toggle" onClick={() => setDarkMode(!darkMode)}>
           {darkMode ? "Light Mode" : "Dark Mode"}
         </button>
-      </header>
+      </motion.header>
 
-      {/* Main Content */}
       <main className="content">
-        {/* Left Panel: Question */}
-        <section className="question-panel">
-          <h2>
-            Question {currentQuestion + 1} of {dummyQuestions.length}
-          </h2>
+        <motion.section
+          className="question-panel"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2>Question {currentQuestion + 1} of {test.questions.length}</h2>
           {currentQuestionData.image && (
             <img src={currentQuestionData.image} alt="Question" className="question-image" />
           )}
           <p>{currentQuestionData.text}</p>
 
           <div className="options">
-            {currentQuestionData.options.map((option) => (
-              <button
-                key={option.id}
-                className={`option ${answers[currentQuestion] === option.id ? "selected" : ""}`}
-                onClick={() => handleOptionSelect(currentQuestion, option.id)}
+            {currentQuestionData.options.map((option, index) => (
+              <motion.button
+                key={index}
+                className={`option ${answers[currentQuestion] === option ? "selected" : ""}`}
+                onClick={() => handleOptionSelect(currentQuestion, option)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {option.text}
-              </button>
+                {option}
+              </motion.button>
             ))}
           </div>
 
           <div className="actions">
-            <button className="save-next-btn" onClick={() => setCurrentQuestion((prev) => (prev + 1) % dummyQuestions.length)}>
+            <button
+              className="save-next-btn"
+              onClick={() => setCurrentQuestion((prev) => (prev + 1) % test.questions.length)}
+            >
               Save & Next
             </button>
             <button className="review-next-btn" onClick={() => handleMarkForReview(currentQuestion)}>
@@ -112,40 +140,50 @@ const TestPage = () => {
             <button className="clear-response-btn" onClick={() => handleOptionSelect(currentQuestion, null)}>
               Clear Response
             </button>
+            {currentQuestion === test.questions.length - 1 && (
+              <motion.button
+                className="submit-btn"
+                onClick={handleSubmit}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Submit Test
+              </motion.button>
+            )}
           </div>
-        </section>
+        </motion.section>
 
-        {/* Right Panel: Navigation */}
         <aside className="navigation-panel">
           <div className="timer">
             <span className="clock-icon">⏰</span>
-            <span className="time">{formatTime(timeLeft)}</span>
+            <span className="time">{timeLeft !== null ? formatTime(timeLeft) : "Loading..."}</span>
           </div>
 
           <h3>Question Navigation</h3>
           <div className="question-nav">
-            {dummyQuestions.map((_, index) => (
-              <button
+            {test.questions.map((_, index) => (
+              <motion.button
                 key={index}
                 className={`nav-btn ${
                   index === currentQuestion ? "current" : questionStatus[index] || "not-attempted"
                 }`}
                 onClick={() => setCurrentQuestion(index)}
+                whileHover={{ scale: 1.1 }}
               >
                 {index + 1}
-              </button>
+              </motion.button>
             ))}
           </div>
 
           <div className="progress">
-            <p>
-              Progress: {Object.keys(answers).length} / {dummyQuestions.length} questions answered
-            </p>
+            <p>Progress: {Object.keys(answers).length} / {test.questions.length} questions answered</p>
             <div className="progress-bar">
-              <div
+              <motion.div
                 className="progress-fill"
-                style={{ width: `${(Object.keys(answers).length / dummyQuestions.length) * 100}%` }}
-              ></div>
+                initial={{ width: 0 }}
+                animate={{ width: `${(Object.keys(answers).length / test.questions.length) * 100}%` }}
+                transition={{ duration: 0.3 }}
+              />
             </div>
           </div>
         </aside>
