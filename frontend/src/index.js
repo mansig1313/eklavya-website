@@ -42,7 +42,7 @@ import CreateTest from './CreateTestPage/CreateTest.jsx';
 import EditTestPage from './CreateTestPage/TestEditor.jsx';
 import PaymentHistory from './homePage/Paymenthistory.jsx';
 import JitsiMeeting from "./components/UpcomingSessions/JitsiMeeting.jsx";
-import TutorProfile from "./homePage/TutorProfile.jsx";
+import TutorProfile from "./homePage/Tutorprofile.jsx";
 import Coursepage from "./CourseMainPage/course_dash/Coursepage.jsx"
 import TestPage from "./testpage/TestPage.jsx"
 import CourseDashboard from "./CourseMainPage/course_dash/CourseDashboard.jsx";
