@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./CourseDashboard.css";
+import "./CourseDashboard.css"; // Assuming this CSS file is still appropriate
 import { useParams, useNavigate } from "react-router-dom";
 
 const TestCreation = () => {
@@ -24,7 +24,8 @@ const TestCreation = () => {
       ...questions,
       {
         id: questions.length + 1,
-        image: null,
+        image: null, // File object or null
+        imagePreview: null, // Temporary URL for preview
         text: "",
         options: ["", "", "", ""],
         correctAnswer: "",
@@ -47,8 +48,11 @@ const TestCreation = () => {
   const handleImageUpload = (id, e) => {
     const file = e.target.files[0];
     if (file) {
+      const previewUrl = URL.createObjectURL(file); // Create temporary URL for preview
       setQuestions(
-        questions.map((q) => (q.id === id ? { ...q, image: file } : q))
+        questions.map((q) =>
+          q.id === id ? { ...q, image: file, imagePreview: previewUrl } : q
+        )
       );
     }
   };
@@ -72,9 +76,9 @@ const TestCreation = () => {
     }))));
 
     // Append images
-    questions.forEach((q, i) => {
+    questions.forEach((q) => {
       if (q.image instanceof File) {
-        formData.append("images", q.image); // Matches backend upload.array("images")
+        formData.append("images", q.image);
       }
     });
 
@@ -125,6 +129,13 @@ const TestCreation = () => {
             accept="image/*"
             onChange={(e) => handleImageUpload(q.id, e)}
           />
+          {q.imagePreview && (
+            <img
+              src={q.imagePreview}
+              alt="Question Preview"
+              className="question-preview-image"
+            />
+          )}
           <textarea
             placeholder="Question Text"
             value={q.text}
