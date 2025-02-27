@@ -1,16 +1,6 @@
-/* General Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-  }
+
   
-  body {
-    background: #f0f0f0;
-    color: #333;
-  }
-  
+ 
   /* Course Dashboard */
   .course-dashboard {
     padding: 40px;

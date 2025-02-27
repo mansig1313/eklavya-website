@@ -1,231 +1,198 @@
 /* General styling */
-
-  /* Sidebar styling */
-  .sidebar {
-    width: 190px;
-    background-color: #d1baf0;
-    height: 100vh;
-    gap:10px;
-    
-  }
-  
-  .logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    margin-top: 20px; 
-  }
-  .logo {
-    width: 150px;
-    height: 115px;
-    border-radius: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0px 4px 15px rgba(244, 240, 244, 0.5);
-    filter: brightness(1.1);
-    padding: 10px;
-    
-  }
-  
-  .logo:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 6px 20px rgba(108, 18, 168, 0.7);
-    filter: brightness(1.3);
-  }
-
-
-  /* Ensures the icon and text are aligned horizontally */
-.sidebar-item {
-    display: flex;
-    align-items: center; /* Vertically center icon and text */
-    padding: 10px;
-    cursor: pointer;
-    gap:10px;
-  }
-  
-  /* Styling for the icon */
-  .sidebar-item .dashboard-icon  {
-    margin-right: 8px; /* Space between icon and text */
-    font-size: 30px; /* Adjust icon size as needed */
-  }
-  .sidebar-item .StudentOverview-icon  {
-    margin-right: 8px; /* Space between icon and text */
-    font-size: 30px; /* Adjust icon size as needed */
-  }
-
-  .sidebar-item .TutorFeedback {
-    margin-right: 8px; /* Space between icon and text */
-    font-size: 30px; /* Adjust icon size as needed */
-  }
-
-  .sidebar-item .Reports  {
-    margin-right: 8px; /* Space between icon and text */
-    font-size: 30px; /* Adjust icon size as needed */
-  }
-
-  .sidebar-item .FinancialOverview {
-    margin-right: 8px; /* Space between icon and text */
-    font-size: 30px; /* Adjust icon size as needed */
-  }
-  
-  .sidebar-item .SessionHistory  {
-    margin-right: 8px; /* Space between icon and text */
-    font-size: 30px; /* Adjust icon size as needed */
-  }
-
-  .sidebar-item .Settings  {
-    margin-right: 8px; /* Space between icon and text */
-    font-size: 30px; /* Adjust icon size as needed */
-  }
-
-
-  /* Styling for the text */
-  .sidebar-item span {
-    font-size: 20px;
-    color: #000000; /* Adjust text color */
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    padding: 15px;
-    color: #0073e6;
-    cursor: pointer;
-  }
-  
-  .sidebar ul li:hover {
-    background-color: #eedfdf;
-  }
-  
-  /* Main container styling */
-  .main-container {
-    flex-grow: 1;
-    padding: 10px;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 0px;
-    margin-bottom: px;
-    width: 170vh;
-    border-bottom: 10px  #000000;
-    height: 100px;
-  }
-  
-  
- /* Welcome text */
- .header .welcome {
-  font-size: 24px;
-  font-weight: bold;
-  padding-right: 90px;
+.body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  height: 100vh; /* Full viewport height */
 }
 
-/* Center the search bar */
+/* Main app container */
+.app {
+  display: flex;
+  flex-direction: row; /* Sidebar and main-container side-by-side */
+  height: 100vh; /* Full viewport height */
+  width: 100%;
+}
+
+/* Sidebar styling */
+.sidebar {
+  width: 190px; /* Fixed width */
+  background-color: #d1baf0;
+  height: 100%; /* Full height of parent */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.logo {
+  width: 150px;
+  height: 115px;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 4px 15px rgba(244, 240, 244, 0.5);
+  filter: brightness(1.1);
+  padding: 10px;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 6px 20px rgba(108, 18, 168, 0.7);
+  filter: brightness(1.3);
+}
+
+/* Sidebar items */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  gap: 10px;
+}
+
+.sidebar-item svg {
+  margin-right: 8px;
+  font-size: 30px;
+}
+
+.sidebar-item span {
+  font-size: 20px;
+  color: #000000;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; /* Remove default margin */
+}
+
+.sidebar ul li {
+  padding: 15px;
+  color: #0073e6;
+  cursor: pointer;
+}
+
+.sidebar ul li:hover {
+  background-color: #eedfdf;
+}
+
+/* Main container styling */
+.main-container {
+  flex: 1; /* Take up remaining space */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Full height of parent */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 20px 40px; /* Adjusted padding */
+  border-radius: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #000000;
+}
+
+.header .welcome {
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .header-search {
   flex: 1;
   display: flex;
   justify-content: center;
-  margin: 10px;
-
+  margin: 0 20px;
 }
 
-/* Search bar input styling */
 .header-search input {
-  width: 300px; /* Increased width for better visibility */
+  width: 300px;
   border: 1px solid #000000;
   border-radius: 20px;
   outline: none;
   font-size: 16px;
   padding: 10px;
-  transition: width 0.3s ease, box-shadow 0.3s ease; /* Adds animation */
+  transition: width 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Search bar focus effect */
 .header-search input:focus {
-  width: 350px; /* Expands the search bar when focused */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow effect */
+  width: 350px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Left-aligned icons section */
 .header-icons {
   display: flex;
   align-items: center;
-  gap: 40px;  /* Controls the space between the icons */
-  left:180vh; 
+  gap: 40px;
 }
 
-/* Icon styles */
-.header-icons .NotificationIcon,
-.header-icons .EmailIcon,
-.header-icons .PersonIcon {
+.header-icons svg {
   font-size: 30px;
   color: #000000;
   cursor: pointer;
-  transition: transform 0.2s ease; /* Adds animation effect to icons */
+  transition: transform 0.2s ease;
 }
 
-/* Icon hover effect */
-.header-icons .NotificationIcon:hover,
-.header-icons .EmailIcon:hover,
-.header-icons .PersonIcon:hover {
-  transform: scale(1.2); /* Enlarges the icon on hover */
+.header-icons svg:hover {
+  transform: scale(1.2);
 }
 
-  .header + .main-content {
-    border-top: 1px solid black; /* Creates a black line */
-    padding-top: 2px; /* Optional: adds space after the line */
-    width: 100%;  /* Adjust the length of the line */
-    
-  }
+.main-content {
+  flex: 1; /* Take up remaining vertical space */
+  display: flex;
+  gap: 60px;
+  padding: 40px;
+}
 
-  .main-content {
-    display: flex;
-    gap: 60px;
-  }
-
-  /* Content grid for boxes */
 .content-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 20px;
-    width: 520px;
-    height: 500px; 
-    padding-left: 50px;
-    padding-top: 40px;
-  }
-  
-  /* Individual content boxes */
-.box {
-    background-color: #f3d7fe; /* Light background color for contrast */
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1.5em;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 50px;
-    transition: transform 0.2s ease;
-    
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+  width: 520px;
+  height: 500px;
+}
 
- /* src/components/ProgressReport.css */
- .Calendar {
-  background: linear-gradient(135deg, #e1bee7, #f3e5f5); /* Soft pinkish violet */
+.box {
+  background-color: #f3d7fe;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 50px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.box:hover {
+  transform: scale(1.05);
+}
+
+.box h3 {
+  font-size: 1.5em;
+  color: #444;
+}
+
+.Calendar {
+  background: linear-gradient(135deg, #e1bee7, #f3e5f5);
   border-radius: 8px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   width: 450px;
   height: 450px;
   padding-top: 20px;
-  margin-top: 20px; 
   cursor: pointer;
 }
 
