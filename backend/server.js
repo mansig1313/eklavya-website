@@ -473,21 +473,22 @@ app.post("/courses", upload.single("demoVideo"), async (req, res) => {
 
 // 🟢 **Add a Resource to a Course**
 app.post("/api/courses/:id/resources", upload.single("resource"), async (req, res) => {
-    try {
-      const { tutorEmail } = req.body;
-      if (!tutorEmail) return res.status(400).json({ error: "Tutor email required" });
-  
-      const course = await Course.findById(req.params.id);
-      if (!course || course.tutorEmail !== tutorEmail) return res.status(403).json({ error: "Unauthorized" });
-  
-      const resourceUrl = `/uploads/${req.file.filename}`;
-      course.resources.push(resourceUrl);
-      await course.save();
-      res.json({ message: "Resource added", course });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
-  });
+  try {
+    const { tutorEmail } = req.body;
+    if (!tutorEmail) return res.status(400).json({ error: "Tutor email required" });
+
+    const course = await Course.findById(req.params.id);
+    if (!course || course.tutorEmail !== tutorEmail) return res.status(403).json({ error: "Unauthorized" });
+
+    const resourceUrl = `http://localhost:5000/uploads/${req.file.filename}`; // Absolute URL
+    course.resources.push(resourceUrl);
+    await course.save();
+    res.json({ message: "Resource added", course });
+  } catch (err) {
+    console.error("Error uploading resource:", err.message, err.stack);
+    res.status(500).json({ error: err.message });
+  }
+});
 app.post("/enroll", async (req, res) => {
     console.log("🚀 Enrollment Request Received!", req.body);
   

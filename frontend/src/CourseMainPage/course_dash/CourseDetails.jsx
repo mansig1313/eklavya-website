@@ -10,27 +10,23 @@ const CourseDetails = () => {
   const studentEmail = localStorage.getItem("email") || "";
 
   const [course, setCourse] = useState(null);
-  const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchCourseDetails = async () => {
       if (!studentEmail) {
+        console.log("No student email found, redirecting to login...");
         navigate("/login");
         return;
       }
       try {
+        console.log(`Fetching course details for ID: ${courseId} with email: ${studentEmail}`);
         const courseResponse = await axios.get(`http://localhost:5000/courses/${courseId}`);
+        console.log("Course response:", courseResponse.data);
         setCourse(courseResponse.data);
-
-        // Fetch reports for all tests
-        const reportPromises = courseResponse.data.tests.map(test =>
-          axios.get(`http://localhost:5000/api/tests/${test._id}/report?studentEmail=${studentEmail}`)
-        );
-        const reportResponses = await Promise.all(reportPromises);
-        setReports(reportResponses.map(res => res.data));
       } catch (err) {
+        console.error("Error fetching course details:", err.response?.data || err.message);
         setError(err.response?.data?.error || "Failed to load course details");
       } finally {
         setLoading(false);
@@ -64,7 +60,7 @@ const CourseDetails = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           <h2>Tests</h2>
-          {course.tests.length > 0 ? (
+          {course.tests && course.tests.length > 0 ? (
             course.tests.map((test) => (
               <motion.div
                 key={test._id}
@@ -82,39 +78,13 @@ const CourseDetails = () => {
         </motion.div>
 
         <motion.div
-          className="section report-card"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <h2>Report Card</h2>
-          {reports.length > 0 ? (
-            reports.map((report, index) => (
-              <motion.div
-                key={index}
-                className="report-item"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-              >
-                <p><strong>Test:</strong> {report.testName}</p>
-                <p><strong>Score:</strong> {report.score}/{report.totalQuestions}</p>
-                <p><strong>Status:</strong> {report.submitted ? "Submitted" : "Not Attempted"}</p>
-              </motion.div>
-            ))
-          ) : (
-            <p>No test reports available.</p>
-          )}
-        </motion.div>
-
-        <motion.div
           className="section resources"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           <h2>Resources</h2>
-          {course.resources.length > 0 ? (
+          {course.resources && course.resources.length > 0 ? (
             course.resources.map((res, i) => (
               <motion.a
                 key={i}

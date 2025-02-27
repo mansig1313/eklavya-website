@@ -14,8 +14,8 @@
   }
   
   .details-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns for tests and resources */
     gap: 30px;
   }
   
@@ -32,7 +32,7 @@
     margin-bottom: 15px;
   }
   
-  .test-card, .report-item, .resource-card {
+  .test-card, .resource-card {
     padding: 15px;
     border-bottom: 1px solid #eee;
     transition: all 0.3s ease;
@@ -46,11 +46,6 @@
   
   .test-card:hover {
     background: #f8f9fa;
-  }
-  
-  .report-item p {
-    margin: 5px 0;
-    color: #7f8c8d;
   }
   
   .resource-card {
